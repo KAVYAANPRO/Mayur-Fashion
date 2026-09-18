@@ -7,7 +7,7 @@ function CategoryManager({ categories, refreshCategories, auth }) {
   const handleAddCategory = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/api/categories', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ function CategoryManager({ categories, refreshCategories, auth }) {
   const handleDeleteCategory = async (id) => {
     if (!window.confirm('Are you sure you want to delete this category?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/categories/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories/${id}`, {
         method: 'DELETE',
         headers: {
           'x-auth-token': auth.token

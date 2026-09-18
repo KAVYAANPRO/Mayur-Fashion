@@ -9,7 +9,7 @@ function AdminManagement({ auth }) {
 
   const fetchAdmins = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/admins', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/admins`, {
         headers: { 'x-auth-token': auth.token }
       });
       const data = await res.json();
@@ -28,7 +28,7 @@ function AdminManagement({ auth }) {
     setMessage('');
     setError('');
     try {
-      const res = await fetch('http://localhost:5000/api/auth/create-subadmin', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/create-subadmin`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ function AdminManagement({ auth }) {
   const handleDeleteAdmin = async (id) => {
     if (!window.confirm('Are you sure you want to remove this admin?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/admins/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/admins/${id}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': auth.token }
       });

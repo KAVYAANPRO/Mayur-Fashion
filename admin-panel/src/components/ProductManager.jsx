@@ -20,7 +20,7 @@ function ProductManager({ categories, auth }) {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/products');
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -57,7 +57,7 @@ function ProductManager({ categories, auth }) {
       const formData = new FormData();
       formData.append('image', imageFile);
 
-      const uploadRes = await fetch('http://localhost:5000/api/upload', {
+      const uploadRes = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
         method: 'POST',
         headers: {
           'x-auth-token': auth.token
@@ -76,7 +76,7 @@ function ProductManager({ categories, auth }) {
       const generatedSku = `PROD-${Date.now().toString().slice(-6)}`;
 
       // 3. Create the product
-      const res = await fetch('http://localhost:5000/api/products', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ function ProductManager({ categories, auth }) {
   const handleDeleteProduct = async (id) => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`, {
         method: 'DELETE',
         headers: {
           'x-auth-token': auth.token
