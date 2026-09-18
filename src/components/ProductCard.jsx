@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Eye, ShoppingBag, MessageCircle, Sparkles, Check } from 'lucide-react';
+import { Eye, ShoppingBag, Check } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import { COMPANY_INFO } from '../data/company';
 
 export default function ProductCard({ 
@@ -113,7 +114,7 @@ export default function ProductCard({
           fontWeight: 700,
           border: '1px solid #ded8cb'
         }}>
-          Sizes M - 5XL
+          Sizes M - 6XL
         </div>
 
         {/* Quick Action Bar on Hover */}
@@ -265,7 +266,7 @@ export default function ProductCard({
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '5px',
+              gap: '6px',
               fontSize: '0.78rem',
               fontWeight: 700,
               color: '#059669',
@@ -275,7 +276,7 @@ export default function ProductCard({
               border: '1px solid #a7f3d0'
             }}
           >
-            <MessageCircle size={13} />
+            <WhatsAppIcon size={14} color="#059669" />
             <span>Enquire</span>
           </button>
         </div>

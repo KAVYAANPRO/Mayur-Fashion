@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Package, Truck, Globe, Shield, MessageCircle, Send, CheckCircle } from 'lucide-react';
+import { Package, Truck, Globe } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import confetti from 'canvas-confetti';
 import { COMPANY_INFO } from '../data/company';
 
@@ -46,7 +47,6 @@ export default function WholesaleSection() {
         {/* Section Heading */}
         <div className="section-title-wrap">
           <div className="section-tag">
-            <Package size={14} color="#EF233C" />
             <span>Direct Manufacturer Pricing</span>
           </div>
           <h2 className="section-title">
@@ -82,8 +82,8 @@ export default function WholesaleSection() {
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: '#1c1917', marginBottom: '8px' }}>
               Full Catalog Set Supply
             </h3>
-            <p style={{ fontSize: '0.86rem', color: '#5e5750', lineHeight: 1.55 }}>
-              Sold in pristine catalog sets with assorted sizes M to 5XL. Each garment is packed in branded luxury sleeves ready for your store racks.
+            <p style={{ fontSize: '0.9rem', color: '#5e5750', lineHeight: 1.6 }}>
+              Sold in pristine catalog sets with assorted sizes M to 6XL. Each garment is packed in branded luxury sleeves ready for your store racks.
             </p>
           </div>
 
@@ -298,7 +298,7 @@ export default function WholesaleSection() {
                   <option value="Kurti 3-Piece Sets & Anarkalis">Kurti 3-Piece Sets & Anarkalis</option>
                   <option value="Co-ord Sets & Afghani Pants">Co-ord Sets & Afghani Pants</option>
                   <option value="Festive & Wedding Silk Edit">Festive & Wedding Silk Edit</option>
-                  <option value="Plus Size (3XL to 5XL) Collection">Plus Size (3XL to 5XL) Collection</option>
+                  <option value="Plus Size (3XL to 6XL) Collection">Plus Size (3XL to 6XL) Collection</option>
                   <option value="Complete Catalog Range (All Categories)">Complete Catalog Range (All Categories)</option>
                 </select>
               </div>
@@ -330,9 +330,9 @@ export default function WholesaleSection() {
               <button
                 type="submit"
                 className="btn btn-whatsapp"
-                style={{ padding: '15px 36px', fontSize: '1.02rem' }}
+                style={{ padding: '15px 36px', fontSize: '1.02rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '9px' }}
               >
-                <MessageCircle size={20} />
+                <WhatsAppIcon size={21} color="#ffffff" />
                 <span>Submit & Open WhatsApp Inquiry</span>
               </button>
             </div>

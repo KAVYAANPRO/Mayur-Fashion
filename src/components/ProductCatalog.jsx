@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Sparkles, Filter, Search, SlidersHorizontal } from 'lucide-react';
+import { SlidersHorizontal } from 'lucide-react';
 import ProductCard from './ProductCard';
 import { CATEGORIES, SIZES, PRODUCTS } from '../data/products';
 
@@ -49,14 +49,13 @@ export default function ProductCatalog({
         {/* Section Heading */}
         <div className="section-title-wrap">
           <div className="section-tag">
-            <Sparkles size={14} color="#EF233C" />
             <span>Curated Ethnic Creations</span>
           </div>
           <h2 className="section-title">
             Our Standout Collections
           </h2>
           <p className="section-subtitle">
-            Crafted using premium fabrics like Pure Chanderi, Modal Silk, Crinkle Georgette, and Rayon. Complete catalog grading in sizes <strong>M to 5XL</strong>.
+            Crafted using premium fabrics like Pure Chanderi, Modal Silk, Crinkle Georgette, and Rayon. Complete catalog grading in sizes <strong>M to 6XL</strong>.
           </p>
         </div>
 

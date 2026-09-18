@@ -1,13 +1,14 @@
 import React from 'react';
-import { Sparkles, ArrowRight, BookOpen, ShieldCheck, Globe, Users, Award, MessageCircle, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import { COMPANY_INFO } from '../data/company';
 
 export default function Hero({ onExploreClick, onLookbookClick }) {
   const highlights = [
-    { icon: Sparkles, text: "100% Pure Silks & Chanderi" },
-    { icon: Award, text: "Artisanal Zardozi & Hand Embroidery" },
-    { icon: ShieldCheck, text: "Complete Size Grading (M to 5XL)" },
-    { icon: Globe, text: "Global Wholesale Export to 30+ Nations" }
+    "100% Pure Silks & Chanderi",
+    "Artisanal Zardozi & Hand Embroidery",
+    "Complete Size Grading (M to 6XL)",
+    "Global Wholesale Export to 30+ Nations"
   ];
 
   return (
@@ -71,8 +72,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '8px',
-              padding: '7px 20px',
+              padding: '7px 22px',
               background: '#ECE5CE',
               color: '#EF233C',
               border: '1px solid #C8D6BF',
@@ -86,7 +86,6 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               animationDelay: '0.06s'
             }}
           >
-            <Sparkles size={15} color="#EF233C" />
             <span>Manohar Dresses • Estd. 1991 • Brand Mayur™</span>
           </div>
 
@@ -139,11 +138,11 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               className="hero-morph-right" 
               style={{ display: 'inline', animationDelay: '0.34s' }}
             >
-              Meticulously handcrafted in Ahmedabad with pure silks, authentic zardozi embroidery, and complete sizing from <strong style={{ color: '#1c1917' }}>M to 5XL</strong>.
+              Meticulously handcrafted in Ahmedabad with pure silks, authentic zardozi embroidery, and complete sizing from <strong style={{ color: '#1c1917' }}>M to 6XL</strong>.
             </span>
           </p>
 
-          {/* Key Feature Highlight Badges (Left half from left, Right half from right) */}
+          {/* Key Feature Highlight Badges (Clean typography without small icons) */}
           <div style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -153,7 +152,6 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
             maxWidth: '820px'
           }}>
             {highlights.map((item, idx) => {
-              const Icon = item.icon;
               const isLeftHalf = idx < 2;
               const animClass = isLeftHalf ? 'hero-morph-left' : 'hero-morph-right';
               const delay = isLeftHalf 
@@ -167,8 +165,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '8px',
-                    padding: '8px 18px',
+                    padding: '8px 20px',
                     background: '#ffffff',
                     border: '1px solid #ECE5CE',
                     borderRadius: '9999px',
@@ -179,8 +176,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
                     animationDelay: delay
                   }}
                 >
-                  <Icon size={15} color="#EF233C" />
-                  <span>{item.text}</span>
+                  <span>{item}</span>
                 </div>
               );
             })}
@@ -206,9 +202,8 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
             <button 
               onClick={onLookbookClick}
               className="btn btn-sage hero-morph-left"
-              style={{ fontSize: '1.02rem', padding: '15px 30px', animationDelay: '0.58s' }}
+              style={{ fontSize: '1.02rem', padding: '15px 32px', animationDelay: '0.58s' }}
             >
-              <BookOpen size={18} />
               <span>Digital Lookbook</span>
             </button>
 
@@ -217,9 +212,9 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-whatsapp hero-morph-right"
-              style={{ fontSize: '1.02rem', padding: '15px 30px', animationDelay: '0.54s' }}
+              style={{ fontSize: '1.02rem', padding: '15px 30px', animationDelay: '0.54s', display: 'inline-flex', alignItems: 'center', gap: '9px' }}
             >
-              <MessageCircle size={18} />
+              <WhatsAppIcon size={20} color="#ffffff" />
               <span>Wholesale Inquiry</span>
             </a>
           </div>

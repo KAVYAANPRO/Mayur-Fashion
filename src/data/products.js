@@ -6,7 +6,7 @@ export const CATEGORIES = [
   { id: "festive-silk", label: "Festive & Wedding Silk", count: 4 },
 ];
 
-export const SIZES = ["M (38)", "L (40)", "XL (42)", "XXL (44)", "3XL (46)", "4XL (48)", "5XL (50)"];
+export const SIZES = ["M (38)", "L (40)", "XL (42)", "XXL (44)", "3XL (46)", "4XL (48)", "5XL (50)", "6XL (52)"];
 
 export const PRODUCTS = [
   {
@@ -31,7 +31,7 @@ export const PRODUCTS = [
     moq: "1 Catalog Set (Assorted Sizes)",
     isNew: true,
     isBestseller: true,
-    description: "An ethereal ivory pearl 3-piece ensemble featuring delicate scalloped borders on the hem and sleeves, paired with tailored straight silk trousers and a sheer embroidered organza dupatta. Perfectly graded across M to 5XL for an impeccable drape.",
+    description: "An ethereal ivory pearl 3-piece ensemble featuring delicate scalloped borders on the hem and sleeves, paired with tailored straight silk trousers and a sheer embroidered organza dupatta. Perfectly graded across M to 6XL for an impeccable drape.",
     features: ["Breathable Natural Fabric", "Anti-Wrinkle Shantoon Lining", "Comfort Elastic Waistband", "Export Quality Stitching"]
   },
   {
@@ -57,7 +57,7 @@ export const PRODUCTS = [
     isNew: true,
     isBestseller: true,
     description: "A radiant magenta festive kurti set with masterfully crafted floral neckline embellishments in gold zari and tonal resham threadwork, offering royal elegance for wedding guest and festival wear.",
-    features: ["High-Sheen Silk Base", "Intricate Zardozi Neckline", "Comfort Interlock Seams", "Sizes up to 5XL"]
+    features: ["High-Sheen Silk Base", "Intricate Zardozi Neckline", "Comfort Interlock Seams", "Sizes up to 6XL"]
   },
   {
     id: "MF-2026-03",
@@ -84,7 +84,7 @@ export const PRODUCTS = [
     isNew: true,
     isBestseller: true,
     description: "A graceful Rani Pink kalidar anarkali with sweeping flare, intricate floral handwork along the yoke, and a sheer embroidered dupatta designed for grand celebrations and wedding festivities.",
-    features: ["Voluminous Flared Silhouette", "Detailed Hand Embroidered Yoke", "Soft Shantoon Full Lining", "Complete M to 5XL Grading"]
+    features: ["Voluminous Flared Silhouette", "Detailed Hand Embroidered Yoke", "Soft Shantoon Full Lining", "Complete M to 6XL Grading"]
   },
   {
     id: "MF-2026-04",
@@ -134,7 +134,7 @@ export const PRODUCTS = [
     isNew: false,
     isBestseller: true,
     description: "Soothing pastel sage green kurti ensemble adorned with minimal pearl highlights and graceful botanical embroidery. Ideal for day weddings, sangeet, and boutique collections.",
-    features: ["Soothing Pastel Colorway", "Natural Breathable Silk Blend", "Side Slits with Lace Trim", "Available in M to 5XL"]
+    features: ["Soothing Pastel Colorway", "Natural Breathable Silk Blend", "Side Slits with Lace Trim", "Available in M to 6XL"]
   },
   {
     id: "MF-2026-06",
@@ -184,7 +184,7 @@ export const PRODUCTS = [
     isNew: true,
     isBestseller: false,
     description: "Subtle luxury in champagne blush tones with metallic micro-shimmer. Features mirror-work accents along the neckline and flowy palazzo trousers.",
-    features: ["Luminous Metallic Sheen", "Comfortable Non-Itch Inner Lining", "Designer Tassel Accents", "M to 5XL Sizing"]
+    features: ["Luminous Metallic Sheen", "Comfortable Non-Itch Inner Lining", "Designer Tassel Accents", "M to 6XL Sizing"]
   },
   {
     id: "MF-2026-08",
@@ -233,7 +233,7 @@ export const PRODUCTS = [
     moq: "1 Set (Full Catalog)",
     isNew: true,
     isBestseller: false,
-    description: "Warm peach blossom hues enriched with traditional gota patti craftwork. A buoyant, celebratory silhouette that flatters every size from M to 5XL.",
+    description: "Warm peach blossom hues enriched with traditional gota patti craftwork. A buoyant, celebratory silhouette that flatters every size from M to 6XL.",
     features: ["Full Girth Flared Hem", "Traditional Gota Patti Work", "Pre-Shrunk Premium Fabric", "Full Lining"]
   },
   {
@@ -259,7 +259,7 @@ export const PRODUCTS = [
     isNew: false,
     isBestseller: true,
     description: "An opulent midnight violet shade crafted from rich modal silk, showcasing antique dual-tone needlework on the neckline and sleeve cuffs.",
-    features: ["Deep Regal Colorway", "High-Density Modal Silk", "Anti-Static Soft Lining", "Sizes M to 5XL"]
+    features: ["Deep Regal Colorway", "High-Density Modal Silk", "Anti-Static Soft Lining", "Sizes M to 6XL"]
   },
   {
     id: "MF-2026-11",
@@ -309,7 +309,7 @@ export const PRODUCTS = [
     isNew: false,
     isBestseller: false,
     description: "Earthy olive ochre gold tones with classic boota work, tailored in Ahmedabad with export-standard precision and full size availability.",
-    features: ["Authentic Chanderi Sheen", "Full Body Cotton Lining", "Neat Overlock Finish", "Complete Sizing M-5XL"]
+    features: ["Authentic Chanderi Sheen", "Full Body Cotton Lining", "Neat Overlock Finish", "Complete Sizing M-6XL"]
   },
   {
     id: "MF-2026-13",
@@ -334,7 +334,7 @@ export const PRODUCTS = [
     isNew: true,
     isBestseller: true,
     description: "Vibrant fuchsia festive suit with a heavily embroidered organza dupatta and gleaming neckline embellishment, crafted for wedding celebrations.",
-    features: ["High-Sheen Art Silk", "Heavy Embroidered Scarf", "Comfort Fit Tailoring", "Sizes up to 5XL"]
+    features: ["High-Sheen Art Silk", "Heavy Embroidered Scarf", "Comfort Fit Tailoring", "Sizes up to 6XL"]
   },
   {
     id: "MF-2026-14",
@@ -387,7 +387,7 @@ export const PRODUCTS = [
     isNew: true,
     isBestseller: true,
     description: "Radiant mustard gold 3-piece suit with 4 studio shoot angles showcasing the rich craftsmanship and graceful drape across standard and plus sizes.",
-    features: ["4 Studio Shoot Perspectives", "Heavily Detailed Yoke", "Soft Shantoon Inner", "Sizes M to 5XL"]
+    features: ["4 Studio Shoot Perspectives", "Heavily Detailed Yoke", "Soft Shantoon Inner", "Sizes M to 6XL"]
   },
   {
     id: "MF-2026-16",
@@ -412,7 +412,7 @@ export const PRODUCTS = [
     isNew: false,
     isBestseller: false,
     description: "Contemporary dusty mauve aesthetic adorned with delicate florals and translucent organza layers, creating a chic modern ethnic look.",
-    features: ["Delicate Pastel Color", "Airy Organza Fabric", "Comfort Elastic Waistband", "Full Size Scale M-5XL"]
+    features: ["Delicate Pastel Color", "Airy Organza Fabric", "Comfort Elastic Waistband", "Full Size Scale M-6XL"]
   },
   {
     id: "MF-2026-17",
@@ -462,7 +462,7 @@ export const PRODUCTS = [
     isNew: true,
     isBestseller: false,
     description: "Dreamy lilac rose sharara suit with fine zari needlework on the yoke, matched with flared bottom tiers and an embroidered scalloped dupatta.",
-    features: ["Flared Sharara Silhouette", "Intricate Scalloped Scarf", "Full Length Soft Lining", "Sizes M to 5XL"]
+    features: ["Flared Sharara Silhouette", "Intricate Scalloped Scarf", "Full Length Soft Lining", "Sizes M to 6XL"]
   },
   {
     id: "MF-2026-19",
@@ -487,7 +487,7 @@ export const PRODUCTS = [
     isNew: false,
     isBestseller: false,
     description: "Light and breezy off-white kurti set with pastel botanical motifs and refined neckline embroidery, perfect for spring/summer catalog collections.",
-    features: ["Breezy Lightweight Silk", "All-Over Floral Artistry", "Comfort Regular Fit", "Sizes M to 5XL"]
+    features: ["Breezy Lightweight Silk", "All-Over Floral Artistry", "Comfort Regular Fit", "Sizes M to 6XL"]
   },
   {
     id: "MF-2026-20",
@@ -537,6 +537,6 @@ export const PRODUCTS = [
     isNew: false,
     isBestseller: false,
     description: "Understated modern slate grey ensemble with delicate geometric print accents and minimal hand-stitched detailing on the collar and cuffs.",
-    features: ["Modern Neutral Palette", "High-Sheen Modal Fabric", "Tailored Pocket Pants", "Sizes up to 5XL"]
+    features: ["Modern Neutral Palette", "High-Sheen Modal Fabric", "Tailored Pocket Pants", "Sizes up to 6XL"]
   }
 ];

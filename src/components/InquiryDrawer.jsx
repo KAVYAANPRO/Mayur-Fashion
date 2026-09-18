@@ -1,5 +1,6 @@
 import React from 'react';
-import { X, Trash2, MessageCircle, ShoppingBag, ArrowRight, Sparkles, Send } from 'lucide-react';
+import { X, Trash2, ShoppingBag } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import confetti from 'canvas-confetti';
 import { COMPANY_INFO } from '../data/company';
 
@@ -170,7 +171,7 @@ export default function InquiryDrawer({
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
                     <span style={{ fontSize: '0.74rem', color: '#3e5336', background: '#C8D6BF', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
-                      Sizes M - 5XL
+                      Sizes M - 6XL
                     </span>
 
                     <button
@@ -238,9 +239,9 @@ export default function InquiryDrawer({
             <button
               onClick={handleSendConsolidatedInquiry}
               className="btn btn-whatsapp"
-              style={{ width: '100%', padding: '14px', fontSize: '0.98rem' }}
+              style={{ width: '100%', padding: '14px', fontSize: '0.98rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
             >
-              <MessageCircle size={18} />
+              <WhatsAppIcon size={20} color="#ffffff" />
               <span>Send All {items.length} Designs to WhatsApp</span>
             </button>
 

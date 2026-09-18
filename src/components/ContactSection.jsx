@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, MessageCircle, Clock, Send, Sparkles, Building2, User } from 'lucide-react';
+import { MapPin, Phone, Send, User } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import confetti from 'canvas-confetti';
 import { COMPANY_INFO } from '../data/company';
 
@@ -34,7 +35,6 @@ export default function ContactSection() {
         {/* Section Heading */}
         <div className="section-title-wrap">
           <div className="section-tag">
-            <Building2 size={14} color="#EF233C" />
             <span>Visit Our Showrooms</span>
           </div>
           <h2 className="section-title">
@@ -140,9 +140,9 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-whatsapp"
-                style={{ width: '100%', padding: '9px 14px', fontSize: '0.85rem' }}
+                style={{ width: '100%', padding: '9px 14px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px' }}
               >
-                <MessageCircle size={15} />
+                <WhatsAppIcon size={16} color="#ffffff" />
                 <span>Chat with {contact.name.split(' ')[0]}</span>
               </a>
             </div>
