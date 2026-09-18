@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Search, Phone, MessageCircle, Menu, X, Sparkles, BookOpen, ShieldCheck } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import { COMPANY_INFO } from '../data/company';
 
 export default function Header({ 
@@ -50,20 +51,19 @@ export default function Header({
       <aside className="top-ticker" aria-label="Announcement Bar">
         <div className="container">
           <div className="ticker-inner">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Sparkles size={14} color="#EF233C" />
-              <span><strong>Ahmedabad's Premier Ethnic Wear Manufacturer</strong> (Est. 1991) • Sizes <strong>M to 5XL</strong></span>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <span><strong>Ahmedabad's Premier Ethnic Wear Manufacturer</strong> (Est. 1991) • Sizes <strong>M to 6XL</strong></span>
             </div>
             <div className="ticker-secondary" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <span>🌍 Exports to 30+ Countries</span>
+              <span>Exports to 30+ Countries</span>
               <a 
                 href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion team, I am interested in viewing your wholesale catalog.")}`}
                 target="_blank" 
                 rel="noopener noreferrer"
-                style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#EF233C', fontWeight: 'bold' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#25D366', fontWeight: 'bold' }}
               >
-                <MessageCircle size={13} />
-                <span>WhatsApp: +91 99788 31115</span>
+                <WhatsAppIcon size={15} color="#25D366" />
+                <span style={{ color: '#EF233C' }}>WhatsApp: +91 99788 31115</span>
               </a>
             </div>
           </div>
@@ -243,10 +243,10 @@ export default function Header({
                   fontSize: '0.88rem',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '6px'
+                  gap: '8px'
                 }}
               >
-                <MessageCircle size={16} />
+                <WhatsAppIcon size={17} color="#ffffff" />
                 <span>Wholesale Chat</span>
               </a>
 
@@ -287,7 +287,7 @@ export default function Header({
                 <Search size={18} color="#EF233C" style={{ marginRight: '10px' }} />
                 <input
                   type="text"
-                  placeholder="Search by fabric (Silk, Chanderi, Georgette), design, color, or sizes M-5XL..."
+                  placeholder="Search by fabric (Silk, Chanderi, Georgette), design, color, or sizes M-6XL..."
                   value={searchQuery}
                   onChange={(e) => onSearchChange(e.target.value)}
                   autoFocus
@@ -345,9 +345,9 @@ export default function Header({
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-whatsapp"
-                  style={{ width: '100%' }}
+                  style={{ width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                 >
-                  <MessageCircle size={18} />
+                  <WhatsAppIcon size={18} color="#ffffff" />
                   <span>Connect on WhatsApp</span>
                 </a>
               </div>

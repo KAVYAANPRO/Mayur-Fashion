@@ -3,7 +3,7 @@ export const LOOKBOOK_PAGES = [
     page: 1,
     title: "Timeless Grace: The 1991 Foundation",
     tagline: "Every Detail a Story",
-    description: "The journey of Manohar Dresses began in 1991, establishing the brand Mayur with the vision of pure fabrics, size inclusivity (M to 5XL), and artisanal craftsmanship in Ahmedabad.",
+    description: "The journey of Manohar Dresses began in 1991, establishing the brand Mayur with the vision of pure fabrics, size inclusivity (M to 6XL), and artisanal craftsmanship in Ahmedabad.",
     image: "/assets/catalog/page_1.webp",
     imageJpg: "/assets/catalog/page_1.jpg",
     tags: ["Brand Story", "1991 Heritage", "Kurti 3-Piece"]

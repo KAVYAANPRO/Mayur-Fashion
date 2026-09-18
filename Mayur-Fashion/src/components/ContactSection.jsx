@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, MessageCircle, Clock, Send, Sparkles, Building2, User } from 'lucide-react';
+import { MapPin, Phone, Send, User } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import confetti from 'canvas-confetti';
 import { COMPANY_INFO } from '../data/company';
 
@@ -13,42 +14,19 @@ export default function ContactSection() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleContactSubmit = async (e) => {
+  const handleContactSubmit = (e) => {
     e.preventDefault();
+    setSubmitted(true);
+    confetti({ particleCount: 60, spread: 60 });
 
-    const inquiryData = {
-      name: formState.name,
-      email: formState.email,
-      phone: formState.phone,
-      subject: formState.subject,
-      message: formState.message
-    };
+    const msg = `*MAYUR FASHION - WEBSITE INQUIRY*\n` +
+      `*Name:* ${formState.name}\n` +
+      `*Phone:* ${formState.phone}\n` +
+      `*Email:* ${formState.email || 'N/A'}\n` +
+      `*Subject:* ${formState.subject}\n` +
+      `*Message:* ${formState.message}`;
 
-    try {
-      const response = await fetch('http://localhost:5000/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(inquiryData)
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        confetti({ particleCount: 60, spread: 60 });
-        alert('Message sent successfully! We will get back to you soon.');
-        setFormState({
-          name: '',
-          phone: '',
-          email: '',
-          subject: 'Showroom Visit & Wholesale Inquiry',
-          message: ''
-        });
-      } else {
-        alert('Failed to send message. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error sending message:', error);
-      alert('An error occurred. Please try again later.');
-    }
+    window.open(`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (
@@ -57,7 +35,6 @@ export default function ContactSection() {
         {/* Section Heading */}
         <div className="section-title-wrap">
           <div className="section-tag">
-            <Building2 size={14} color="#EF233C" />
             <span>Visit Our Showrooms</span>
           </div>
           <h2 className="section-title">
@@ -163,9 +140,9 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-whatsapp"
-                style={{ width: '100%', padding: '9px 14px', fontSize: '0.85rem' }}
+                style={{ width: '100%', padding: '9px 14px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px' }}
               >
-                <MessageCircle size={15} />
+                <WhatsAppIcon size={16} color="#ffffff" />
                 <span>Chat with {contact.name.split(' ')[0]}</span>
               </a>
             </div>
@@ -370,10 +347,10 @@ export default function ContactSection() {
               <button
                 type="submit"
                 className="btn btn-primary"
-                style={{ width: '100%', padding: '13px', fontSize: '0.95rem', background: '#1c1917', color: '#fff', border: 'none' }}
+                style={{ width: '100%', padding: '13px', fontSize: '0.95rem' }}
               >
                 <Send size={16} />
-                <span>Send Message</span>
+                <span>Send via WhatsApp</span>
               </button>
             </form>
           </div>

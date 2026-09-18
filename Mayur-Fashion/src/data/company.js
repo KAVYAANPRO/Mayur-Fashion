@@ -11,7 +11,7 @@ export const COMPANY_INFO = {
     { label: "Manufacturing Heritage", value: "35+ Yrs", sub: "Since 1991" },
     { label: "Retail & Wholesale Network", value: "15,000+", sub: "Trusted Partners" },
     { label: "Global Export Reach", value: "30+ Countries", sub: "Worldwide Delivery" },
-    { label: "Inclusive Size Range", value: "M to 5XL", sub: "Perfect Fits" },
+    { label: "Inclusive Size Range", value: "M to 6XL", sub: "Perfect Fits" },
   ],
 
   contacts: [
@@ -31,8 +31,8 @@ export const COMPANY_INFO = {
     {
       name: "Manohar Peswani",
       role: "Founder & Chairman",
-      phones: ["+91 99259 45225"],
-      whatsapp: "919925945225"
+      phones: ["+91 98253 43225"],
+      whatsapp: "919825343225"
     }
   ],
 
@@ -63,7 +63,7 @@ export const COMPANY_INFO = {
     paragraphs: [
       "The journey began in 1991, when Mr. Manohar Peswani and family established Manohar Dresses and registered the celebrated designer brand label 'Mayur' in Ahmedabad, the textile heartland of India, driven by an uncompromising vision for fabric excellence, size inclusivity, and authentic craftsmanship.",
       "Over more than three decades, that foundational passion has expanded into one of India's premier ethnic wear manufacturing houses, trusted by over 15,000 retail boutiques and exporting to 30+ nations worldwide.",
-      "Our expansive collections span Kurti 3-Piece Sets, Designer Anarkalis, Sharara Ensembles, Indo-Western Co-ords, and Afghani Pant Sets in sizes M to 5XL, meticulously engineered with pure silks, fine Chanderi, modal, georgette, and breathable cottons."
+      "Our expansive collections span Kurti 3-Piece Sets, Designer Anarkalis, Sharara Ensembles, Indo-Western Co-ords, and Afghani Pant Sets in sizes M to 6XL, meticulously engineered with pure silks, fine Chanderi, modal, georgette, and breathable cottons."
     ]
   },
 
@@ -83,7 +83,7 @@ export const COMPANY_INFO = {
     {
       id: "inclusivity",
       title: "Complete Size Inclusivity",
-      desc: "Flattering silhouettes tailored for real bodies—offering complete catalog grading from M (38) all the way to 5XL (50).",
+      desc: "Flattering silhouettes tailored for real bodies—offering complete catalog grading from M (38) all the way to 6XL (52).",
       icon: "Sparkles"
     },
     {
@@ -98,7 +98,7 @@ export const COMPANY_INFO = {
     {
       name: "Rajesh Kothari",
       business: "Kothari Silk & Sarees, Mumbai",
-      quote: "We have been sourcing Mayur Fashion catalog sets for over 12 years. Their kurti 3-piece sets and sizing up to 5XL are our fastest moving inventory every festive season.",
+      quote: "We have been sourcing Mayur Fashion catalog sets for over 12 years. Their kurti 3-piece sets and sizing up to 6XL are our fastest moving inventory every festive season.",
       rating: 5,
       city: "Mumbai, Maharashtra"
     },

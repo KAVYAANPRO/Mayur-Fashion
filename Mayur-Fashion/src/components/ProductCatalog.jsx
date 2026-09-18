@@ -1,6 +1,7 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { Sparkles, Filter, Search, SlidersHorizontal } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { SlidersHorizontal } from 'lucide-react';
 import ProductCard from './ProductCard';
+import { CATEGORIES, SIZES, PRODUCTS } from '../data/products';
 
 export default function ProductCatalog({ 
   searchQuery, 
@@ -11,58 +12,9 @@ export default function ProductCatalog({
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedSize, setSelectedSize] = useState("all");
   const [sortBy, setSortBy] = useState("featured");
-  
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [productsRes, categoriesRes] = await Promise.all([
-          fetch('http://localhost:5000/api/products'),
-          fetch('http://localhost:5000/api/categories')
-        ]);
-        const productsData = await productsRes.json();
-        const categoriesData = await categoriesRes.json();
-        
-        // Map backend categories to expected frontend schema
-        const mappedCategories = categoriesData.map(c => ({
-          id: c._id,
-          label: c.name
-        }));
-        setCategories(mappedCategories);
-
-        // Map backend products to expected frontend schema
-        const mappedProducts = productsData.map(p => ({
-          id: p.sku || p._id,
-          originalId: p._id,
-          title: p.name,
-          fabric: p.description?.substring(0, 20) || "Premium Fabric",
-          color: "Assorted",
-          colorHex: "#e5e5e5",
-          category: p.category?._id || p.category,
-          categoryLabel: p.category?.name || "Apparel",
-          primaryImage: (p.images && p.images.length > 0) ? p.images[0] : "",
-          gallery: p.images || [],
-          isBestseller: p.demandScore > 5,
-          isNew: true,
-          description: p.description,
-          price: p.price,
-          stock: p.stock
-        }));
-        setProducts(mappedProducts);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
 
   const filteredProducts = useMemo(() => {
-    return products.filter((item) => {
+    return PRODUCTS.filter((item) => {
       // Category Match
       if (selectedCategory !== "all" && item.category !== selectedCategory) {
         return false;
@@ -89,7 +41,7 @@ export default function ProductCatalog({
       }
       return 0;
     });
-  }, [selectedCategory, searchQuery, sortBy, products]);
+  }, [selectedCategory, searchQuery, sortBy]);
 
   return (
     <section id="collections" className="section" style={{ background: '#EDEBE6', borderBottom: '1px solid #ECE5CE' }}>
@@ -97,14 +49,13 @@ export default function ProductCatalog({
         {/* Section Heading */}
         <div className="section-title-wrap">
           <div className="section-tag">
-            <Sparkles size={14} color="#EF233C" />
             <span>Curated Ethnic Creations</span>
           </div>
           <h2 className="section-title">
             Our Standout Collections
           </h2>
           <p className="section-subtitle">
-            Crafted using premium fabrics like Pure Chanderi, Modal Silk, Crinkle Georgette, and Rayon. Complete catalog grading in sizes <strong>M to 5XL</strong>.
+            Crafted using premium fabrics like Pure Chanderi, Modal Silk, Crinkle Georgette, and Rayon. Complete catalog grading in sizes <strong>M to 6XL</strong>.
           </p>
         </div>
 
@@ -125,25 +76,7 @@ export default function ProductCatalog({
             flexWrap: 'wrap',
             gap: '8px'
           }}>
-            {/* "All" button can be inserted here if needed or handled differently. Assuming "all" is implicit or we map categories as they are */}
-            <button
-              key="all"
-              onClick={() => setSelectedCategory("all")}
-              style={{
-                padding: '9px 18px',
-                borderRadius: '9999px',
-                fontSize: '0.88rem',
-                fontWeight: 600,
-                background: selectedCategory === "all" ? 'linear-gradient(135deg, #EF233C, #b81427)' : '#ffffff',
-                color: selectedCategory === "all" ? '#ffffff' : '#1c1917',
-                border: selectedCategory === "all" ? '1px solid #EF233C' : '1px solid #ECE5CE',
-                boxShadow: selectedCategory === "all" ? '0 4px 14px rgba(239, 35, 60, 0.25)' : 'none',
-                transition: 'all 0.25s ease'
-              }}
-            >
-              All Categories
-            </button>
-            {categories.map((cat) => {
+            {CATEGORIES.map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (
                 <button
@@ -204,9 +137,7 @@ export default function ProductCatalog({
         </div>
 
         {/* Product Grid */}
-        {loading ? (
-          <div style={{ textAlign: 'center', padding: '60px' }}>Loading...</div>
-        ) : filteredProducts.length > 0 ? (
+        {filteredProducts.length > 0 ? (
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',

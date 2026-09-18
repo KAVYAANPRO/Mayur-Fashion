@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { X, MessageCircle, ShoppingBag, Check, Sparkles, Shield, Info, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, ShoppingBag, Check } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import { COMPANY_INFO } from '../data/company';
 
 export default function ProductModal({ product, onClose, onToggleInquiry, isInInquiry }) {
@@ -8,6 +9,14 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
   const [activeImage, setActiveImage] = useState(product.primaryImage);
   const [selectedSize, setSelectedSize] = useState("M (38)");
   const [showSizeChart, setShowSizeChart] = useState(false);
+
+  useEffect(() => {
+    if (product) {
+      setActiveImage(product.primaryImage);
+      setSelectedSize("M (38)");
+      setShowSizeChart(false);
+    }
+  }, [product]);
 
   const handleWhatsAppEnquiry = () => {
     const text = `Hello Mayur Fashion! I am looking to inquire about the wholesale catalog set for:\n\n*Product:* ${product.title}\n*Code:* ${product.id}\n*Fabric:* ${product.fabric}\n*Preferred Size:* ${selectedSize}\n*Color:* ${product.color}\n\nPlease share catalog pricing, MOQ, and delivery timeline.`;
@@ -195,7 +204,7 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
               <div style={{ marginBottom: '22px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                   <label style={{ fontSize: '0.86rem', fontWeight: 700, color: '#1c1917' }}>
-                    Available Sizes (Complete M to 5XL Grading):
+                    Available Sizes (Complete M to 6XL Grading):
                   </label>
                   <button 
                     onClick={() => setShowSizeChart(!showSizeChart)}
@@ -252,6 +261,7 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
                         <tr><td style={{ padding: '4px' }}>3XL</td><td>46"</td><td>42"</td><td>48"</td></tr>
                         <tr><td style={{ padding: '4px' }}>4XL</td><td>48"</td><td>44"</td><td>50"</td></tr>
                         <tr><td style={{ padding: '4px' }}>5XL</td><td>50"</td><td>46"</td><td>52"</td></tr>
+                        <tr><td style={{ padding: '4px' }}>6XL</td><td>52"</td><td>48"</td><td>54"</td></tr>
                       </tbody>
                     </table>
                   </div>
@@ -271,7 +281,6 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
                 color: '#065f46',
                 marginBottom: '24px'
               }}>
-                <Shield size={16} />
                 <span><strong>Wholesale Packaging:</strong> Full catalog set with individual branded polybags and hangar packs.</span>
               </div>
             </div>
@@ -281,9 +290,9 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
               <button
                 onClick={handleWhatsAppEnquiry}
                 className="btn btn-whatsapp"
-                style={{ flex: 1.2, minWidth: '220px', padding: '13px 20px', fontSize: '0.95rem' }}
+                style={{ flex: 1.2, minWidth: '220px', padding: '13px 20px', fontSize: '0.95rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
-                <MessageCircle size={18} />
+                <WhatsAppIcon size={20} color="#ffffff" />
                 <span>Instant WhatsApp Inquiry</span>
               </button>
 

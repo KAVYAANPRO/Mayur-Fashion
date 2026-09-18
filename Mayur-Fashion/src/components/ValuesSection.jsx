@@ -16,7 +16,6 @@ export default function ValuesSection() {
         {/* Section Title */}
         <div className="section-title-wrap">
           <div className="section-tag sage">
-            <Sparkles size={14} color="#3e5336" />
             <span>Our Guiding Principles</span>
           </div>
           <h2 className="section-title">
