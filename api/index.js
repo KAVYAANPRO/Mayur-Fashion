@@ -37,13 +37,18 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // DB connection middleware — connects once and reuses
+let dbInitialized = false;
 app.use(async (req, res, next) => {
   try {
     await connectDB();
+    // Initialize master admin only once after DB connects
+    if (!dbInitialized) {
+      await initMasterAdmin();
+      dbInitialized = true;
+    }
     next();
   } catch (err) {
     console.error('DB connection failed:', err.message);

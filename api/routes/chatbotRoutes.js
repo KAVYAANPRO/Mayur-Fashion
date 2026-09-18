@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { GoogleGenAI } = require('@google/genai');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 const Product = require('../models/Product');
 const Category = require('../models/Category');
 
@@ -31,16 +31,13 @@ ${websiteDataContext}`;
     let replyText = '';
 
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-      const response = await ai.models.generateContent({
-        model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
-        contents: message,
-        config: {
-          systemInstruction,
-          temperature: 0.7,
-        }
+      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+      const model = genAI.getGenerativeModel({ 
+        model: process.env.GEMINI_MODEL || 'gemini-2.0-flash-exp',
+        systemInstruction: systemInstruction,
       });
-      replyText = response.text;
+      const result = await model.generateContent(message);
+      replyText = result.response.text();
     } catch (geminiError) {
       console.warn('Gemini API failed, falling back to OpenRouter...', geminiError);
       
