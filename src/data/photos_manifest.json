@@ -1,0 +1,603 @@
+{
+  "catalog": [
+    {
+      "pageNumber": 1,
+      "image": "/assets/catalog/page_1.webp",
+      "imageJpg": "/assets/catalog/page_1.jpg",
+      "width": 2162,
+      "height": 1622
+    },
+    {
+      "pageNumber": 2,
+      "image": "/assets/catalog/page_2.webp",
+      "imageJpg": "/assets/catalog/page_2.jpg",
+      "width": 2161,
+      "height": 1621
+    },
+    {
+      "pageNumber": 3,
+      "image": "/assets/catalog/page_3.webp",
+      "imageJpg": "/assets/catalog/page_3.jpg",
+      "width": 2161,
+      "height": 1621
+    },
+    {
+      "pageNumber": 4,
+      "image": "/assets/catalog/page_4.webp",
+      "imageJpg": "/assets/catalog/page_4.jpg",
+      "width": 2161,
+      "height": 1621
+    },
+    {
+      "pageNumber": 5,
+      "image": "/assets/catalog/page_5.webp",
+      "imageJpg": "/assets/catalog/page_5.jpg",
+      "width": 2162,
+      "height": 1623
+    },
+    {
+      "pageNumber": 6,
+      "image": "/assets/catalog/page_6.webp",
+      "imageJpg": "/assets/catalog/page_6.jpg",
+      "width": 2161,
+      "height": 1621
+    },
+    {
+      "pageNumber": 7,
+      "image": "/assets/catalog/page_7.webp",
+      "imageJpg": "/assets/catalog/page_7.jpg",
+      "width": 2161,
+      "height": 1621
+    },
+    {
+      "pageNumber": 8,
+      "image": "/assets/catalog/page_8.webp",
+      "imageJpg": "/assets/catalog/page_8.jpg",
+      "width": 2161,
+      "height": 1621
+    }
+  ],
+  "photos": [
+    {
+      "id": "shoot2_img_3450",
+      "shoot": "shoot2",
+      "original": "IMG_3450",
+      "image": "/assets/products/shoot2_img_3450.webp",
+      "imageJpg": "/assets/products/shoot2_img_3450.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3450_thumb.webp",
+      "width": 717,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3452",
+      "shoot": "shoot2",
+      "original": "IMG_3452",
+      "image": "/assets/products/shoot2_img_3452.webp",
+      "imageJpg": "/assets/products/shoot2_img_3452.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3452_thumb.webp",
+      "width": 633,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3457",
+      "shoot": "shoot2",
+      "original": "IMG_3457",
+      "image": "/assets/products/shoot2_img_3457.webp",
+      "imageJpg": "/assets/products/shoot2_img_3457.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3457_thumb.webp",
+      "width": 718,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3458",
+      "shoot": "shoot2",
+      "original": "IMG_3458",
+      "image": "/assets/products/shoot2_img_3458.webp",
+      "imageJpg": "/assets/products/shoot2_img_3458.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3458_thumb.webp",
+      "width": 631,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3462",
+      "shoot": "shoot2",
+      "original": "IMG_3462",
+      "image": "/assets/products/shoot2_img_3462.webp",
+      "imageJpg": "/assets/products/shoot2_img_3462.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3462_thumb.webp",
+      "width": 714,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3463",
+      "shoot": "shoot2",
+      "original": "IMG_3463",
+      "image": "/assets/products/shoot2_img_3463.webp",
+      "imageJpg": "/assets/products/shoot2_img_3463.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3463_thumb.webp",
+      "width": 660,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3469",
+      "shoot": "shoot2",
+      "original": "IMG_3469",
+      "image": "/assets/products/shoot2_img_3469.webp",
+      "imageJpg": "/assets/products/shoot2_img_3469.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3469_thumb.webp",
+      "width": 739,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3470",
+      "shoot": "shoot2",
+      "original": "IMG_3470",
+      "image": "/assets/products/shoot2_img_3470.webp",
+      "imageJpg": "/assets/products/shoot2_img_3470.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3470_thumb.webp",
+      "width": 629,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3473",
+      "shoot": "shoot2",
+      "original": "IMG_3473",
+      "image": "/assets/products/shoot2_img_3473.webp",
+      "imageJpg": "/assets/products/shoot2_img_3473.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3473_thumb.webp",
+      "width": 718,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3474",
+      "shoot": "shoot2",
+      "original": "IMG_3474",
+      "image": "/assets/products/shoot2_img_3474.webp",
+      "imageJpg": "/assets/products/shoot2_img_3474.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3474_thumb.webp",
+      "width": 629,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3476",
+      "shoot": "shoot2",
+      "original": "IMG_3476",
+      "image": "/assets/products/shoot2_img_3476.webp",
+      "imageJpg": "/assets/products/shoot2_img_3476.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3476_thumb.webp",
+      "width": 716,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3478",
+      "shoot": "shoot2",
+      "original": "IMG_3478",
+      "image": "/assets/products/shoot2_img_3478.webp",
+      "imageJpg": "/assets/products/shoot2_img_3478.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3478_thumb.webp",
+      "width": 643,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3481",
+      "shoot": "shoot2",
+      "original": "IMG_3481",
+      "image": "/assets/products/shoot2_img_3481.webp",
+      "imageJpg": "/assets/products/shoot2_img_3481.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3481_thumb.webp",
+      "width": 756,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3482",
+      "shoot": "shoot2",
+      "original": "IMG_3482",
+      "image": "/assets/products/shoot2_img_3482.webp",
+      "imageJpg": "/assets/products/shoot2_img_3482.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3482_thumb.webp",
+      "width": 629,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3489",
+      "shoot": "shoot2",
+      "original": "IMG_3489",
+      "image": "/assets/products/shoot2_img_3489.webp",
+      "imageJpg": "/assets/products/shoot2_img_3489.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3489_thumb.webp",
+      "width": 652,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3490",
+      "shoot": "shoot2",
+      "original": "IMG_3490",
+      "image": "/assets/products/shoot2_img_3490.webp",
+      "imageJpg": "/assets/products/shoot2_img_3490.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3490_thumb.webp",
+      "width": 738,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3497",
+      "shoot": "shoot2",
+      "original": "IMG_3497",
+      "image": "/assets/products/shoot2_img_3497.webp",
+      "imageJpg": "/assets/products/shoot2_img_3497.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3497_thumb.webp",
+      "width": 720,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3498",
+      "shoot": "shoot2",
+      "original": "IMG_3498",
+      "image": "/assets/products/shoot2_img_3498.webp",
+      "imageJpg": "/assets/products/shoot2_img_3498.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3498_thumb.webp",
+      "width": 629,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3502",
+      "shoot": "shoot2",
+      "original": "IMG_3502",
+      "image": "/assets/products/shoot2_img_3502.webp",
+      "imageJpg": "/assets/products/shoot2_img_3502.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3502_thumb.webp",
+      "width": 747,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3503",
+      "shoot": "shoot2",
+      "original": "IMG_3503",
+      "image": "/assets/products/shoot2_img_3503.webp",
+      "imageJpg": "/assets/products/shoot2_img_3503.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3503_thumb.webp",
+      "width": 629,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3505",
+      "shoot": "shoot2",
+      "original": "IMG_3505",
+      "image": "/assets/products/shoot2_img_3505.webp",
+      "imageJpg": "/assets/products/shoot2_img_3505.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3505_thumb.webp",
+      "width": 835,
+      "height": 2000
+    },
+    {
+      "id": "shoot2_img_3506",
+      "shoot": "shoot2",
+      "original": "IMG_3506",
+      "image": "/assets/products/shoot2_img_3506.webp",
+      "imageJpg": "/assets/products/shoot2_img_3506.jpg",
+      "thumbnail": "/assets/products/shoot2_img_3506_thumb.webp",
+      "width": 629,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2530",
+      "shoot": "shoot1",
+      "original": "IMG_2530",
+      "image": "/assets/products/shoot1_img_2530.webp",
+      "imageJpg": "/assets/products/shoot1_img_2530.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2530_thumb.webp",
+      "width": 658,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2535",
+      "shoot": "shoot1",
+      "original": "IMG_2535",
+      "image": "/assets/products/shoot1_img_2535.webp",
+      "imageJpg": "/assets/products/shoot1_img_2535.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2535_thumb.webp",
+      "width": 719,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2536",
+      "shoot": "shoot1",
+      "original": "IMG_2536",
+      "image": "/assets/products/shoot1_img_2536.webp",
+      "imageJpg": "/assets/products/shoot1_img_2536.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2536_thumb.webp",
+      "width": 689,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2542",
+      "shoot": "shoot1",
+      "original": "IMG_2542",
+      "image": "/assets/products/shoot1_img_2542.webp",
+      "imageJpg": "/assets/products/shoot1_img_2542.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2542_thumb.webp",
+      "width": 687,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2545",
+      "shoot": "shoot1",
+      "original": "IMG_2545",
+      "image": "/assets/products/shoot1_img_2545.webp",
+      "imageJpg": "/assets/products/shoot1_img_2545.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2545_thumb.webp",
+      "width": 644,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2549",
+      "shoot": "shoot1",
+      "original": "IMG_2549",
+      "image": "/assets/products/shoot1_img_2549.webp",
+      "imageJpg": "/assets/products/shoot1_img_2549.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2549_thumb.webp",
+      "width": 675,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2552",
+      "shoot": "shoot1",
+      "original": "IMG_2552",
+      "image": "/assets/products/shoot1_img_2552.webp",
+      "imageJpg": "/assets/products/shoot1_img_2552.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2552_thumb.webp",
+      "width": 711,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2553",
+      "shoot": "shoot1",
+      "original": "IMG_2553",
+      "image": "/assets/products/shoot1_img_2553.webp",
+      "imageJpg": "/assets/products/shoot1_img_2553.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2553_thumb.webp",
+      "width": 686,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2554",
+      "shoot": "shoot1",
+      "original": "IMG_2554",
+      "image": "/assets/products/shoot1_img_2554.webp",
+      "imageJpg": "/assets/products/shoot1_img_2554.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2554_thumb.webp",
+      "width": 710,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2556",
+      "shoot": "shoot1",
+      "original": "IMG_2556",
+      "image": "/assets/products/shoot1_img_2556.webp",
+      "imageJpg": "/assets/products/shoot1_img_2556.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2556_thumb.webp",
+      "width": 678,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2559",
+      "shoot": "shoot1",
+      "original": "IMG_2559",
+      "image": "/assets/products/shoot1_img_2559.webp",
+      "imageJpg": "/assets/products/shoot1_img_2559.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2559_thumb.webp",
+      "width": 684,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2562",
+      "shoot": "shoot1",
+      "original": "IMG_2562",
+      "image": "/assets/products/shoot1_img_2562.webp",
+      "imageJpg": "/assets/products/shoot1_img_2562.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2562_thumb.webp",
+      "width": 662,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2565",
+      "shoot": "shoot1",
+      "original": "IMG_2565",
+      "image": "/assets/products/shoot1_img_2565.webp",
+      "imageJpg": "/assets/products/shoot1_img_2565.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2565_thumb.webp",
+      "width": 641,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2568",
+      "shoot": "shoot1",
+      "original": "IMG_2568",
+      "image": "/assets/products/shoot1_img_2568.webp",
+      "imageJpg": "/assets/products/shoot1_img_2568.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2568_thumb.webp",
+      "width": 706,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2570",
+      "shoot": "shoot1",
+      "original": "IMG_2570",
+      "image": "/assets/products/shoot1_img_2570.webp",
+      "imageJpg": "/assets/products/shoot1_img_2570.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2570_thumb.webp",
+      "width": 680,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2576",
+      "shoot": "shoot1",
+      "original": "IMG_2576",
+      "image": "/assets/products/shoot1_img_2576.webp",
+      "imageJpg": "/assets/products/shoot1_img_2576.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2576_thumb.webp",
+      "width": 662,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2577",
+      "shoot": "shoot1",
+      "original": "IMG_2577",
+      "image": "/assets/products/shoot1_img_2577.webp",
+      "imageJpg": "/assets/products/shoot1_img_2577.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2577_thumb.webp",
+      "width": 673,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2578",
+      "shoot": "shoot1",
+      "original": "IMG_2578",
+      "image": "/assets/products/shoot1_img_2578.webp",
+      "imageJpg": "/assets/products/shoot1_img_2578.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2578_thumb.webp",
+      "width": 653,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2579",
+      "shoot": "shoot1",
+      "original": "IMG_2579",
+      "image": "/assets/products/shoot1_img_2579.webp",
+      "imageJpg": "/assets/products/shoot1_img_2579.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2579_thumb.webp",
+      "width": 697,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2583",
+      "shoot": "shoot1",
+      "original": "IMG_2583",
+      "image": "/assets/products/shoot1_img_2583.webp",
+      "imageJpg": "/assets/products/shoot1_img_2583.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2583_thumb.webp",
+      "width": 726,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2586",
+      "shoot": "shoot1",
+      "original": "IMG_2586",
+      "image": "/assets/products/shoot1_img_2586.webp",
+      "imageJpg": "/assets/products/shoot1_img_2586.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2586_thumb.webp",
+      "width": 656,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2590",
+      "shoot": "shoot1",
+      "original": "IMG_2590",
+      "image": "/assets/products/shoot1_img_2590.webp",
+      "imageJpg": "/assets/products/shoot1_img_2590.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2590_thumb.webp",
+      "width": 659,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2591",
+      "shoot": "shoot1",
+      "original": "IMG_2591",
+      "image": "/assets/products/shoot1_img_2591.webp",
+      "imageJpg": "/assets/products/shoot1_img_2591.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2591_thumb.webp",
+      "width": 658,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2593",
+      "shoot": "shoot1",
+      "original": "IMG_2593",
+      "image": "/assets/products/shoot1_img_2593.webp",
+      "imageJpg": "/assets/products/shoot1_img_2593.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2593_thumb.webp",
+      "width": 688,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2594",
+      "shoot": "shoot1",
+      "original": "IMG_2594",
+      "image": "/assets/products/shoot1_img_2594.webp",
+      "imageJpg": "/assets/products/shoot1_img_2594.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2594_thumb.webp",
+      "width": 649,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2596",
+      "shoot": "shoot1",
+      "original": "IMG_2596",
+      "image": "/assets/products/shoot1_img_2596.webp",
+      "imageJpg": "/assets/products/shoot1_img_2596.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2596_thumb.webp",
+      "width": 669,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2597",
+      "shoot": "shoot1",
+      "original": "IMG_2597",
+      "image": "/assets/products/shoot1_img_2597.webp",
+      "imageJpg": "/assets/products/shoot1_img_2597.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2597_thumb.webp",
+      "width": 629,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2599",
+      "shoot": "shoot1",
+      "original": "IMG_2599",
+      "image": "/assets/products/shoot1_img_2599.webp",
+      "imageJpg": "/assets/products/shoot1_img_2599.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2599_thumb.webp",
+      "width": 671,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2600",
+      "shoot": "shoot1",
+      "original": "IMG_2600",
+      "image": "/assets/products/shoot1_img_2600.webp",
+      "imageJpg": "/assets/products/shoot1_img_2600.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2600_thumb.webp",
+      "width": 711,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2602",
+      "shoot": "shoot1",
+      "original": "IMG_2602",
+      "image": "/assets/products/shoot1_img_2602.webp",
+      "imageJpg": "/assets/products/shoot1_img_2602.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2602_thumb.webp",
+      "width": 676,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2603",
+      "shoot": "shoot1",
+      "original": "IMG_2603",
+      "image": "/assets/products/shoot1_img_2603.webp",
+      "imageJpg": "/assets/products/shoot1_img_2603.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2603_thumb.webp",
+      "width": 697,
+      "height": 2000
+    },
+    {
+      "id": "shoot1_img_2604",
+      "shoot": "shoot1",
+      "original": "IMG_2604",
+      "image": "/assets/products/shoot1_img_2604.webp",
+      "imageJpg": "/assets/products/shoot1_img_2604.jpg",
+      "thumbnail": "/assets/products/shoot1_img_2604_thumb.webp",
+      "width": 670,
+      "height": 2000
+    }
+  ],
+  "totalPhotos": 54
+}
