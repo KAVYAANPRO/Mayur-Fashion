@@ -1,0 +1,24 @@
+const mongoose = require('mongoose');
+
+const InquirySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  phone: {
+    type: String,
+    trim: true
+  },
+  message: {
+    type: String,
+    required: true
+  }
+}, { timestamps: true });
+
+module.exports = mongoose.models.Inquiry || mongoose.model('Inquiry', InquirySchema);

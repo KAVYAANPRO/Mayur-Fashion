@@ -1,0 +1,253 @@
+import React, { useState, useMemo, useEffect } from 'react';
+import { Sparkles, Filter, Search, SlidersHorizontal } from 'lucide-react';
+import ProductCard from './ProductCard';
+
+export default function ProductCatalog({ 
+  searchQuery, 
+  onQuickView, 
+  onToggleInquiry, 
+  inquiryList 
+}) {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedSize, setSelectedSize] = useState("all");
+  const [sortBy, setSortBy] = useState("featured");
+  
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [productsRes, categoriesRes] = await Promise.all([
+          fetch('http://localhost:5000/api/products'),
+          fetch('http://localhost:5000/api/categories')
+        ]);
+        const productsData = await productsRes.json();
+        const categoriesData = await categoriesRes.json();
+        
+        // Map backend categories to expected frontend schema
+        const mappedCategories = categoriesData.map(c => ({
+          id: c._id,
+          label: c.name
+        }));
+        setCategories(mappedCategories);
+
+        // Map backend products to expected frontend schema
+        const mappedProducts = productsData.map(p => ({
+          id: p.sku || p._id,
+          originalId: p._id,
+          title: p.name,
+          fabric: p.description?.substring(0, 20) || "Premium Fabric",
+          color: "Assorted",
+          colorHex: "#e5e5e5",
+          category: p.category?._id || p.category,
+          categoryLabel: p.category?.name || "Apparel",
+          primaryImage: (p.images && p.images.length > 0) ? p.images[0] : "",
+          gallery: p.images || [],
+          isBestseller: p.demandScore > 5,
+          isNew: true,
+          description: p.description,
+          price: p.price,
+          stock: p.stock
+        }));
+        setProducts(mappedProducts);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((item) => {
+      // Category Match
+      if (selectedCategory !== "all" && item.category !== selectedCategory) {
+        return false;
+      }
+      // Search Match
+      if (searchQuery && searchQuery.trim() !== '') {
+        const query = searchQuery.toLowerCase();
+        const matchTitle = item.title.toLowerCase().includes(query);
+        const matchFabric = item.fabric.toLowerCase().includes(query);
+        const matchColor = item.color.toLowerCase().includes(query);
+        const matchId = item.id.toLowerCase().includes(query);
+        const matchDesc = item.description.toLowerCase().includes(query);
+        if (!matchTitle && !matchFabric && !matchColor && !matchId && !matchDesc) {
+          return false;
+        }
+      }
+      return true;
+    }).sort((a, b) => {
+      if (sortBy === "bestsellers") {
+        return (b.isBestseller ? 1 : 0) - (a.isBestseller ? 1 : 0);
+      }
+      if (sortBy === "newest") {
+        return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
+      }
+      return 0;
+    });
+  }, [selectedCategory, searchQuery, sortBy, products]);
+
+  return (
+    <section id="collections" className="section" style={{ background: '#EDEBE6', borderBottom: '1px solid #ECE5CE' }}>
+      <div className="container-wide">
+        {/* Section Heading */}
+        <div className="section-title-wrap">
+          <div className="section-tag">
+            <Sparkles size={14} color="#EF233C" />
+            <span>Curated Ethnic Creations</span>
+          </div>
+          <h2 className="section-title">
+            Our Standout Collections
+          </h2>
+          <p className="section-subtitle">
+            Crafted using premium fabrics like Pure Chanderi, Modal Silk, Crinkle Georgette, and Rayon. Complete catalog grading in sizes <strong>M to 5XL</strong>.
+          </p>
+        </div>
+
+        {/* Category & Filter Navigation Bar */}
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '16px',
+          paddingBottom: '24px',
+          borderBottom: '1px solid #ECE5CE',
+          marginBottom: '36px'
+        }}>
+          {/* Category Tabs */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '8px'
+          }}>
+            {/* "All" button can be inserted here if needed or handled differently. Assuming "all" is implicit or we map categories as they are */}
+            <button
+              key="all"
+              onClick={() => setSelectedCategory("all")}
+              style={{
+                padding: '9px 18px',
+                borderRadius: '9999px',
+                fontSize: '0.88rem',
+                fontWeight: 600,
+                background: selectedCategory === "all" ? 'linear-gradient(135deg, #EF233C, #b81427)' : '#ffffff',
+                color: selectedCategory === "all" ? '#ffffff' : '#1c1917',
+                border: selectedCategory === "all" ? '1px solid #EF233C' : '1px solid #ECE5CE',
+                boxShadow: selectedCategory === "all" ? '0 4px 14px rgba(239, 35, 60, 0.25)' : 'none',
+                transition: 'all 0.25s ease'
+              }}
+            >
+              All Categories
+            </button>
+            {categories.map((cat) => {
+              const isActive = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  style={{
+                    padding: '9px 18px',
+                    borderRadius: '9999px',
+                    fontSize: '0.88rem',
+                    fontWeight: 600,
+                    background: isActive ? 'linear-gradient(135deg, #EF233C, #b81427)' : '#ffffff',
+                    color: isActive ? '#ffffff' : '#1c1917',
+                    border: isActive ? '1px solid #EF233C' : '1px solid #ECE5CE',
+                    boxShadow: isActive ? '0 4px 14px rgba(239, 35, 60, 0.25)' : 'none',
+                    transition: 'all 0.25s ease'
+                  }}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Controls: Sort & Total Count */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <span style={{ fontSize: '0.85rem', color: '#5e5750', fontWeight: 600 }}>
+              Showing {filteredProducts.length} designs
+            </span>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: '#ffffff',
+              padding: '6px 12px',
+              borderRadius: '9999px',
+              border: '1px solid #C8D6BF'
+            }}>
+              <SlidersHorizontal size={14} color="#EF233C" />
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                style={{
+                  border: 'none',
+                  background: 'transparent',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                  color: '#1c1917',
+                  outline: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                <option value="featured">Featured Catalog</option>
+                <option value="bestsellers">Bestsellers First</option>
+                <option value="newest">2026 New Edits</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        {/* Product Grid */}
+        {loading ? (
+          <div style={{ textAlign: 'center', padding: '60px' }}>Loading...</div>
+        ) : filteredProducts.length > 0 ? (
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: '28px'
+          }}>
+            {filteredProducts.map((product) => {
+              const isInInquiry = inquiryList.some((item) => item.id === product.id);
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onQuickView={onQuickView}
+                  onToggleInquiry={onToggleInquiry}
+                  isInInquiry={isInInquiry}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div style={{
+            textAlign: 'center',
+            padding: '80px 20px',
+            background: '#ffffff',
+            borderRadius: '20px',
+            border: '1px dashed #C8D6BF'
+          }}>
+            <h3 style={{ fontSize: '1.3rem', color: '#EF233C', marginBottom: '8px' }}>
+              No designs matched your filter
+            </h3>
+            <p style={{ color: '#5e5750', marginBottom: '16px' }}>
+              Try searching with another keyword or resetting the category filter.
+            </p>
+            <button
+              onClick={() => { setSelectedCategory('all'); }}
+              className="btn btn-outline"
+            >
+              Reset Filters
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
