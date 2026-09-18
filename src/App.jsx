@@ -12,6 +12,7 @@ import WholesaleSection from './components/WholesaleSection';
 import ContactSection from './components/ContactSection';
 import InquiryDrawer from './components/InquiryDrawer';
 import Footer from './components/Footer';
+import ChatWidget from './components/ChatWidget';
 import { COMPANY_INFO } from './data/company';
 
 export default function App() {
@@ -215,6 +216,8 @@ export default function App() {
             </span>
           </button>
         )}
+
+        <ChatWidget />
 
         <a
           href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you directly from your website.")}`}

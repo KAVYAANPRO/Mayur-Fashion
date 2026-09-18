@@ -1,5 +1,6 @@
 import React from 'react';
-import { MessageCircle, Phone, Mail, MapPin, Globe, Sparkles, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MapPin, Globe, ArrowUp } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import { COMPANY_INFO } from '../data/company';
 
 function InstagramIcon({ size = 18 }) {
@@ -59,13 +60,13 @@ export default function Footer({ onNavigate }) {
                   MAYUR FASHION
                 </div>
                 <div style={{ fontSize: '0.72rem', color: '#F2BCB6', letterSpacing: '0.1em', fontWeight: 600 }}>
-                  MANOHAR DRESSES • ESTD. 1954
+                  MANOHAR DRESSES • ESTD. 1991
                 </div>
               </div>
             </div>
 
             <p style={{ fontSize: '0.88rem', color: '#C8D6BF', lineHeight: 1.6, marginBottom: '20px', maxWidth: '360px' }}>
-              Premier manufacturer & wholesale supplier of women's ethnic wear in Ahmedabad. Specialized in Kurti 3-Piece Sets, Anarkalis, Shararas, and Co-ord sets (Sizes M to 5XL).
+              Premier manufacturer & wholesale supplier of women's ethnic wear in Ahmedabad. Specialized in Kurti 3-Piece Sets, Anarkalis, Shararas, and Co-ord sets (Sizes M to 6XL).
             </p>
 
             <div style={{ display: 'flex', gap: '10px' }}>
@@ -105,7 +106,7 @@ export default function Footer({ onNavigate }) {
                 }}
                 aria-label="WhatsApp"
               >
-                <MessageCircle size={18} />
+                <WhatsAppIcon size={18} color="#25d366" />
               </a>
             </div>
           </div>
@@ -164,7 +165,7 @@ export default function Footer({ onNavigate }) {
               <li>Co-ord & Afghani Sets</li>
               <li>Pure Chanderi & Dola Silk</li>
               <li>Festive Lucknowi Chikankari</li>
-              <li style={{ color: '#F2BCB6', fontWeight: 600 }}>✨ Sizes: M, L, XL, XXL, 3XL, 4XL, 5XL</li>
+              <li style={{ color: '#F2BCB6', fontWeight: 600 }}>Sizes: M, L, XL, XXL, 3XL, 4XL, 5XL, 6XL</li>
             </ul>
           </div>
 
@@ -186,7 +187,7 @@ export default function Footer({ onNavigate }) {
               </div>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                 <Phone size={16} color="#EF233C" style={{ flexShrink: 0 }} />
-                <span>+91 99788 31115 / +91 99091 54100</span>
+                <span>+91 99788 31115 / +91 98253 43225</span>
               </div>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                 <Mail size={16} color="#EF233C" style={{ flexShrink: 0 }} />

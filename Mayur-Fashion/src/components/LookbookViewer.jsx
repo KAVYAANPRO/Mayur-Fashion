@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookOpen, ChevronLeft, ChevronRight, Download, Maximize2, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, Maximize2 } from 'lucide-react';
 import { LOOKBOOK_PAGES } from '../data/lookbook';
 import { COMPANY_INFO } from '../data/company';
 
@@ -35,7 +35,6 @@ export default function LookbookViewer() {
         {/* Header */}
         <div className="section-title-wrap">
           <div className="section-tag rose" style={{ background: 'rgba(242, 188, 182, 0.15)', color: '#F2BCB6', borderColor: 'rgba(242, 188, 182, 0.3)' }}>
-            <BookOpen size={14} color="#F2BCB6" />
             <span>Official 2026 Brand Catalogue</span>
           </div>
           <h2 className="section-title" style={{ color: '#ffffff' }}>

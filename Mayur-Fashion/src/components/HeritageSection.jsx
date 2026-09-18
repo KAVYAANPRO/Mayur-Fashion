@@ -1,5 +1,4 @@
 import React from 'react';
-import { Award, Clock, History, CheckCircle2, Sparkles, Building, Globe } from 'lucide-react';
 import { COMPANY_INFO } from '../data/company';
 
 export default function HeritageSection() {
@@ -12,7 +11,7 @@ export default function HeritageSection() {
     {
       year: "2000",
       title: "Wholesale & Ready-to-Wear Expansion",
-      desc: "Pioneered specialized 3-Piece Kurti Ensembles, Anarkalis, and complete size grading from M to 5XL for boutiques across Western & Northern India."
+      desc: "Pioneered specialized 3-Piece Kurti Ensembles, Anarkalis, and complete size grading from M to 6XL for boutiques across Western & Northern India."
     },
     {
       year: "2008",
@@ -32,7 +31,6 @@ export default function HeritageSection() {
         {/* Section Heading */}
         <div className="section-title-wrap">
           <div className="section-tag">
-            <History size={14} color="#EF233C" />
             <span>35+ Years of Craftsmanship</span>
           </div>
           <h2 className="section-title">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, ShoppingBag, ArrowUp } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
+import WhatsAppIcon from './components/WhatsAppIcon';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductCatalog from './components/ProductCatalog';
@@ -112,34 +113,36 @@ export default function App() {
         onNavigate={scrollToSection}
       />
 
-      {/* Hero Showcase */}
-      <Hero
-        onExploreClick={() => scrollToSection('collections')}
-        onLookbookClick={() => scrollToSection('lookbook')}
-      />
+      <main style={{ flexGrow: 1 }}>
+        {/* 1. Hero Showcase (Clean typography editorial design) */}
+        <Hero
+          onExploreClick={() => scrollToSection('collections')}
+          onLookbookClick={() => scrollToSection('lookbook')}
+        />
 
-      {/* Product Catalog with Categories & Filtering */}
-      <ProductCatalog
-        searchQuery={searchQuery}
-        onQuickView={(p) => setModalProduct(p)}
-        onToggleInquiry={handleToggleInquiry}
-        inquiryList={inquiryList}
-      />
+        {/* 2. Product Catalog with Categories & Filtering */}
+        <ProductCatalog
+          searchQuery={searchQuery}
+          onQuickView={(p) => setModalProduct(p)}
+          onToggleInquiry={handleToggleInquiry}
+          inquiryList={inquiryList}
+        />
 
-      {/* Digital Lookbook Interactive Viewer */}
-      <LookbookViewer />
+        {/* 3. Digital Lookbook Interactive Viewer */}
+        <LookbookViewer />
 
-      {/* Heritage & Brand Story (1991 Foundation) */}
-      <HeritageSection />
+        {/* 4. Heritage & Brand Story (1991 Foundation) */}
+        <HeritageSection onExploreClick={() => scrollToSection('collections')} />
 
-      {/* Why Mayur & Values */}
-      <ValuesSection />
+        {/* 5. Why Mayur & Size Inclusivity (M to 6XL) */}
+        <ValuesSection onWholesaleClick={() => scrollToSection('wholesale')} />
 
-      {/* Wholesale & B2B Inquiry Portal */}
-      <WholesaleSection />
+        {/* 6. Wholesale & B2B Inquiry Portal */}
+        <WholesaleSection />
 
-      {/* Showroom, Contacts & Map */}
-      <ContactSection />
+        {/* 7. Showroom, Contacts & Map */}
+        <ContactSection />
+      </main>
 
       {/* Footer */}
       <Footer onNavigate={scrollToSection} />
@@ -163,7 +166,7 @@ export default function App() {
         onClearAll={handleClearInquiry}
       />
 
-      {/* Floating Action Buttons (WhatsApp & Inquiry Bag) */}
+      {/* Floating Action Quick Links (Bottom Right) */}
       <div style={{
         position: 'fixed',
         bottom: '24px',
@@ -173,7 +176,6 @@ export default function App() {
         flexDirection: 'column',
         gap: '12px'
       }}>
-        {/* Floating Inquiry Bag Button */}
         {inquiryList.length > 0 && (
           <button
             onClick={() => setIsDrawerOpen(true)}
@@ -184,13 +186,14 @@ export default function App() {
               background: '#EF233C',
               color: '#ffffff',
               boxShadow: '0 6px 20px rgba(239, 35, 60, 0.45)',
-              border: '2px solid #EDEBE6',
+              border: '2px solid #ffffff',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               position: 'relative'
             }}
             aria-label="Open Inquiry Bag"
+            title="Open Wholesale Inquiry Shortlist"
           >
             <ShoppingBag size={24} />
             <span style={{
@@ -199,7 +202,7 @@ export default function App() {
               right: '-4px',
               background: '#1c1917',
               color: '#ffffff',
-              fontSize: '0.75rem',
+              fontSize: '0.72rem',
               fontWeight: 800,
               width: '22px',
               height: '22px',
@@ -216,9 +219,8 @@ export default function App() {
 
         <ChatWidget />
 
-        {/* Floating WhatsApp Quick Connect Button */}
         <a
-          href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am browsing your website and would like to inquire about wholesale catalogs.")}`}
+          href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you directly from your website.")}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -236,7 +238,7 @@ export default function App() {
           aria-label="Chat on WhatsApp"
           title="Direct WhatsApp with Mayur Fashion"
         >
-          <MessageCircle size={28} />
+          <WhatsAppIcon size={30} color="#ffffff" />
         </a>
       </div>
     </div>

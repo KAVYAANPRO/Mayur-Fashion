@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Package, Truck, Globe, Shield, MessageCircle, Send, CheckCircle } from 'lucide-react';
+import { Package, Truck, Globe } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import confetti from 'canvas-confetti';
 import { COMPANY_INFO } from '../data/company';
 
@@ -17,51 +18,27 @@ export default function WholesaleSection() {
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    setSubmitted(true);
+    confetti({
+      particleCount: 80,
+      spread: 70,
+      origin: { y: 0.7 }
+    });
 
-    const inquiryData = {
-      name: formData.contactPerson,
-      email: '', // Not collected in this form
-      phone: formData.phone,
-      subject: `Wholesale Inquiry - ${formData.businessName}`,
-      message: `Location: ${formData.cityCountry}\nBusiness Type: ${formData.businessType}\nInterested In: ${formData.interestedCategories}\nEstimated Volume: ${formData.estimatedOrderSize}\nNotes: ${formData.customNotes || 'N/A'}`
-    };
+    const msg = `*MAYUR FASHION - B2B WHOLESALE INQUIRY*\n\n` +
+      `*Business Name:* ${formData.businessName || 'N/A'}\n` +
+      `*Contact Person:* ${formData.contactPerson}\n` +
+      `*Phone/WhatsApp:* ${formData.phone}\n` +
+      `*Location:* ${formData.cityCountry}\n` +
+      `*Business Type:* ${formData.businessType}\n` +
+      `*Interested In:* ${formData.interestedCategories}\n` +
+      `*Estimated Volume:* ${formData.estimatedOrderSize}\n` +
+      `*Notes:* ${formData.customNotes || 'Looking forward to receiving latest wholesale catalog.'}`;
 
-    try {
-      const response = await fetch('http://localhost:5000/api/inquiries', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(inquiryData)
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.7 }
-        });
-        alert("Inquiry submitted successfully! We will contact you soon.");
-        setFormData({
-          businessName: '',
-          contactPerson: '',
-          phone: '',
-          cityCountry: '',
-          businessType: 'Retail Boutique Owner',
-          interestedCategories: 'Kurti 3-Piece Sets & Anarkalis',
-          estimatedOrderSize: '5 to 10 Catalog Sets',
-          customNotes: ''
-        });
-      } else {
-        alert("Failed to submit inquiry. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error submitting inquiry:", error);
-      alert("An error occurred. Please try again later.");
-    }
+    const waUrl = `https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, '_blank');
   };
 
   return (
@@ -70,7 +47,6 @@ export default function WholesaleSection() {
         {/* Section Heading */}
         <div className="section-title-wrap">
           <div className="section-tag">
-            <Package size={14} color="#EF233C" />
             <span>Direct Manufacturer Pricing</span>
           </div>
           <h2 className="section-title">
@@ -106,8 +82,8 @@ export default function WholesaleSection() {
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: '#1c1917', marginBottom: '8px' }}>
               Full Catalog Set Supply
             </h3>
-            <p style={{ fontSize: '0.86rem', color: '#5e5750', lineHeight: 1.55 }}>
-              Sold in pristine catalog sets with assorted sizes M to 5XL. Each garment is packed in branded luxury sleeves ready for your store racks.
+            <p style={{ fontSize: '0.9rem', color: '#5e5750', lineHeight: 1.6 }}>
+              Sold in pristine catalog sets with assorted sizes M to 6XL. Each garment is packed in branded luxury sleeves ready for your store racks.
             </p>
           </div>
 
@@ -322,7 +298,7 @@ export default function WholesaleSection() {
                   <option value="Kurti 3-Piece Sets & Anarkalis">Kurti 3-Piece Sets & Anarkalis</option>
                   <option value="Co-ord Sets & Afghani Pants">Co-ord Sets & Afghani Pants</option>
                   <option value="Festive & Wedding Silk Edit">Festive & Wedding Silk Edit</option>
-                  <option value="Plus Size (3XL to 5XL) Collection">Plus Size (3XL to 5XL) Collection</option>
+                  <option value="Plus Size (3XL to 6XL) Collection">Plus Size (3XL to 6XL) Collection</option>
                   <option value="Complete Catalog Range (All Categories)">Complete Catalog Range (All Categories)</option>
                 </select>
               </div>
@@ -354,10 +330,10 @@ export default function WholesaleSection() {
               <button
                 type="submit"
                 className="btn btn-whatsapp"
-                style={{ padding: '15px 36px', fontSize: '1.02rem', background: '#EF233C', color: '#fff', border: 'none' }}
+                style={{ padding: '15px 36px', fontSize: '1.02rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '9px' }}
               >
-                <Send size={20} />
-                <span>Submit Inquiry</span>
+                <WhatsAppIcon size={21} color="#ffffff" />
+                <span>Submit & Open WhatsApp Inquiry</span>
               </button>
             </div>
           </form>
