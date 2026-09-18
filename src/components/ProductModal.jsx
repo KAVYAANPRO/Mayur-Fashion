@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, MessageCircle, ShoppingBag, Check, Sparkles, Shield, Info, ArrowRight } from 'lucide-react';
 import { COMPANY_INFO } from '../data/company';
 
@@ -8,6 +8,14 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
   const [activeImage, setActiveImage] = useState(product.primaryImage);
   const [selectedSize, setSelectedSize] = useState("M (38)");
   const [showSizeChart, setShowSizeChart] = useState(false);
+
+  useEffect(() => {
+    if (product) {
+      setActiveImage(product.primaryImage);
+      setSelectedSize("M (38)");
+      setShowSizeChart(false);
+    }
+  }, [product]);
 
   const handleWhatsAppEnquiry = () => {
     const text = `Hello Mayur Fashion! I am looking to inquire about the wholesale catalog set for:\n\n*Product:* ${product.title}\n*Code:* ${product.id}\n*Fabric:* ${product.fabric}\n*Preferred Size:* ${selectedSize}\n*Color:* ${product.color}\n\nPlease share catalog pricing, MOQ, and delivery timeline.`;
