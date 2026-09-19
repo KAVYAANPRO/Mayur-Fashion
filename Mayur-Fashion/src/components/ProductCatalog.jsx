@@ -46,33 +46,36 @@ export default function ProductCatalog({
     fetchData();
   }, []);
 
-  // Merge hardcoded + API products
+  // Convert API products to frontend format (single source of truth: MongoDB)
   const allProducts = useMemo(() => {
-    // Convert API products to match hardcoded format
-    const convertedApiProducts = apiProducts.map(p => ({
-      id: p.sku || p._id,
-      title: p.name,
-      category: p.category?._id || 'all',
-      categoryLabel: p.category?.name || 'Uncategorized',
-      tagline: p.description.substring(0, 60),
-      primaryImage: p.images[0] || '/assets/products/placeholder.jpg',
-      primaryImageJpg: p.images[0] || '/assets/products/placeholder.jpg',
-      gallery: p.images,
-      color: p.customFields?.find(f => f.key === 'Color')?.value || 'N/A',
-      colorHex: '#cccccc',
-      fabric: p.customFields?.find(f => f.key === 'Fabric')?.value || 'Premium Fabric',
-      bottomFabric: p.customFields?.find(f => f.key === 'Bottom Fabric')?.value || '',
-      dupatta: p.customFields?.find(f => f.key === 'Dupatta')?.value || '',
-      work: p.customFields?.find(f => f.key === 'Work')?.value || '',
-      sizes: p.sizes.length > 0 ? p.sizes : SIZES,
-      moq: '1 Catalog Set',
-      isNew: p.demandScore > 5,
-      isBestseller: p.demandScore > 10,
-      description: p.description,
-      features: []
-    }));
-
-    return [...PRODUCTS, ...convertedApiProducts];
+    // If API products are available, use them; otherwise fallback to hardcoded
+    if (apiProducts.length > 0) {
+      return apiProducts.map(p => ({
+        id: p.sku || p._id,
+        title: p.name,
+        category: p.category?._id || 'all',
+        categoryLabel: p.category?.name || 'Uncategorized',
+        tagline: p.description.substring(0, 60),
+        primaryImage: p.images[0] || '/assets/products/placeholder.jpg',
+        primaryImageJpg: p.images[0] || '/assets/products/placeholder.jpg',
+        gallery: p.images,
+        color: p.customFields?.find(f => f.key === 'Color')?.value || 'N/A',
+        colorHex: '#cccccc',
+        fabric: p.customFields?.find(f => f.key === 'Fabric')?.value || 'Premium Fabric',
+        bottomFabric: p.customFields?.find(f => f.key === 'Bottom Fabric')?.value || '',
+        dupatta: p.customFields?.find(f => f.key === 'Dupatta')?.value || '',
+        work: p.customFields?.find(f => f.key === 'Work')?.value || '',
+        sizes: p.sizes.length > 0 ? p.sizes : SIZES,
+        moq: '1 Catalog Set',
+        isNew: p.demandScore > 5,
+        isBestseller: p.demandScore > 10,
+        description: p.description,
+        features: []
+      }));
+    }
+    
+    // Fallback to hardcoded products only if API fails
+    return PRODUCTS;
   }, [apiProducts]);
 
   const filteredProducts = useMemo(() => {
