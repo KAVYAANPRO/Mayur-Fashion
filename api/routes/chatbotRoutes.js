@@ -6,7 +6,7 @@ const Category = require('../models/Category');
 
 // POST chat message
 router.post('/', async (req, res) => {
-  const { message } = req.body;
+  const { message, history } = req.body;
 
   if (!message) {
     return res.status(400).json({ error: 'Message is required' });
@@ -73,7 +73,12 @@ ${websiteDataContext}`;
           responseSchema: responseSchema,
         }
       });
-      const result = await model.generateContent(message);
+      
+      const chat = model.startChat({
+        history: history || []
+      });
+      
+      const result = await chat.sendMessage(message);
       const jsonResponse = JSON.parse(result.response.text());
       replyText = jsonResponse.reply;
       actionType = jsonResponse.action;
@@ -96,6 +101,7 @@ ${websiteDataContext}`;
           response_format: { type: "json_object" },
           messages: [
             { role: "system", content: systemInstruction + "\n\nRespond ONLY with a JSON object containing 'reply' (string) and 'action' (string, either 'none', 'book_call', or 'open_contact_form')." },
+            ...(history || []).map(m => ({ role: m.role === 'model' ? 'assistant' : 'user', content: m.parts[0].text })),
             { role: "user", content: message }
           ]
         })

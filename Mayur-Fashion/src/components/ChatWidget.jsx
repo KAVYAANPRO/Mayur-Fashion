@@ -28,11 +28,18 @@ export default function ChatWidget() {
     setIsLoading(true);
 
     const apiUrl = import.meta.env.VITE_API_URL || '';
+    
+    // Map previous messages for the backend history format (skip empty ones)
+    const history = messages.filter(m => m.text).map(m => ({
+      role: m.isBot ? "model" : "user",
+      parts: [{ text: m.text }]
+    }));
+
     try {
       const res = await fetch(`${apiUrl}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage })
+        body: JSON.stringify({ message: userMessage, history })
       });
       const data = await res.json();
       
