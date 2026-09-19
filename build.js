@@ -2,13 +2,15 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+const env = { ...process.env, VITE_API_URL: 'https://mayurfashionapi.vercel.app' };
+
 console.log('Building Mayur-Fashion frontend...');
 execSync('npm install', { cwd: path.join(__dirname, 'Mayur-Fashion'), stdio: 'inherit' });
-execSync('npm run build', { cwd: path.join(__dirname, 'Mayur-Fashion'), stdio: 'inherit' });
+execSync('npm run build', { cwd: path.join(__dirname, 'Mayur-Fashion'), stdio: 'inherit', env });
 
 console.log('Building admin-panel...');
 execSync('npm install', { cwd: path.join(__dirname, 'admin-panel'), stdio: 'inherit' });
-execSync('npm run build', { cwd: path.join(__dirname, 'admin-panel'), stdio: 'inherit' });
+execSync('npm run build', { cwd: path.join(__dirname, 'admin-panel'), stdio: 'inherit', env });
 
 console.log('Copying admin-panel/dist to Mayur-Fashion/dist/admin...');
 const adminDistSrc = path.join(__dirname, 'admin-panel', 'dist');
