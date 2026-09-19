@@ -69,11 +69,11 @@ function AdminManagement({ auth }) {
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <div style={{ border: '2px solid black', padding: '2rem', marginBottom: '2rem' }}>
-        <h2 style={{ marginBottom: '1.5rem', fontWeight: 800 }}>Create Sub-Admin</h2>
-        {message && <div style={{ color: 'green', marginBottom: '1rem' }}>{message}</div>}
-        {error && <div style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
+    <div className="animate-fade-in-up">
+      <div className="card" style={{ marginBottom: '2rem' }}>
+        <h2>Create Sub-Admin</h2>
+        {message && <div style={{ color: 'var(--success)', marginBottom: '1rem' }}>{message}</div>}
+        {error && <div style={{ color: 'var(--danger)', marginBottom: '1rem' }}>{error}</div>}
         
         <form onSubmit={handleCreateSubAdmin} style={{ display: 'grid', gap: '1rem', gridTemplateColumns: '1fr 1fr auto' }}>
           <input 
@@ -82,7 +82,6 @@ function AdminManagement({ auth }) {
             value={name} 
             onChange={e => setName(e.target.value)} 
             required 
-            style={{ padding: '0.75rem', border: '1px solid black' }}
           />
           <input 
             type="password" 
@@ -90,30 +89,29 @@ function AdminManagement({ auth }) {
             value={password} 
             onChange={e => setPassword(e.target.value)} 
             required 
-            style={{ padding: '0.75rem', border: '1px solid black' }}
           />
-          <button type="submit" style={{ backgroundColor: 'black', color: 'white', padding: '0.75rem 2rem', fontWeight: 'bold' }}>
+          <button type="submit" className="btn-primary">
             Create
           </button>
         </form>
       </div>
 
-      <div style={{ border: '2px solid black', padding: '2rem' }}>
-        <h2 style={{ marginBottom: '1.5rem', fontWeight: 800 }}>Admin List</h2>
+      <div className="card animate-fade-in-up delay-1">
+        <h2>Admin List</h2>
         <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
           <thead>
-            <tr style={{ borderBottom: '2px solid black' }}>
-              <th style={{ padding: '1rem' }}>Name</th>
-              <th style={{ padding: '1rem' }}>Role</th>
-              <th style={{ padding: '1rem' }}>Created At</th>
-              <th style={{ padding: '1rem' }}>Actions</th>
+            <tr style={{ borderBottom: '1px solid var(--border-color)' }}>
+              <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Name</th>
+              <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Role</th>
+              <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Created At</th>
+              <th style={{ padding: '1rem', color: 'var(--text-muted)' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {admins.map(admin => (
-              <tr key={admin._id} style={{ borderBottom: '1px solid #eee' }}>
+              <tr key={admin._id} style={{ borderBottom: '1px solid var(--border-color)' }}>
                 <td style={{ padding: '1rem' }}>{admin.name}</td>
-                <td style={{ padding: '1rem', fontWeight: admin.role === 'master' ? 'bold' : 'normal' }}>
+                <td style={{ padding: '1rem', color: admin.role === 'master' ? 'var(--primary)' : 'inherit', fontWeight: admin.role === 'master' ? 'bold' : 'normal' }}>
                   {admin.role.toUpperCase()}
                 </td>
                 <td style={{ padding: '1rem' }}>{new Date(admin.createdAt).toLocaleDateString()}</td>
@@ -121,7 +119,8 @@ function AdminManagement({ auth }) {
                   {admin.role !== 'master' && (
                     <button 
                       onClick={() => handleDeleteAdmin(admin._id)}
-                      style={{ padding: '0.5rem 1rem', backgroundColor: '#dc3545', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                      className="btn-danger"
+                      style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}
                     >
                       Remove
                     </button>

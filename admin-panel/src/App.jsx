@@ -40,34 +40,35 @@ function App() {
 
   return (
     <div className="app-container">
-      <header className="flex-row" style={{ justifyContent: 'space-between' }}>
+      <header className="flex-row animate-fade-in-up" style={{ justifyContent: 'space-between' }}>
         <div>
-          <h1 style={{ display: 'inline-block', marginRight: '1rem' }}>Mayur Fashion Admin</h1>
-          <span style={{ fontSize: '0.9rem', color: '#666' }}>Logged in as <strong>{auth.user.name}</strong> ({auth.user.role})</span>
+          <h1 style={{ display: 'inline-block', marginRight: '1rem', color: 'var(--primary)' }}>Mayur Fashion Admin</h1>
+          <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Logged in as <strong style={{ color: 'var(--text-color)' }}>{auth.user.name}</strong> ({auth.user.role})</span>
         </div>
         <div className="flex-row">
           <button 
-            style={{ backgroundColor: activeTab === 'products' ? 'black' : 'white', color: activeTab === 'products' ? 'white' : 'black' }}
+            className={activeTab === 'products' ? 'btn-primary' : 'btn-outline'}
             onClick={() => setActiveTab('products')}
           >
             Products
           </button>
           <button 
-            style={{ backgroundColor: activeTab === 'categories' ? 'black' : 'white', color: activeTab === 'categories' ? 'white' : 'black' }}
+            className={activeTab === 'categories' ? 'btn-primary' : 'btn-outline'}
             onClick={() => setActiveTab('categories')}
           >
             Categories
           </button>
           {auth.user.role === 'master' && (
             <button 
-              style={{ backgroundColor: activeTab === 'admins' ? 'black' : 'white', color: activeTab === 'admins' ? 'white' : 'black' }}
+              className={activeTab === 'admins' ? 'btn-primary' : 'btn-outline'}
               onClick={() => setActiveTab('admins')}
             >
               Admins
             </button>
           )}
           <button 
-            style={{ backgroundColor: '#dc3545', color: 'white', marginLeft: '1rem' }}
+            className="btn-danger"
+            style={{ marginLeft: '1rem' }}
             onClick={handleLogout}
           >
             Logout

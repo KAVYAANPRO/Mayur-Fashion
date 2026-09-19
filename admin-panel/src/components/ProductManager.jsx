@@ -139,11 +139,11 @@ function ProductManager({ categories, auth }) {
   };
 
   return (
-    <div style={styles.container}>
+    <div style={styles.container} className="animate-fade-in-up">
       <h2 style={styles.heading}>Product Management</h2>
       
       <div style={styles.contentLayout}>
-        <div style={styles.formSection}>
+        <div style={styles.formSection} className="animate-slide-in-left delay-1">
           <div style={styles.card}>
             <h3 style={styles.cardTitle}>Add New Product</h3>
             <form onSubmit={handleAddProduct} style={styles.form}>
@@ -304,7 +304,7 @@ function ProductManager({ categories, auth }) {
           </div>
         </div>
 
-        <div style={styles.listSection}>
+        <div style={styles.listSection} className="animate-fade-in-up delay-2">
           <h3 style={{...styles.cardTitle, marginBottom: '1.5rem'}}>Product Catalog</h3>
           {loading ? (
             <div style={styles.loading}>Loading catalog...</div>
@@ -361,8 +361,8 @@ const styles = {
     padding: '2rem',
     maxWidth: '1400px',
     margin: '0 auto',
-    fontFamily: '"Inter", "Segoe UI", Roboto, sans-serif',
-    color: '#000',
+    fontFamily: 'var(--font-family)',
+    color: 'var(--text-color)',
   },
   heading: {
     fontSize: '2.5rem',
@@ -370,9 +370,10 @@ const styles = {
     marginBottom: '2rem',
     textTransform: 'uppercase',
     letterSpacing: '-1px',
-    borderBottom: '4px solid #000',
+    borderBottom: '2px solid var(--primary)',
     paddingBottom: '0.5rem',
     display: 'inline-block',
+    color: 'var(--primary)',
   },
   contentLayout: {
     display: 'flex',
@@ -387,19 +388,19 @@ const styles = {
     flex: '2 1 600px',
   },
   card: {
-    backgroundColor: '#fff',
-    border: '2px solid #000',
-    borderRadius: '12px',
+    backgroundColor: 'var(--panel-bg)',
+    border: '1px solid var(--border-color)',
+    borderRadius: '8px',
     padding: '2rem',
-    boxShadow: '8px 8px 0px #000',
   },
   cardTitle: {
     fontSize: '1.5rem',
     fontWeight: '700',
     marginBottom: '1.5rem',
     textTransform: 'uppercase',
-    borderBottom: '2px solid #000',
+    borderBottom: '1px solid var(--border-color)',
     paddingBottom: '0.5rem',
+    color: 'var(--primary)',
   },
   form: {
     display: 'flex',
@@ -421,28 +422,34 @@ const styles = {
     fontSize: '0.9rem',
     textTransform: 'uppercase',
     letterSpacing: '1px',
+    color: 'var(--text-muted)',
   },
   input: {
     padding: '0.75rem',
-    border: '2px solid #000',
-    borderRadius: '6px',
+    border: '1px solid var(--border-color)',
+    backgroundColor: 'var(--bg-color)',
+    color: 'var(--text-color)',
+    borderRadius: '4px',
     fontSize: '1rem',
     outline: 'none',
     transition: 'all 0.2s ease',
   },
   select: {
     padding: '0.75rem',
-    border: '2px solid #000',
-    borderRadius: '6px',
+    border: '1px solid var(--border-color)',
+    backgroundColor: 'var(--bg-color)',
+    color: 'var(--text-color)',
+    borderRadius: '4px',
     fontSize: '1rem',
     outline: 'none',
-    backgroundColor: '#fff',
     cursor: 'pointer',
   },
   textarea: {
     padding: '0.75rem',
-    border: '2px solid #000',
-    borderRadius: '6px',
+    border: '1px solid var(--border-color)',
+    backgroundColor: 'var(--bg-color)',
+    color: 'var(--text-color)',
+    borderRadius: '4px',
     fontSize: '1rem',
     outline: 'none',
     resize: 'vertical',
@@ -459,60 +466,60 @@ const styles = {
   imagePlaceholder: {
     width: '100%',
     height: '200px',
-    border: '2px dashed #000',
+    border: '2px dashed var(--border-color)',
     borderRadius: '8px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fafafa',
+    backgroundColor: 'var(--bg-color)',
     transition: 'background-color 0.2s',
     fontWeight: '600',
     textTransform: 'uppercase',
     letterSpacing: '1px',
     fontSize: '0.85rem',
+    color: 'var(--text-muted)',
   },
   imagePreview: {
     width: '100%',
     height: '200px',
     objectFit: 'cover',
-    border: '2px solid #000',
+    border: '1px solid var(--border-color)',
     borderRadius: '8px',
   },
   submitButton: {
     padding: '1rem',
-    backgroundColor: '#000',
+    backgroundColor: 'var(--primary)',
     color: '#fff',
     border: 'none',
-    borderRadius: '6px',
+    borderRadius: '4px',
     fontSize: '1rem',
     fontWeight: '700',
     textTransform: 'uppercase',
     letterSpacing: '1px',
     cursor: 'pointer',
     marginTop: '1rem',
-    transition: 'transform 0.1s',
+    transition: 'transform 0.2s, background-color 0.2s',
   },
   grid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-    gap: '2rem',
+    gap: '1.5rem',
   },
   productCard: {
-    backgroundColor: '#fff',
-    border: '2px solid #000',
-    borderRadius: '12px',
+    backgroundColor: 'var(--panel-bg)',
+    border: '1px solid var(--border-color)',
+    borderRadius: '8px',
     overflow: 'hidden',
-    boxShadow: '6px 6px 0px #000',
     display: 'flex',
     flexDirection: 'column',
-    transition: 'transform 0.2s ease',
+    transition: 'transform 0.2s ease, border-color 0.2s ease',
   },
   productImageContainer: {
     position: 'relative',
     height: '240px',
     width: '100%',
-    borderBottom: '2px solid #000',
+    borderBottom: '1px solid var(--border-color)',
   },
   productImage: {
     width: '100%',
@@ -523,30 +530,30 @@ const styles = {
     position: 'absolute',
     top: '1rem',
     right: '1rem',
-    backgroundColor: '#000',
+    backgroundColor: 'var(--primary)',
     color: '#fff',
     padding: '0.25rem 0.75rem',
     borderRadius: '99px',
     fontSize: '0.75rem',
     fontWeight: '700',
     textTransform: 'uppercase',
-    border: '1px solid #fff',
   },
   productDetails: {
-    padding: '1.5rem',
+    padding: '1.25rem',
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
   },
   productName: {
-    fontSize: '1.25rem',
-    fontWeight: '800',
+    fontSize: '1.15rem',
+    fontWeight: '700',
     marginBottom: '0.25rem',
     margin: 0,
+    color: 'var(--text-color)',
   },
   productSku: {
     fontSize: '0.75rem',
-    color: '#666',
+    color: 'var(--text-muted)',
     marginBottom: '1rem',
     fontFamily: 'monospace',
   },
@@ -558,25 +565,27 @@ const styles = {
     marginTop: 'auto',
   },
   productPrice: {
-    fontSize: '1.25rem',
-    fontWeight: '800',
+    fontSize: '1.15rem',
+    fontWeight: '700',
+    color: 'var(--primary)',
   },
   productStock: {
     fontSize: '0.85rem',
     fontWeight: '600',
     padding: '0.25rem 0.5rem',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: 'var(--bg-color)',
     borderRadius: '4px',
-    border: '1px solid #000',
+    border: '1px solid var(--border-color)',
+    color: 'var(--text-color)',
   },
   deleteButton: {
     width: '100%',
     padding: '0.75rem',
     backgroundColor: 'transparent',
-    color: '#000',
-    border: '2px solid #000',
-    borderRadius: '6px',
-    fontWeight: '700',
+    color: 'var(--danger)',
+    border: '1px solid var(--danger)',
+    borderRadius: '4px',
+    fontWeight: '600',
     textTransform: 'uppercase',
     cursor: 'pointer',
     transition: 'all 0.2s',
@@ -586,6 +595,7 @@ const styles = {
     fontWeight: '600',
     textAlign: 'center',
     padding: '3rem',
+    color: 'var(--text-muted)',
   }
 };
 

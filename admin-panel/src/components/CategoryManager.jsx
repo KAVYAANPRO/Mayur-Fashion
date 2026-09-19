@@ -47,10 +47,10 @@ function CategoryManager({ categories, refreshCategories, auth }) {
   };
 
   return (
-    <div className="card">
+    <div className="card animate-fade-in-up">
       <h2>Categories</h2>
       
-      <form onSubmit={handleAddCategory} className="form-group flex-row" style={{ alignItems: 'flex-end', marginBottom: '2rem' }}>
+      <form onSubmit={handleAddCategory} className="form-group flex-row animate-fade-in-up delay-1" style={{ alignItems: 'flex-end', marginBottom: '2rem' }}>
         <div style={{ flex: 1 }}>
           <label>Category Name</label>
           <input 
@@ -58,6 +58,7 @@ function CategoryManager({ categories, refreshCategories, auth }) {
             value={newCategoryName} 
             onChange={(e) => setNewCategoryName(e.target.value)} 
             required 
+            style={{ width: '100%' }}
           />
         </div>
         <div style={{ flex: 2 }}>
@@ -66,20 +67,22 @@ function CategoryManager({ categories, refreshCategories, auth }) {
             type="text" 
             value={newCategoryDesc} 
             onChange={(e) => setNewCategoryDesc(e.target.value)} 
+            style={{ width: '100%' }}
           />
         </div>
-        <button type="submit">Add Category</button>
+        <button type="submit" className="btn-primary">Add Category</button>
       </form>
 
       <div className="grid">
-        {categories.map((cat) => (
-          <div key={cat._id} className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        {categories.map((cat, index) => (
+          <div key={cat._id} className={`card animate-fade-in-up delay-${Math.min(index % 4 + 1, 4)}`} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
-              <h3>{cat.name}</h3>
-              <p>{cat.description}</p>
+              <h3 className="card-title" style={{ color: 'var(--text-color)' }}>{cat.name}</h3>
+              <p className="card-subtitle">{cat.description}</p>
             </div>
             <button 
-              style={{ marginTop: '1rem', backgroundColor: 'transparent', color: 'black' }}
+              className="btn-danger"
+              style={{ marginTop: '1rem', width: 'fit-content' }}
               onClick={() => handleDeleteCategory(cat._id)}
             >
               Delete
