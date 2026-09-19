@@ -15,7 +15,7 @@ export default function ProductCard({
 
   const displayImage = isHovered && product.gallery && product.gallery.length > 1
     ? product.gallery[1]
-    : product.primaryImage;
+    : (product.primaryImage || (product.gallery && product.gallery[0]) || '');
 
   const handleWhatsAppEnquiry = (e) => {
     e.stopPropagation();
@@ -118,7 +118,7 @@ export default function ProductCard({
           fontWeight: 700,
           border: '1px solid #ded8cb'
         }}>
-          Sizes M - 6XL
+          Sizes {product.sizes && product.sizes.length > 0 ? `${product.sizes[0].split(' ')[0]} - ${product.sizes[product.sizes.length - 1].split(' ')[0]}` : 'M - 6XL'}
         </div>
 
         {/* Quick Action Bar on Hover */}
@@ -247,7 +247,7 @@ export default function ProductCard({
             overflow: 'hidden',
             lineHeight: 1.4
           }}>
-            <strong>Fabric:</strong> {product.fabric}
+            <strong>Fabric:</strong> {product.fabric || 'Premium Fabric'}
           </div>
         </div>
 
@@ -266,14 +266,14 @@ export default function ProductCard({
                 width: '11px',
                 height: '11px',
                 borderRadius: '50%',
-                background: product.colorHex,
+                background: product.colorHex || '#8a7b6b',
                 border: '1px solid #C8D6BF',
                 flexShrink: 0
               }} 
               title={product.color}
             />
             <span style={{ fontSize: '0.72rem', color: '#5e5750', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '65px' }}>
-              {product.color.split('/')[0]}
+              {(product.color || 'Classic').split('/')[0]}
             </span>
           </div>
 

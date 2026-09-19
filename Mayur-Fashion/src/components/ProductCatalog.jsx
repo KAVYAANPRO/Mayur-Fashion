@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { SlidersHorizontal } from 'lucide-react';
+import { SlidersHorizontal, Loader2 } from 'lucide-react';
 import ProductCard from './ProductCard';
-import { CATEGORIES, SIZES, PRODUCTS } from '../data/products';
+import { fetchProducts, fetchCategories, transformProduct, transformCategories } from '../services/api';
+import { SIZES } from '../data/products';
 
 export default function ProductCatalog({ 
   searchQuery, 
@@ -12,74 +13,50 @@ export default function ProductCatalog({
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedSize, setSelectedSize] = useState("all");
   const [sortBy, setSortBy] = useState("featured");
-  const [apiProducts, setApiProducts] = useState([]);
-  const [apiCategories, setApiCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  // Fetch products and categories from API
+  // Dynamic state from API
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch products and categories from the MongoDB API
   useEffect(() => {
-    const fetchData = async () => {
+    let cancelled = false;
+
+    async function loadData() {
+      setLoading(true);
+      setError(null);
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || 'https://mayurfashionapi.vercel.app';
-        
-        const [productsRes, categoriesRes] = await Promise.all([
-          fetch(`${apiUrl}/api/products`),
-          fetch(`${apiUrl}/api/categories`)
+        const [rawProducts, rawCategories] = await Promise.all([
+          fetchProducts(),
+          fetchCategories(),
         ]);
 
-        if (productsRes.ok) {
-          const products = await productsRes.json();
-          setApiProducts(products);
-        }
+        if (cancelled) return;
 
-        if (categoriesRes.ok) {
-          const categories = await categoriesRes.json();
-          setApiCategories(categories);
-        }
+        // Transform MongoDB documents into frontend shape
+        const transformed = rawProducts.map(transformProduct);
+        const cats = transformCategories(rawCategories, rawProducts);
+
+        setProducts(transformed);
+        setCategories(cats);
       } catch (err) {
-        console.warn('Failed to fetch from API, using hardcoded data:', err);
+        console.error('Failed to load products:', err);
+        if (!cancelled) {
+          setError('Unable to load products. Please check your connection.');
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
-    };
+    }
 
-    fetchData();
+    loadData();
+    return () => { cancelled = true; };
   }, []);
 
-  // Convert API products to frontend format (single source of truth: MongoDB)
-  const allProducts = useMemo(() => {
-    // If API products are available, use them; otherwise fallback to hardcoded
-    if (apiProducts.length > 0) {
-      return apiProducts.map(p => ({
-        id: p.sku || p._id,
-        title: p.name,
-        category: p.category?._id || 'all',
-        categoryLabel: p.category?.name || 'Uncategorized',
-        tagline: p.description.substring(0, 60),
-        primaryImage: p.images[0] || '/assets/products/placeholder.jpg',
-        primaryImageJpg: p.images[0] || '/assets/products/placeholder.jpg',
-        gallery: p.images,
-        color: p.customFields?.find(f => f.key === 'Color')?.value || 'N/A',
-        colorHex: '#cccccc',
-        fabric: p.customFields?.find(f => f.key === 'Fabric')?.value || 'Premium Fabric',
-        bottomFabric: p.customFields?.find(f => f.key === 'Bottom Fabric')?.value || '',
-        dupatta: p.customFields?.find(f => f.key === 'Dupatta')?.value || '',
-        work: p.customFields?.find(f => f.key === 'Work')?.value || '',
-        sizes: p.sizes.length > 0 ? p.sizes : SIZES,
-        moq: '1 Catalog Set',
-        isNew: p.demandScore > 5,
-        isBestseller: p.demandScore > 10,
-        description: p.description,
-        features: []
-      }));
-    }
-    
-    // Fallback to hardcoded products only if API fails
-    return PRODUCTS;
-  }, [apiProducts]);
-
   const filteredProducts = useMemo(() => {
-    return allProducts.filter((item) => {
+    return products.filter((item) => {
       // Category Match
       if (selectedCategory !== "all" && item.category !== selectedCategory) {
         return false;
@@ -88,10 +65,10 @@ export default function ProductCatalog({
       if (searchQuery && searchQuery.trim() !== '') {
         const query = searchQuery.toLowerCase();
         const matchTitle = item.title.toLowerCase().includes(query);
-        const matchFabric = item.fabric.toLowerCase().includes(query);
-        const matchColor = item.color.toLowerCase().includes(query);
+        const matchFabric = (item.fabric || '').toLowerCase().includes(query);
+        const matchColor = (item.color || '').toLowerCase().includes(query);
         const matchId = item.id.toLowerCase().includes(query);
-        const matchDesc = item.description.toLowerCase().includes(query);
+        const matchDesc = (item.description || '').toLowerCase().includes(query);
         if (!matchTitle && !matchFabric && !matchColor && !matchId && !matchDesc) {
           return false;
         }
@@ -106,7 +83,7 @@ export default function ProductCatalog({
       }
       return 0;
     });
-  }, [allProducts, selectedCategory, searchQuery, sortBy]);
+  }, [products, selectedCategory, searchQuery, sortBy]);
 
   return (
     <section id="collections" className="section" style={{ background: '#EDEBE6', borderBottom: '1px solid #ECE5CE', overflow: 'hidden' }}>
@@ -141,7 +118,7 @@ export default function ProductCatalog({
             flexWrap: 'wrap',
             gap: '8px'
           }}>
-            {CATEGORIES.map((cat) => {
+            {categories.map((cat) => {
               const isActive = selectedCategory === cat.id;
               return (
                 <button
@@ -197,14 +174,54 @@ export default function ProductCatalog({
               >
                 <option value="featured">Featured Catalog</option>
                 <option value="bestsellers">Bestsellers First</option>
-                <option value="newest">2026 New Edits</option>
+                <option value="newest">Newest First</option>
               </select>
             </div>
           </div>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div style={{
+            textAlign: 'center',
+            padding: '80px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '16px'
+          }}>
+            <Loader2 size={40} color="#EF233C" style={{ animation: 'spin 1s linear infinite' }} />
+            <p style={{ color: '#5e5750', fontSize: '1rem', fontWeight: 600 }}>Loading our curated collections…</p>
+            <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && !loading && (
+          <div style={{
+            textAlign: 'center',
+            padding: '80px 20px',
+            background: '#ffffff',
+            borderRadius: '20px',
+            border: '1px dashed #EF233C'
+          }}>
+            <h3 style={{ fontSize: '1.3rem', color: '#EF233C', marginBottom: '8px' }}>
+              {error}
+            </h3>
+            <p style={{ color: '#5e5750', marginBottom: '16px' }}>
+              Please try refreshing the page or check back later.
+            </p>
+            <button
+              onClick={() => window.location.reload()}
+              className="btn btn-outline"
+            >
+              Refresh Page
+            </button>
+          </div>
+        )}
+
         {/* Product Grid (2-columns on mobile, responsive auto-fill on desktop) */}
-        {filteredProducts.length > 0 ? (
+        {!loading && !error && filteredProducts.length > 0 && (
           <div 
             className="products-grid-mobile"
             style={{
@@ -229,8 +246,10 @@ export default function ProductCatalog({
               );
             })}
           </div>
-        ) : (
+        )}
 
+        {/* Empty State */}
+        {!loading && !error && filteredProducts.length === 0 && (
           <div style={{
             textAlign: 'center',
             padding: '80px 20px',

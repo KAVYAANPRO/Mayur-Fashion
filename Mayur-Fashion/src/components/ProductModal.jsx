@@ -6,20 +6,20 @@ import { COMPANY_INFO } from '../data/company';
 export default function ProductModal({ product, onClose, onToggleInquiry, isInInquiry }) {
   if (!product) return null;
 
-  const [activeImage, setActiveImage] = useState(product.primaryImage);
+  const [activeImage, setActiveImage] = useState(product.primaryImage || (product.gallery && product.gallery[0]) || '');
   const [selectedSize, setSelectedSize] = useState("M (38)");
   const [showSizeChart, setShowSizeChart] = useState(false);
 
   useEffect(() => {
     if (product) {
-      setActiveImage(product.primaryImage);
+      setActiveImage(product.primaryImage || (product.gallery && product.gallery[0]) || '');
       setSelectedSize("M (38)");
       setShowSizeChart(false);
     }
   }, [product]);
 
   const handleWhatsAppEnquiry = () => {
-    const text = `Hello Mayur Fashion! I am looking to inquire about the wholesale catalog set for:\n\n*Product:* ${product.title}\n*Code:* ${product.id}\n*Fabric:* ${product.fabric}\n*Preferred Size:* ${selectedSize}\n*Color:* ${product.color}\n\nPlease share catalog pricing, MOQ, and delivery timeline.`;
+    const text = `Hello Mayur Fashion! I am looking to inquire about the wholesale catalog set for:\n\n*Product:* ${product.title}\n*Code:* ${product.id}\n*Fabric:* ${product.fabric || 'Premium Fabric'}\n*Preferred Size:* ${selectedSize}\n*Color:* ${product.color || 'As shown'}\n\nPlease share catalog pricing, MOQ, and delivery timeline.`;
     window.open(`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -187,19 +187,19 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
               }}>
                 <div>
                   <strong style={{ color: '#EF233C' }}>Top Fabric:</strong>
-                  <div style={{ color: '#1c1917' }}>{product.fabric}</div>
+                  <div style={{ color: '#1c1917' }}>{product.fabric || 'Premium Fabric'}</div>
                 </div>
                 <div>
                   <strong style={{ color: '#EF233C' }}>Bottom Fabric:</strong>
-                  <div style={{ color: '#1c1917' }}>{product.bottomFabric}</div>
+                  <div style={{ color: '#1c1917' }}>{product.bottomFabric || '—'}</div>
                 </div>
                 <div>
                   <strong style={{ color: '#EF233C' }}>Dupatta:</strong>
-                  <div style={{ color: '#1c1917' }}>{product.dupatta}</div>
+                  <div style={{ color: '#1c1917' }}>{product.dupatta || '—'}</div>
                 </div>
                 <div>
                   <strong style={{ color: '#EF233C' }}>Embroidery:</strong>
-                  <div style={{ color: '#1c1917' }}>{product.work}</div>
+                  <div style={{ color: '#1c1917' }}>{product.work || '—'}</div>
                 </div>
               </div>
 
@@ -218,7 +218,7 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
                 </div>
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {product.sizes.map((s) => (
+                  {(product.sizes || []).map((s) => (
                     <button
                       key={s}
                       onClick={() => setSelectedSize(s)}
