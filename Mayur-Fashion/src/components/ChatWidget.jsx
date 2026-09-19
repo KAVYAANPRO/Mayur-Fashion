@@ -38,6 +38,18 @@ export default function ChatWidget() {
       
       if (res.ok) {
         setMessages(prev => [...prev, { text: data.reply, isBot: true }]);
+        
+        if (data.action === 'book_call') {
+          // Open Calendly or booking link in a new tab
+          window.open('https://calendly.com/mayurfashion', '_blank');
+        } else if (data.action === 'open_contact_form') {
+          // Close the chat widget and scroll to contact section
+          setIsOpen(false);
+          const contactElem = document.getElementById('contact');
+          if (contactElem) {
+            contactElem.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
       } else {
         setMessages(prev => [...prev, { text: "Thank you for reaching out! You can also chat directly with our team on WhatsApp for instant assistance.", isBot: true }]);
       }

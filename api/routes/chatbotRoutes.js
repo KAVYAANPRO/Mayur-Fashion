@@ -33,22 +33,50 @@ router.post('/', async (req, res) => {
     }).join("\n");
 
     const systemInstruction = `You are Mayur Fashion's AI Assistant, representing India's premier B2B manufacturer and wholesaler of ethnic kurtis and sets since 1984.
-Your tone is professional, warm, and helpful for B2B buyers, retailers, and boutique owners.
+Your tone is professional, warm, and helpful for B2B buyers, retailers, and boutique owners. Do not be repetitive.
 Use the live catalog and brand information provided below to answer customer queries accurately regarding designs, fabrics, sizes (up to 6XL), categories, and wholesale procedures.
 For placing orders or custom bulk inquiries, politely invite the user to connect with our WhatsApp wholesale team.
+
+If a user wants to book a call, schedule a meeting, or speak directly with the team, you MUST trigger the "book_call" action.
+If a user wants to fill out a contact form, send a direct message, or asks where the contact us form is, you MUST trigger the "open_contact_form" action.
+Otherwise, use the "none" action.
 
 ${websiteDataContext}`;
 
     let replyText = '';
+    let actionType = 'none';
 
     try {
+      const { SchemaType } = require('@google/generative-ai');
+      
+      const responseSchema = {
+        type: SchemaType.OBJECT,
+        properties: {
+          reply: {
+            type: SchemaType.STRING,
+            description: "The text response to the user."
+          },
+          action: {
+            type: SchemaType.STRING,
+            description: "The action to trigger on the frontend, if any. Can be 'none', 'book_call', or 'open_contact_form'."
+          }
+        },
+        required: ["reply", "action"]
+      };
+
       const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
       const model = genAI.getGenerativeModel({ 
-        model: process.env.GEMINI_MODEL || 'gemini-2.0-flash-exp',
+        model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
         systemInstruction: systemInstruction,
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: responseSchema,
+        }
       });
       const result = await model.generateContent(message);
-      replyText = result.response.text();
+      const jsonResponse = JSON.parse(result.response.text());
+      replyText = jsonResponse.reply;
+      actionType = jsonResponse.action;
     } catch (geminiError) {
       console.warn('Gemini API failed, falling back to OpenRouter...', geminiError);
       
@@ -64,9 +92,10 @@ ${websiteDataContext}`;
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "google/gemini-2.5-flash", // We can use the openrouter gemini equivalent or another model
+          model: "google/gemini-2.5-flash",
+          response_format: { type: "json_object" },
           messages: [
-            { role: "system", content: systemInstruction },
+            { role: "system", content: systemInstruction + "\n\nRespond ONLY with a JSON object containing 'reply' (string) and 'action' (string, either 'none', 'book_call', or 'open_contact_form')." },
             { role: "user", content: message }
           ]
         })
@@ -77,10 +106,16 @@ ${websiteDataContext}`;
       }
       
       const data = await fallbackResponse.json();
-      replyText = data.choices[0].message.content;
+      try {
+        const jsonResponse = JSON.parse(data.choices[0].message.content);
+        replyText = jsonResponse.reply || data.choices[0].message.content;
+        actionType = jsonResponse.action || 'none';
+      } catch (e) {
+        replyText = data.choices[0].message.content;
+      }
     }
 
-    res.json({ reply: replyText });
+    res.json({ reply: replyText, action: actionType });
   } catch (error) {
     console.error('Chatbot API Error:', error);
     res.status(500).json({ error: 'Failed to communicate with AI chatbot.' });
