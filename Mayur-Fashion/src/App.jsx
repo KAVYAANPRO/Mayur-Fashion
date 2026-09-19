@@ -14,8 +14,11 @@ import InquiryDrawer from './components/InquiryDrawer';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
 import { COMPANY_INFO } from './data/company';
+import useScrollReveal from './hooks/useScrollReveal';
 
 export default function App() {
+  useScrollReveal();
+
   const [inquiryList, setInquiryList] = useState(() => {
     try {
       const saved = localStorage.getItem('mayur_inquiry_list');
@@ -24,6 +27,7 @@ export default function App() {
       return [];
     }
   });
+
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState(null);

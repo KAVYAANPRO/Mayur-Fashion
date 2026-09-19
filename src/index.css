@@ -417,13 +417,63 @@ img {
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.6s ease forwards;
+/* Scroll-Driven Fly From Walls Animation Engine */
+.fly-in-left {
+  opacity: 0;
+  transform: translate3d(-140px, 0, 0) scale(0.92);
+  filter: blur(8px);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
 }
 
-.animate-float {
-  animation: floatAnim 4s ease-in-out infinite;
+.fly-in-left.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+  filter: blur(0px) !important;
 }
+
+.fly-in-right {
+  opacity: 0;
+  transform: translate3d(140px, 0, 0) scale(0.92);
+  filter: blur(8px);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.fly-in-right.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+  filter: blur(0px) !important;
+}
+
+.fly-in-up {
+  opacity: 0;
+  transform: translate3d(0, 60px, 0) scale(0.94);
+  filter: blur(6px);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity, filter;
+}
+
+.fly-in-up.is-revealed {
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) scale(1) !important;
+  filter: blur(0px) !important;
+}
+
+.delay-1 { transition-delay: 0.08s !important; }
+.delay-2 { transition-delay: 0.16s !important; }
+.delay-3 { transition-delay: 0.24s !important; }
+.delay-4 { transition-delay: 0.32s !important; }
+.delay-5 { transition-delay: 0.40s !important; }
+.delay-6 { transition-delay: 0.48s !important; }
+.delay-7 { transition-delay: 0.56s !important; }
+.delay-8 { transition-delay: 0.64s !important; }
 
 .hero-morph-left {
   animation: morphInLeft 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -435,24 +485,119 @@ img {
   will-change: transform, opacity, filter;
 }
 
-/* Responsive Media Queries */
+
+/* Responsive Media Queries & Mobile Optimizations */
 @media (max-width: 1024px) {
+  .section {
+    padding: 65px 0;
+  }
   .section-title {
-    font-size: 2.25rem;
+    font-size: 2.2rem;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 60px 0;
+    padding: 48px 0;
+  }
+  .section-title-wrap {
+    margin-bottom: 28px;
   }
   .section-title {
-    font-size: 1.85rem;
+    font-size: 1.7rem;
+    line-height: 1.24;
+  }
+  .section-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.55;
   }
   .container, .container-wide {
     padding: 0 16px;
   }
+  .top-ticker {
+    padding: 7px 0;
+    font-size: 0.74rem;
+  }
   .top-ticker .ticker-secondary {
     display: none;
   }
+  
+  /* Mobile Button Touch Friendly Sizes */
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.88rem;
+    touch-action: manipulation;
+  }
+
+  /* Horizontal scroll category tabs utility */
+  .category-scroll-ribbon {
+    display: flex !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 8px !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+  .category-scroll-ribbon::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* 2-Column Mobile Product Grid */
+  .products-grid-mobile {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Mobile scroll reveal transforms */
+  .fly-in-left:not(.is-revealed) {
+    transform: translate3d(-70px, 0, 0) scale(0.95);
+  }
+  .fly-in-right:not(.is-revealed) {
+    transform: translate3d(70px, 0, 0) scale(0.95);
+  }
+  .fly-in-up:not(.is-revealed) {
+    transform: translate3d(0, 40px, 0) scale(0.96);
+  }
 }
+
+
+@media (max-width: 480px) {
+  .section {
+    padding: 38px 0;
+  }
+  .section-title {
+    font-size: 1.48rem;
+  }
+  .section-tag {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+  }
+  .container, .container-wide {
+    padding: 0 12px;
+  }
+  .products-grid-mobile {
+    gap: 8px !important;
+  }
+}
+
+/* Prevent auto zoom on iOS input focus */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Touch action and iOS optimizations */
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+}
+

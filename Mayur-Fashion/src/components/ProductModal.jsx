@@ -79,24 +79,27 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1.15fr',
-          gap: '32px'
+          gap: '24px'
         }} className="modal-grid">
           
           {/* Left Column: Image Viewer & Gallery Strip */}
-          <div style={{ padding: '24px', background: '#EDEBE6', borderRadius: '24px 0 0 24px' }}>
-            <div style={{
-              borderRadius: '16px',
-              overflow: 'hidden',
-              height: '520px',
-              maxHeight: '62vh',
-              background: '#f5f4f0',
-              boxShadow: '0 8px 25px rgba(0,0,0,0.06)',
-              marginBottom: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '1px solid #ECE5CE'
-            }}>
+          <div className="modal-image-col" style={{ padding: '24px', background: '#EDEBE6', borderRadius: '24px 0 0 24px' }}>
+            <div 
+              className="modal-main-img-box"
+              style={{
+                borderRadius: '16px',
+                overflow: 'hidden',
+                height: '500px',
+                maxHeight: '60vh',
+                background: '#f5f4f0',
+                boxShadow: '0 8px 25px rgba(0,0,0,0.06)',
+                marginBottom: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                border: '1px solid #ECE5CE'
+              }}
+            >
               <img
                 src={activeImage}
                 alt={product.title}
@@ -112,14 +115,14 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
 
             {/* Thumbnail Gallery Strip */}
             {product.gallery && product.gallery.length > 1 && (
-              <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '6px' }}>
+              <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '4px' }}>
                 {product.gallery.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveImage(img)}
                     style={{
-                      width: '65px',
-                      height: '85px',
+                      width: '60px',
+                      height: '80px',
                       borderRadius: '8px',
                       overflow: 'hidden',
                       border: activeImage === img ? '2px solid #EF233C' : '1px solid #C8D6BF',
@@ -137,11 +140,11 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
           </div>
 
           {/* Right Column: Specifications & B2B Inquiry Actions */}
-          <div style={{ padding: '36px 32px 32px 10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="modal-content-col" style={{ padding: '32px 28px 28px 10px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
                 <span style={{
-                  fontSize: '0.75rem',
+                  fontSize: '0.74rem',
                   fontWeight: 700,
                   color: '#3e5336',
                   background: '#C8D6BF',
@@ -151,14 +154,14 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
                 }}>
                   {product.categoryLabel}
                 </span>
-                <span style={{ fontSize: '0.8rem', color: '#5e5750', fontWeight: 600 }}>
+                <span style={{ fontSize: '0.78rem', color: '#5e5750', fontWeight: 600 }}>
                   Design Code: {product.id}
                 </span>
               </div>
 
               <h2 style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: '1.65rem',
+                fontSize: 'clamp(1.3rem, 3.5vw, 1.65rem)',
                 color: '#1c1917',
                 lineHeight: 1.25,
                 marginBottom: '10px'
@@ -166,7 +169,7 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
                 {product.title}
               </h2>
 
-              <p style={{ fontSize: '0.92rem', color: '#5e5750', lineHeight: 1.6, marginBottom: '20px' }}>
+              <p style={{ fontSize: '0.88rem', color: '#5e5750', lineHeight: 1.55, marginBottom: '18px' }}>
                 {product.description}
               </p>
 
@@ -174,13 +177,13 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
               <div style={{
                 background: '#EDEBE6',
                 borderRadius: '16px',
-                padding: '16px 20px',
+                padding: '14px 18px',
                 border: '1px solid #ECE5CE',
-                marginBottom: '20px',
+                marginBottom: '18px',
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
-                gap: '12px',
-                fontSize: '0.86rem'
+                gap: '10px',
+                fontSize: '0.84rem'
               }}>
                 <div>
                   <strong style={{ color: '#EF233C' }}>Top Fabric:</strong>
@@ -201,28 +204,28 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
               </div>
 
               {/* Size Selector Strip */}
-              <div style={{ marginBottom: '22px' }}>
+              <div style={{ marginBottom: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <label style={{ fontSize: '0.86rem', fontWeight: 700, color: '#1c1917' }}>
-                    Available Sizes (Complete M to 6XL Grading):
+                  <label style={{ fontSize: '0.84rem', fontWeight: 700, color: '#1c1917' }}>
+                    Sizes (M to 6XL Grading):
                   </label>
                   <button 
                     onClick={() => setShowSizeChart(!showSizeChart)}
-                    style={{ fontSize: '0.8rem', color: '#EF233C', fontWeight: 600, textDecoration: 'underline' }}
+                    style={{ fontSize: '0.78rem', color: '#EF233C', fontWeight: 600, textDecoration: 'underline' }}
                   >
                     {showSizeChart ? 'Hide Size Chart' : 'View Size Chart'}
                   </button>
                 </div>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                   {product.sizes.map((s) => (
                     <button
                       key={s}
                       onClick={() => setSelectedSize(s)}
                       style={{
-                        padding: '6px 14px',
+                        padding: '6px 12px',
                         borderRadius: '8px',
-                        fontSize: '0.84rem',
+                        fontSize: '0.82rem',
                         fontWeight: 600,
                         border: selectedSize === s ? '1.5px solid #EF233C' : '1px solid #C8D6BF',
                         background: selectedSize === s ? '#fde8eb' : '#ffffff',
@@ -237,18 +240,19 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
                 {/* Inline Size Chart Modal Accordion */}
                 {showSizeChart && (
                   <div style={{
-                    marginTop: '12px',
+                    marginTop: '10px',
                     padding: '12px',
                     background: '#ffffff',
                     border: '1px solid #ECE5CE',
                     borderRadius: '12px',
-                    fontSize: '0.8rem'
+                    fontSize: '0.78rem',
+                    overflowX: 'auto'
                   }}>
-                    <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
+                    <table style={{ width: '100%', minWidth: '260px', textAlign: 'left', borderCollapse: 'collapse' }}>
                       <thead>
                         <tr style={{ borderBottom: '1px solid #ECE5CE', color: '#EF233C' }}>
                           <th style={{ padding: '4px' }}>Size</th>
-                          <th style={{ padding: '4px' }}>Bust (Inches)</th>
+                          <th style={{ padding: '4px' }}>Bust</th>
                           <th style={{ padding: '4px' }}>Waist</th>
                           <th style={{ padding: '4px' }}>Hip</th>
                         </tr>
@@ -273,42 +277,42 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
                 display: 'flex',
                 alignItems: 'center',
                 gap: '8px',
-                padding: '8px 14px',
+                padding: '8px 12px',
                 background: '#ecfdf5',
                 border: '1px solid #a7f3d0',
                 borderRadius: '8px',
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 color: '#065f46',
-                marginBottom: '24px'
+                marginBottom: '20px'
               }}>
-                <span><strong>Wholesale Packaging:</strong> Full catalog set with individual branded polybags and hangar packs.</span>
+                <span><strong>Wholesale Packaging:</strong> Full catalog set with branded luxury polybags.</span>
               </div>
             </div>
 
             {/* Actions */}
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+            <div className="modal-actions-group" style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
               <button
                 onClick={handleWhatsAppEnquiry}
                 className="btn btn-whatsapp"
-                style={{ flex: 1.2, minWidth: '220px', padding: '13px 20px', fontSize: '0.95rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                style={{ flex: 1.2, minWidth: '200px', padding: '13px 18px', fontSize: '0.92rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
-                <WhatsAppIcon size={20} color="#ffffff" />
+                <WhatsAppIcon size={19} color="#ffffff" />
                 <span>Instant WhatsApp Inquiry</span>
               </button>
 
               <button
                 onClick={() => onToggleInquiry(product)}
                 className={`btn ${isInInquiry ? 'btn-primary' : 'btn-outline'}`}
-                style={{ flex: 1, minWidth: '180px', padding: '13px 20px', fontSize: '0.95rem' }}
+                style={{ flex: 1, minWidth: '160px', padding: '13px 18px', fontSize: '0.92rem' }}
               >
                 {isInInquiry ? (
                   <>
-                    <Check size={18} />
+                    <Check size={17} />
                     <span>In Inquiry Bag</span>
                   </>
                 ) : (
                   <>
-                    <ShoppingBag size={18} />
+                    <ShoppingBag size={17} />
                     <span>Add to Bag</span>
                   </>
                 )}
@@ -322,6 +326,26 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
         @media (max-width: 768px) {
           .modal-grid {
             grid-template-columns: 1fr !important;
+            gap: 0 !important;
+          }
+          .modal-image-col {
+            padding: 16px 16px 12px 16px !important;
+            border-radius: 20px 20px 0 0 !important;
+          }
+          .modal-main-img-box {
+            height: 320px !important;
+            max-height: 40vh !important;
+            margin-bottom: 10px !important;
+          }
+          .modal-content-col {
+            padding: 18px 16px 24px 16px !important;
+          }
+          .modal-actions-group {
+            flex-direction: column !important;
+          }
+          .modal-actions-group .btn {
+            width: 100% !important;
+            min-width: 100% !important;
           }
         }
       `}</style>

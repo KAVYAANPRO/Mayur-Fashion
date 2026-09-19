@@ -30,13 +30,13 @@ export default function HeritageSection() {
       <div className="container">
         {/* Section Heading */}
         <div className="section-title-wrap">
-          <div className="section-tag">
+          <div className="section-tag fly-in-left">
             <span>35+ Years of Craftsmanship</span>
           </div>
-          <h2 className="section-title">
+          <h2 className="section-title fly-in-left delay-1">
             The Manohar Legacy & Mayur Heritage
           </h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle fly-in-right delay-2">
             Rooted in Ahmedabad, Gujarat—India's textile capital—we have shaped traditional elegance into modern wearability since 1991.
           </p>
         </div>
@@ -47,11 +47,11 @@ export default function HeritageSection() {
           gridTemplateColumns: '1fr 1fr',
           gap: '50px',
           alignItems: 'center',
-          marginBottom: '60px'
+          marginBottom: '50px'
         }} className="heritage-grid">
           
-          {/* Left Column: Visual Collage */}
-          <div style={{ position: 'relative' }}>
+          {/* Left Column: Visual Collage (Flies in from Left Wall) */}
+          <div className="fly-in-left delay-2" style={{ position: 'relative', marginBottom: '20px' }}>
             <div style={{
               borderRadius: '24px',
               overflow: 'hidden',
@@ -68,146 +68,168 @@ export default function HeritageSection() {
             </div>
 
             {/* Overlapping Badge */}
-            <div style={{
-              position: 'absolute',
-              bottom: '-25px',
-              right: '25px',
-              background: '#EF233C',
-              color: '#ffffff',
-              padding: '18px 24px',
-              borderRadius: '16px',
-              boxShadow: '0 12px 30px rgba(239, 35, 60, 0.35)',
-              border: '2px solid #EDEBE6',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '14px'
-            }}>
-              <div style={{
-                fontFamily: "'Cinzel', serif",
-                fontSize: '2.2rem',
-                fontWeight: 800,
-                color: '#EDEBE6',
-                lineHeight: 1
-              }}>
+            <div 
+              className="heritage-badge"
+              style={{
+                position: 'absolute',
+                bottom: '-20px',
+                right: '20px',
+                background: '#EF233C',
+                color: '#ffffff',
+                padding: '16px 22px',
+                borderRadius: '16px',
+                boxShadow: '0 12px 30px rgba(239, 35, 60, 0.35)',
+                border: '2px solid #EDEBE6',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px'
+              }}
+            >
+              <div 
+                className="heritage-badge-year"
+                style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: '2rem',
+                  fontWeight: 800,
+                  color: '#EDEBE6',
+                  lineHeight: 1
+                }}
+              >
                 1991
               </div>
-              <div style={{ fontSize: '0.8rem', lineHeight: 1.3, fontWeight: 600 }}>
+              <div style={{ fontSize: '0.78rem', lineHeight: 1.3, fontWeight: 600 }}>
                 Crafting Excellence<br />
                 <strong>For Over 35 Years</strong>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Founder's Story */}
-          <div>
+          {/* Right Column: Founder's Story (Flies in from Right Wall) */}
+          <div className="fly-in-right delay-2">
             <h3 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: '1.85rem',
+              fontSize: 'clamp(1.4rem, 3vw, 1.85rem)',
               color: '#1c1917',
               lineHeight: 1.3,
-              marginBottom: '20px'
+              marginBottom: '16px'
             }}>
               "Over more than three decades, the passion and dedication that inspired our foundation have remained unchanged."
             </h3>
 
             {COMPANY_INFO.story.paragraphs.map((para, idx) => (
               <p key={idx} style={{
-                fontSize: '0.98rem',
+                fontSize: '0.94rem',
                 color: '#5e5750',
-                lineHeight: 1.7,
-                marginBottom: '16px'
+                lineHeight: 1.65,
+                marginBottom: '14px'
               }}>
                 {para}
               </p>
             ))}
 
             <div style={{
-              marginTop: '25px',
-              paddingTop: '20px',
+              marginTop: '20px',
+              paddingTop: '18px',
               borderTop: '1px solid #ECE5CE',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between'
             }}>
               <div>
-                <div style={{ fontWeight: 700, color: '#1c1917', fontSize: '1.05rem' }}>
+                <div style={{ fontWeight: 700, color: '#1c1917', fontSize: '1rem' }}>
                   Mr. Manohar Peswani
                 </div>
-                <div style={{ fontSize: '0.82rem', color: '#EF233C', fontWeight: 600 }}>
+                <div style={{ fontSize: '0.8rem', color: '#EF233C', fontWeight: 600 }}>
                   Founder, Manohar Dresses & Mayur Fashion
                 </div>
               </div>
               <img
                 src="/assets/logo/mayur-official-circle.png"
                 alt="Official Seal"
-                style={{ width: '48px', height: '48px', borderRadius: '50%' }}
+                style={{ width: '44px', height: '44px', borderRadius: '50%' }}
               />
             </div>
           </div>
         </div>
 
-        {/* Milestone Timeline Cards */}
+        {/* Milestone Timeline Cards (Left 2 fly from left, Right 2 fly from right) */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '24px'
+          gap: '20px'
         }} className="milestones-grid">
-          {milestones.map((m, idx) => (
-            <div
-              key={idx}
-              className="luxury-card"
-              style={{
-                padding: '28px 22px',
-                background: '#ffffff',
-                borderColor: '#ECE5CE',
-                position: 'relative'
-              }}
-            >
-              <div style={{
-                fontFamily: "'Cinzel', serif",
-                fontSize: '1.8rem',
-                fontWeight: 800,
-                color: '#EF233C',
-                marginBottom: '10px'
-              }}>
-                {m.year}
+          {milestones.map((m, idx) => {
+            const flyClass = idx < 2 ? 'fly-in-left' : 'fly-in-right';
+            const delayClass = `delay-${idx < 2 ? idx + 1 : 4 - idx}`;
+            return (
+              <div
+                key={idx}
+                className={`luxury-card ${flyClass} ${delayClass}`}
+                style={{
+                  padding: '24px 20px',
+                  background: '#ffffff',
+                  borderColor: '#ECE5CE',
+                  position: 'relative'
+                }}
+              >
+                <div style={{
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: '1.65rem',
+                  fontWeight: 800,
+                  color: '#EF233C',
+                  marginBottom: '8px'
+                }}>
+                  {m.year}
+                </div>
+                <h4 style={{
+                  fontFamily: "'Playfair Display', serif",
+                  fontSize: '1.05rem',
+                  color: '#1c1917',
+                  marginBottom: '6px',
+                  fontWeight: 700
+                }}>
+                  {m.title}
+                </h4>
+                <p style={{
+                  fontSize: '0.84rem',
+                  color: '#5e5750',
+                  lineHeight: 1.5
+                }}>
+                  {m.desc}
+                </p>
               </div>
-              <h4 style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: '1.1rem',
-                color: '#1c1917',
-                marginBottom: '8px',
-                fontWeight: 700
-              }}>
-                {m.title}
-              </h4>
-              <p style={{
-                fontSize: '0.85rem',
-                color: '#5e5750',
-                lineHeight: 1.55
-              }}>
-                {m.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
+
 
       <style>{`
         @media (max-width: 992px) {
           .heritage-grid {
             grid-template-columns: 1fr !important;
+            gap: 30px !important;
           }
           .milestones-grid {
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }
-        @media (max-width: 576px) {
+        @media (max-width: 640px) {
+          .heritage-badge {
+            bottom: -15px !important;
+            right: 12px !important;
+            padding: 10px 14px !important;
+          }
+          .heritage-badge-year {
+            font-size: 1.5rem !important;
+          }
           .milestones-grid {
             grid-template-columns: 1fr !important;
+            gap: 14px !important;
           }
         }
       `}</style>
     </section>
   );
 }
+
