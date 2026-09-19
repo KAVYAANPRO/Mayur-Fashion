@@ -93,6 +93,16 @@ router.delete('/:id', authMiddleware, async (req, res) => {
   }
 });
 
+// DELETE all products (temp cleanup)
+router.delete('/delete-all/products', async (req, res) => {
+  try {
+    await Product.deleteMany({});
+    res.json({ message: 'All products deleted' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 // POST increment demand (to track what consumers ask for)
 router.post('/:id/track-demand', async (req, res) => {
   try {
