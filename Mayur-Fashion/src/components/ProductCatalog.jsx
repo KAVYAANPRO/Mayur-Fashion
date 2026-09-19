@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { SlidersHorizontal } from 'lucide-react';
 import ProductCard from './ProductCard';
 import { CATEGORIES, SIZES, PRODUCTS } from '../data/products';
@@ -12,9 +12,71 @@ export default function ProductCatalog({
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedSize, setSelectedSize] = useState("all");
   const [sortBy, setSortBy] = useState("featured");
+  const [apiProducts, setApiProducts] = useState([]);
+  const [apiCategories, setApiCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch products and categories from API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://mayurfashionapi.vercel.app';
+        
+        const [productsRes, categoriesRes] = await Promise.all([
+          fetch(`${apiUrl}/api/products`),
+          fetch(`${apiUrl}/api/categories`)
+        ]);
+
+        if (productsRes.ok) {
+          const products = await productsRes.json();
+          setApiProducts(products);
+        }
+
+        if (categoriesRes.ok) {
+          const categories = await categoriesRes.json();
+          setApiCategories(categories);
+        }
+      } catch (err) {
+        console.warn('Failed to fetch from API, using hardcoded data:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Merge hardcoded + API products
+  const allProducts = useMemo(() => {
+    // Convert API products to match hardcoded format
+    const convertedApiProducts = apiProducts.map(p => ({
+      id: p.sku || p._id,
+      title: p.name,
+      category: p.category?._id || 'all',
+      categoryLabel: p.category?.name || 'Uncategorized',
+      tagline: p.description.substring(0, 60),
+      primaryImage: p.images[0] || '/assets/products/placeholder.jpg',
+      primaryImageJpg: p.images[0] || '/assets/products/placeholder.jpg',
+      gallery: p.images,
+      color: p.customFields?.find(f => f.key === 'Color')?.value || 'N/A',
+      colorHex: '#cccccc',
+      fabric: p.customFields?.find(f => f.key === 'Fabric')?.value || 'Premium Fabric',
+      bottomFabric: p.customFields?.find(f => f.key === 'Bottom Fabric')?.value || '',
+      dupatta: p.customFields?.find(f => f.key === 'Dupatta')?.value || '',
+      work: p.customFields?.find(f => f.key === 'Work')?.value || '',
+      sizes: p.sizes.length > 0 ? p.sizes : SIZES,
+      moq: '1 Catalog Set',
+      isNew: p.demandScore > 5,
+      isBestseller: p.demandScore > 10,
+      description: p.description,
+      features: []
+    }));
+
+    return [...PRODUCTS, ...convertedApiProducts];
+  }, [apiProducts]);
 
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((item) => {
+    return allProducts.filter((item) => {
       // Category Match
       if (selectedCategory !== "all" && item.category !== selectedCategory) {
         return false;
@@ -41,7 +103,7 @@ export default function ProductCatalog({
       }
       return 0;
     });
-  }, [selectedCategory, searchQuery, sortBy]);
+  }, [allProducts, selectedCategory, searchQuery, sortBy]);
 
   return (
     <section id="collections" className="section" style={{ background: '#EDEBE6', borderBottom: '1px solid #ECE5CE' }}>
