@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const { GoogleGenerativeAI } = require('@google/generative-ai');
 const Product = require('../models/Product');
 const Category = require('../models/Category');
 
@@ -47,84 +46,52 @@ ${websiteDataContext}`;
     let actionType = 'none';
 
     try {
-      const { SchemaType } = require('@google/generative-ai');
-      
-      const responseSchema = {
-        type: SchemaType.OBJECT,
-        properties: {
-          reply: {
-            type: SchemaType.STRING,
-            description: "The text response to the user."
-          },
-          action: {
-            type: SchemaType.STRING,
-            description: "The action to trigger on the frontend, if any. Can be 'none', 'book_call', or 'open_contact_form'."
-          }
-        },
-        required: ["reply", "action"]
-      };
-
-      const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({ 
-        model: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
-        systemInstruction: systemInstruction,
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: responseSchema,
-        }
-      });
-      
-      const chat = model.startChat({
-        history: history || []
-      });
-      
-      const result = await chat.sendMessage(message);
-      const jsonResponse = JSON.parse(result.response.text());
-      replyText = jsonResponse.reply;
-      actionType = jsonResponse.action;
-    } catch (geminiError) {
-      console.warn('Gemini API failed, falling back to OpenRouter...', geminiError);
-      
       if (!process.env.OPENROUTER_API_KEY) {
-         throw new Error('OpenRouter API key is not configured for fallback.');
+         throw new Error('OpenRouter API key is not configured.');
       }
 
-      // OpenRouter Fallback
-      const fallbackResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "google/gemini-2.5-flash",
-          response_format: { type: "json_object" },
+          model: "openrouter/free",
           messages: [
-            { role: "system", content: systemInstruction + "\n\nRespond ONLY with a JSON object containing 'reply' (string) and 'action' (string, either 'none', 'book_call', or 'open_contact_form')." },
+            { role: "system", content: systemInstruction + "\n\nCRITICAL INSTRUCTION: You must respond ONLY with a raw JSON object containing exactly two keys: 'reply' (string) and 'action' (string, either 'none', 'book_call', or 'open_contact_form'). Do NOT wrap it in markdown code blocks. Do not add any conversational text outside the JSON." },
             ...(history || []).map(m => ({ role: m.role === 'model' ? 'assistant' : 'user', content: m.parts[0].text })),
             { role: "user", content: message }
           ]
         })
       });
 
-      if (!fallbackResponse.ok) {
-        throw new Error(`OpenRouter Fallback Error: ${fallbackResponse.statusText}`);
+      if (!response.ok) {
+        throw new Error(`OpenRouter Error: ${response.statusText}`);
       }
       
-      const data = await fallbackResponse.json();
+      const data = await response.json();
+      const content = data.choices[0].message.content;
+      
+      // Attempt to clean markdown if present (some free models wrap json in ```json ... ``` despite instructions)
+      const cleanedContent = content.replace(/```json/g, '').replace(/```/g, '').trim();
+      
       try {
-        const jsonResponse = JSON.parse(data.choices[0].message.content);
-        replyText = jsonResponse.reply || data.choices[0].message.content;
+        const jsonResponse = JSON.parse(cleanedContent);
+        replyText = jsonResponse.reply || cleanedContent;
         actionType = jsonResponse.action || 'none';
       } catch (e) {
-        replyText = data.choices[0].message.content;
+        replyText = cleanedContent;
       }
+    } catch (apiError) {
+      console.error('API Error:', apiError);
+      return res.status(500).json({ error: 'Failed to communicate with AI chatbot.' });
     }
 
     res.json({ reply: replyText, action: actionType });
   } catch (error) {
-    console.error('Chatbot API Error:', error);
-    res.status(500).json({ error: 'Failed to communicate with AI chatbot.' });
+    console.error('Chatbot Internal Error:', error);
+    res.status(500).json({ error: 'Internal server error.' });
   }
 });
 
