@@ -4,8 +4,8 @@
   "description": "Mayur Fashion backend API",
   "main": "api/index.js",
   "scripts": {
-    "build": "cd admin-panel && npm install && npm run build",
-    "start": "serve -s admin-panel/dist -l ${PORT:-3000}",
+    "build": "cd Mayur-Fashion && npm install && npm run build",
+    "start": "serve -s Mayur-Fashion/dist -l ${PORT:-3000}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
