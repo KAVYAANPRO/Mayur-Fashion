@@ -27,32 +27,37 @@ function Login({ setAuth }) {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#f9f9f9' }}>
-      <div style={{ padding: '2rem', backgroundColor: 'white', border: '2px solid black', width: '400px' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '1.5rem', fontWeight: 800 }}>Admin Login</h2>
-        {error && <div style={{ color: 'red', marginBottom: '1rem', textAlign: 'center' }}>{error}</div>}
-        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <div>
-            <label style={{ fontWeight: 600, display: 'block', marginBottom: '0.5rem' }}>Username</label>
+    <div className="admin-login-wrapper">
+      <div className="admin-login-box animate-fade-in-up">
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <h2 style={{ color: 'var(--primary)', marginBottom: '0.5rem', fontSize: '2rem' }}>MAYUR FASHION</h2>
+          <p style={{ color: 'var(--text-muted)' }}>Admin Portal</p>
+        </div>
+        
+        {error && <div style={{ color: 'var(--danger)', marginBottom: '1.5rem', textAlign: 'center', padding: '0.75rem', border: '1px solid var(--danger)', borderRadius: '4px', backgroundColor: 'rgba(220, 53, 69, 0.1)' }}>{error}</div>}
+        
+        <form onSubmit={handleLogin} className="flex-col">
+          <div className="form-group animate-slide-in-left delay-1">
+            <label>Username</label>
             <input 
               type="text" 
               value={name} 
               onChange={e => setName(e.target.value)} 
               required 
-              style={{ width: '100%', padding: '0.75rem', border: '1px solid #ccc' }} 
             />
           </div>
-          <div>
-            <label style={{ fontWeight: 600, display: 'block', marginBottom: '0.5rem' }}>Password</label>
+          <div className="form-group animate-slide-in-left delay-2">
+            <label>Password</label>
             <input 
               type="password" 
               value={password} 
               onChange={e => setPassword(e.target.value)} 
               required 
-              style={{ width: '100%', padding: '0.75rem', border: '1px solid #ccc' }} 
             />
           </div>
-          <button type="submit" style={{ padding: '1rem', backgroundColor: 'black', color: 'white', fontWeight: 800, cursor: 'pointer', marginTop: '1rem' }}>LOGIN</button>
+          <button type="submit" className="btn-primary animate-fade-in-up delay-3" style={{ marginTop: '1rem', width: '100%', padding: '1rem' }}>
+            SECURE LOGIN
+          </button>
         </form>
       </div>
     </div>
