@@ -42,17 +42,17 @@ export default function WholesaleSection() {
   };
 
   return (
-    <section id="wholesale" className="section" style={{ background: '#EDEBE6', position: 'relative', borderBottom: '1px solid #ECE5CE' }}>
+    <section id="wholesale" className="section" style={{ background: '#EDEBE6', position: 'relative', borderBottom: '1px solid #ECE5CE', overflow: 'hidden' }}>
       <div className="container">
         {/* Section Heading */}
         <div className="section-title-wrap">
-          <div className="section-tag">
+          <div className="section-tag fly-in-left">
             <span>Direct Manufacturer Pricing</span>
           </div>
-          <h2 className="section-title">
+          <h2 className="section-title fly-in-left delay-1">
             B2B Wholesale & Global Export Portal
           </h2>
-          <p className="section-subtitle">
+          <p className="section-subtitle fly-in-right delay-2">
             Partner directly with Manohar Dresses. Guaranteed catalog exclusivity, export-compliant packaging, and seamless dispatch to 30+ countries.
           </p>
         </div>
@@ -65,7 +65,7 @@ export default function WholesaleSection() {
           marginBottom: '50px'
         }} className="wholesale-cards-grid">
           
-          <div className="luxury-card" style={{ padding: '28px', background: '#ffffff', borderColor: '#ECE5CE' }}>
+          <div className="luxury-card fly-in-left delay-1" style={{ padding: '28px', background: '#ffffff', borderColor: '#ECE5CE' }}>
             <div style={{
               width: '48px',
               height: '48px',
@@ -87,7 +87,7 @@ export default function WholesaleSection() {
             </p>
           </div>
 
-          <div className="luxury-card" style={{ padding: '28px', background: '#ffffff', borderColor: '#ECE5CE' }}>
+          <div className="luxury-card fly-in-up delay-2" style={{ padding: '28px', background: '#ffffff', borderColor: '#ECE5CE' }}>
             <div style={{
               width: '48px',
               height: '48px',
@@ -109,7 +109,7 @@ export default function WholesaleSection() {
             </p>
           </div>
 
-          <div className="luxury-card" style={{ padding: '28px', background: '#ffffff', borderColor: '#ECE5CE' }}>
+          <div className="luxury-card fly-in-right delay-1" style={{ padding: '28px', background: '#ffffff', borderColor: '#ECE5CE' }}>
             <div style={{
               width: '48px',
               height: '48px',
@@ -133,25 +133,28 @@ export default function WholesaleSection() {
         </div>
 
         {/* Wholesale Form Box */}
-        <div style={{
-          background: '#ffffff',
-          borderRadius: '24px',
-          border: '1px solid #ECE5CE',
-          padding: '40px',
-          boxShadow: '0 12px 40px rgba(0, 0, 0, 0.04)',
-          maxWidth: '960px',
-          margin: '0 auto'
-        }}>
-          <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <div 
+          className="wholesale-form-card fly-in-up delay-2"
+          style={{
+            background: '#ffffff',
+            borderRadius: '24px',
+            border: '1px solid #ECE5CE',
+            padding: '40px',
+            boxShadow: '0 12px 40px rgba(0, 0, 0, 0.04)',
+            maxWidth: '960px',
+            margin: '0 auto'
+          }}
+        >
+          <div style={{ textAlign: 'center', marginBottom: '28px' }}>
             <h3 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: '1.75rem',
+              fontSize: 'clamp(1.35rem, 3vw, 1.75rem)',
               color: '#1c1917',
               marginBottom: '6px'
             }}>
               Request Wholesale Catalog & Rate Card
             </h3>
-            <p style={{ fontSize: '0.92rem', color: '#5e5750' }}>
+            <p style={{ fontSize: '0.9rem', color: '#5e5750' }}>
               Fill out your business requirements below to receive instant wholesale catalog PDFs and set prices on WhatsApp.
             </p>
           </div>
@@ -160,11 +163,11 @@ export default function WholesaleSection() {
             <div style={{
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
-              gap: '20px',
-              marginBottom: '20px'
+              gap: '18px',
+              marginBottom: '18px'
             }} className="form-grid">
-              <div>
-                <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
+              <div className="fly-in-left delay-3">
+                <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
                   Business / Store Name *
                 </label>
                 <input
@@ -185,8 +188,8 @@ export default function WholesaleSection() {
                 />
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
+              <div className="fly-in-right delay-3">
+                <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
                   Contact Person Name *
                 </label>
                 <input
@@ -207,8 +210,8 @@ export default function WholesaleSection() {
                 />
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
+              <div className="fly-in-left delay-3">
+                <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
                   WhatsApp / Phone Number *
                 </label>
                 <input
@@ -229,8 +232,8 @@ export default function WholesaleSection() {
                 />
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
+              <div className="fly-in-right delay-3">
+                <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
                   City & State / Country *
                 </label>
                 <input
@@ -251,8 +254,8 @@ export default function WholesaleSection() {
                 />
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
+              <div className="fly-in-left delay-3">
+                <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
                   Business Type
                 </label>
                 <select
@@ -277,8 +280,8 @@ export default function WholesaleSection() {
                 </select>
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
+              <div className="fly-in-right delay-3">
+                <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
                   Interested Collections
                 </label>
                 <select
@@ -304,8 +307,8 @@ export default function WholesaleSection() {
               </div>
             </div>
 
-            <div style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
+            <div className="fly-in-up delay-3" style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', fontSize: '0.84rem', fontWeight: 700, color: '#1c1917', marginBottom: '6px' }}>
                 Additional Notes or Specific Design Inquiries
               </label>
               <textarea
@@ -326,13 +329,13 @@ export default function WholesaleSection() {
               />
             </div>
 
-            <div style={{ textAlign: 'center' }}>
+            <div className="fly-in-up delay-4" style={{ textAlign: 'center' }}>
               <button
                 type="submit"
-                className="btn btn-whatsapp"
-                style={{ padding: '15px 36px', fontSize: '1.02rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '9px' }}
+                className="btn btn-whatsapp wholesale-submit-btn"
+                style={{ padding: '14px 34px', fontSize: '0.98rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '9px' }}
               >
-                <WhatsAppIcon size={21} color="#ffffff" />
+                <WhatsAppIcon size={20} color="#ffffff" />
                 <span>Submit & Open WhatsApp Inquiry</span>
               </button>
             </div>
@@ -340,16 +343,27 @@ export default function WholesaleSection() {
         </div>
       </div>
 
+
       <style>{`
         @media (max-width: 768px) {
           .wholesale-cards-grid {
             grid-template-columns: 1fr !important;
+            gap: 16px !important;
           }
           .form-grid {
             grid-template-columns: 1fr !important;
+            gap: 14px !important;
+          }
+          .wholesale-form-card {
+            padding: 24px 18px !important;
+            border-radius: 18px !important;
+          }
+          .wholesale-submit-btn {
+            width: 100% !important;
           }
         }
       `}</style>
     </section>
   );
 }
+

@@ -7,7 +7,9 @@ export default function ProductCard({
   product, 
   onQuickView, 
   onToggleInquiry, 
-  isInInquiry 
+  isInInquiry,
+  className = '',
+  style = {}
 }) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -23,7 +25,7 @@ export default function ProductCard({
 
   return (
     <div 
-      className="product-card luxury-card"
+      className={`product-card luxury-card ${className}`}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -31,12 +33,14 @@ export default function ProductCard({
         position: 'relative',
         cursor: 'pointer',
         background: '#ffffff',
-        borderColor: '#ECE5CE'
+        borderColor: '#ECE5CE',
+        ...style
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => onQuickView(product)}
     >
+
       {/* Product Image Container */}
       <div style={{
         position: 'relative',
@@ -180,58 +184,68 @@ export default function ProductCard({
       </div>
 
       {/* Card Body */}
-      <div style={{
-        padding: '18px 18px 20px 18px',
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 1,
-        justifyContent: 'space-between'
-      }}>
+      <div 
+        className="product-card-body"
+        style={{
+          padding: '16px 16px 18px 16px',
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          justifyContent: 'space-between'
+        }}
+      >
         <div>
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: '6px'
+            marginBottom: '4px'
           }}>
             <span style={{
-              fontSize: '0.72rem',
+              fontSize: '0.7rem',
               fontWeight: 700,
               color: '#3e5336',
               textTransform: 'uppercase',
-              letterSpacing: '0.08em'
+              letterSpacing: '0.06em'
             }}>
               {product.categoryLabel}
             </span>
             <span style={{
-              fontSize: '0.75rem',
+              fontSize: '0.72rem',
               fontWeight: 600,
               color: '#5e5750'
             }}>
-              Code: {product.id}
+              {product.id}
             </span>
           </div>
 
-          <h3 style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: '1.12rem',
-            lineHeight: 1.35,
-            color: '#1c1917',
-            marginBottom: '8px',
-            fontWeight: 700
-          }}>
+          <h3 
+            className="product-card-title"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: '1.05rem',
+              lineHeight: 1.3,
+              color: '#1c1917',
+              marginBottom: '6px',
+              fontWeight: 700,
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden'
+            }}
+          >
             {product.title}
           </h3>
 
           <div style={{
-            fontSize: '0.82rem',
+            fontSize: '0.78rem',
             color: '#5e5750',
-            marginBottom: '12px',
+            marginBottom: '10px',
             display: '-webkit-box',
-            WebkitLineClamp: 2,
+            WebkitLineClamp: 1,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
-            lineHeight: 1.5
+            lineHeight: 1.4
           }}>
             <strong>Fabric:</strong> {product.fabric}
           </div>
@@ -239,24 +253,26 @@ export default function ProductCard({
 
         {/* Footer Actions on Card */}
         <div style={{
-          paddingTop: '12px',
+          paddingTop: '10px',
           borderTop: '1px solid #ECE5CE',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'center',
+          gap: '4px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
             <span 
               style={{
-                width: '12px',
-                height: '12px',
+                width: '11px',
+                height: '11px',
                 borderRadius: '50%',
                 background: product.colorHex,
-                border: '1px solid #C8D6BF'
+                border: '1px solid #C8D6BF',
+                flexShrink: 0
               }} 
               title={product.color}
             />
-            <span style={{ fontSize: '0.75rem', color: '#5e5750', fontWeight: 500 }}>
+            <span style={{ fontSize: '0.72rem', color: '#5e5750', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '65px' }}>
               {product.color.split('/')[0]}
             </span>
           </div>
@@ -266,21 +282,34 @@ export default function ProductCard({
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
-              fontSize: '0.78rem',
+              gap: '4px',
+              fontSize: '0.74rem',
               fontWeight: 700,
               color: '#059669',
               background: '#ecfdf5',
-              padding: '5px 10px',
+              padding: '4px 8px',
               borderRadius: '9999px',
-              border: '1px solid #a7f3d0'
+              border: '1px solid #a7f3d0',
+              flexShrink: 0
             }}
           >
-            <WhatsAppIcon size={14} color="#059669" />
+            <WhatsAppIcon size={13} color="#059669" />
             <span>Enquire</span>
           </button>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .product-card-body {
+            padding: 10px 8px 12px 8px !important;
+          }
+          .product-card-title {
+            font-size: 0.9rem !important;
+            min-height: 2.3em;
+          }
+        }
+      `}</style>
     </div>
   );
 }

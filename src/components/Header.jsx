@@ -97,46 +97,19 @@ export default function Header({
             <a 
               href="#hero" 
               onClick={(e) => { e.preventDefault(); handleNavClick('hero'); }}
-              style={{ display: 'flex', alignItems: 'center', gap: '14px' }}
+              style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
+              aria-label="Mayur Fashion - Manohar Dresses"
             >
               <img 
-                src="/assets/logo/mayur-official-circle.png" 
-                alt="Mayur Fashion Official Logo" 
+                src="/assets/logo/mayur-official-brand-logo.png" 
+                alt="Mayur Fashion - Manohar Dresses" 
                 style={{
-                  height: isScrolled ? '46px' : '52px',
-                  width: isScrolled ? '46px' : '52px',
-                  borderRadius: '50%',
+                  height: isScrolled ? '46px' : '54px',
+                  width: 'auto',
                   objectFit: 'contain',
-                  boxShadow: '0 4px 14px rgba(239, 35, 60, 0.25)',
-                  transition: 'all 0.3s ease',
-                  border: '2px solid #ffffff'
+                  transition: 'all 0.3s ease'
                 }}
               />
-              <div>
-                <div style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: isScrolled ? '1.35rem' : '1.5rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.04em',
-                  color: '#EF233C',
-                  lineHeight: 1.1,
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  gap: '4px'
-                }}>
-                  MAYUR
-                  <span style={{ fontSize: '0.7rem', color: '#1c1917', fontWeight: 700 }}>FASHION</span>
-                </div>
-                <div style={{
-                  fontSize: '0.7rem',
-                  letterSpacing: '0.12em',
-                  color: '#3e5336',
-                  fontWeight: 700,
-                  textTransform: 'uppercase'
-                }}>
-                  Manohar Dresses • Since 1991
-                </div>
-              </div>
             </a>
 
             {/* Desktop Navigation Links */}
@@ -173,13 +146,14 @@ export default function Header({
             </nav>
 
             {/* Action Buttons */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               {/* Search Toggle */}
               <button
                 onClick={() => setShowSearch(!showSearch)}
                 aria-label="Toggle Search"
                 style={{
-                  padding: '9px',
+                  width: '38px',
+                  height: '38px',
                   borderRadius: '50%',
                   color: '#1c1917',
                   background: showSearch ? '#ECE5CE' : 'transparent',
@@ -190,7 +164,7 @@ export default function Header({
                 }}
                 title="Search Collections"
               >
-                <Search size={20} />
+                <Search size={19} />
               </button>
 
               {/* Inquiry Basket Button */}
@@ -201,14 +175,14 @@ export default function Header({
                   position: 'relative',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px',
-                  padding: '9px 16px',
+                  gap: '6px',
+                  padding: '8px 12px',
                   background: 'rgba(239, 35, 60, 0.08)',
                   color: '#EF233C',
                   borderRadius: '9999px',
                   border: '1px solid rgba(239, 35, 60, 0.25)',
                   fontWeight: 600,
-                  fontSize: '0.88rem'
+                  fontSize: '0.85rem'
                 }}
               >
                 <ShoppingBag size={18} />
@@ -217,10 +191,10 @@ export default function Header({
                   <span style={{
                     background: '#EF233C',
                     color: '#ffffff',
-                    fontSize: '0.75rem',
+                    fontSize: '0.72rem',
                     fontWeight: 800,
-                    width: '20px',
-                    height: '20px',
+                    width: '18px',
+                    height: '18px',
                     borderRadius: '50%',
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -232,15 +206,15 @@ export default function Header({
                 )}
               </button>
 
-              {/* WhatsApp Wholesale CTA */}
+              {/* WhatsApp Wholesale CTA (Desktop) */}
               <a
                 href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am looking for your latest catalog and wholesale pricing.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-whatsapp hide-mobile"
                 style={{
-                  padding: '9px 18px',
-                  fontSize: '0.88rem',
+                  padding: '8px 16px',
+                  fontSize: '0.86rem',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px'
@@ -256,12 +230,17 @@ export default function Header({
                 className="mobile-menu-toggle"
                 style={{
                   display: 'none',
-                  padding: '8px',
-                  color: '#EF233C'
+                  width: '38px',
+                  height: '38px',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%',
+                  background: mobileMenuOpen ? '#EF233C' : '#ECE5CE',
+                  color: mobileMenuOpen ? '#ffffff' : '#EF233C'
                 }}
                 aria-label="Open Mobile Menu"
               >
-                {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             </div>
           </div>
@@ -269,7 +248,7 @@ export default function Header({
           {/* Search Bar Dropdown */}
           {showSearch && (
             <div style={{
-              padding: '12px 0 16px 0',
+              padding: '10px 0 14px 0',
               borderTop: '1px solid #ECE5CE',
               animation: 'fadeIn 0.25s ease'
             }}>
@@ -279,15 +258,15 @@ export default function Header({
                 background: '#ffffff',
                 border: '1.5px solid #C8D6BF',
                 borderRadius: '9999px',
-                padding: '4px 16px',
+                padding: '4px 14px',
                 maxWidth: '650px',
                 margin: '0 auto',
                 boxShadow: '0 4px 12px rgba(0,0,0,0.04)'
               }}>
-                <Search size={18} color="#EF233C" style={{ marginRight: '10px' }} />
+                <Search size={17} color="#EF233C" style={{ marginRight: '8px', flexShrink: 0 }} />
                 <input
                   type="text"
-                  placeholder="Search by fabric (Silk, Chanderi, Georgette), design, color, or sizes M-6XL..."
+                  placeholder="Search fabric, design, sizes M-6XL..."
                   value={searchQuery}
                   onChange={(e) => onSearchChange(e.target.value)}
                   autoFocus
@@ -296,7 +275,7 @@ export default function Header({
                     padding: '8px 0',
                     border: 'none',
                     background: 'transparent',
-                    fontSize: '0.95rem',
+                    fontSize: '0.92rem',
                     outline: 'none',
                     color: '#1c1917'
                   }}
@@ -304,7 +283,7 @@ export default function Header({
                 {searchQuery && (
                   <button 
                     onClick={() => onSearchChange('')}
-                    style={{ fontSize: '0.8rem', color: '#EF233C', fontWeight: 600, padding: '4px' }}
+                    style={{ fontSize: '0.78rem', color: '#EF233C', fontWeight: 600, padding: '4px' }}
                   >
                     Clear
                   </button>
@@ -314,15 +293,24 @@ export default function Header({
           )}
         </div>
 
-        {/* Mobile Slide-down Navigation Drawer */}
+        {/* Mobile Slide-down Luxury Navigation Drawer */}
         {mobileMenuOpen && (
           <div style={{
-            background: '#EDEBE6',
+            background: 'rgba(237, 235, 230, 0.98)',
+            backdropFilter: 'blur(20px)',
             borderTop: '1px solid #ECE5CE',
-            padding: '20px 24px',
-            boxShadow: '0 12px 30px rgba(0,0,0,0.1)'
+            padding: '24px 20px 30px 20px',
+            boxShadow: '0 16px 40px rgba(0,0,0,0.15)',
+            maxHeight: 'calc(100vh - 80px)',
+            overflowY: 'auto'
           }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div style={{ paddingBottom: '8px', borderBottom: '1px solid #ECE5CE' }}>
+                <span style={{ fontSize: '0.72rem', color: '#EF233C', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                  Explore Mayur Fashion
+                </span>
+              </div>
+
               {navLinks.map((link) => (
                 <button
                   key={link.id}
@@ -330,25 +318,53 @@ export default function Header({
                   style={{
                     textAlign: 'left',
                     fontSize: '1.05rem',
-                    fontWeight: 600,
+                    fontWeight: 700,
                     color: activeSection === link.id ? '#EF233C' : '#1c1917',
                     padding: '8px 0',
-                    borderBottom: '1px solid #ECE5CE'
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between'
                   }}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  <span style={{ color: '#C8D6BF', fontSize: '0.85rem' }}>→</span>
                 </button>
               ))}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px' }}>
+
+              <div style={{
+                marginTop: '12px',
+                paddingTop: '16px',
+                borderTop: '1px solid #ECE5CE',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px'
+              }}>
                 <a
-                  href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you from your website.")}`}
+                  href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you directly from your website.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-whatsapp"
-                  style={{ width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                  style={{ width: '100%', padding: '13px', fontSize: '0.94rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
                 >
-                  <WhatsAppIcon size={18} color="#ffffff" />
-                  <span>Connect on WhatsApp</span>
+                  <WhatsAppIcon size={19} color="#ffffff" />
+                  <span>Direct Wholesale WhatsApp</span>
+                </a>
+
+                <a
+                  href="tel:+919978831115"
+                  style={{
+                    width: '100%',
+                    padding: '11px',
+                    borderRadius: '9999px',
+                    border: '1px solid #ECE5CE',
+                    background: '#ffffff',
+                    textAlign: 'center',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                    color: '#1c1917'
+                  }}
+                >
+                  Call Showroom: +91 99788 31115
                 </a>
               </div>
             </div>
@@ -372,6 +388,9 @@ export default function Header({
         @media (max-width: 640px) {
           .inquiry-label {
             display: none;
+          }
+          .main-header img {
+            height: 38px !important;
           }
         }
       `}</style>

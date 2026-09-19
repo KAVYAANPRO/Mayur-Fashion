@@ -183,17 +183,21 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
           </div>
 
           {/* Prominent CTAs (Left buttons from Left, Right WhatsApp from Right) */}
-          <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '16px',
-            marginBottom: '55px'
-          }}>
+          <div 
+            className="hero-cta-group"
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '14px',
+              marginBottom: '48px',
+              width: '100%'
+            }}
+          >
             <button 
               onClick={onExploreClick}
               className="btn btn-primary hero-morph-left"
-              style={{ fontSize: '1.02rem', padding: '15px 34px', animationDelay: '0.52s' }}
+              style={{ fontSize: '1rem', padding: '14px 28px', animationDelay: '0.52s' }}
             >
               <span>Explore 2026 Collection</span>
               <ArrowRight size={18} />
@@ -202,7 +206,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
             <button 
               onClick={onLookbookClick}
               className="btn btn-sage hero-morph-left"
-              style={{ fontSize: '1.02rem', padding: '15px 32px', animationDelay: '0.58s' }}
+              style={{ fontSize: '1rem', padding: '14px 26px', animationDelay: '0.58s' }}
             >
               <span>Digital Lookbook</span>
             </button>
@@ -212,7 +216,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-whatsapp hero-morph-right"
-              style={{ fontSize: '1.02rem', padding: '15px 30px', animationDelay: '0.54s', display: 'inline-flex', alignItems: 'center', gap: '9px' }}
+              style={{ fontSize: '1rem', padding: '14px 26px', animationDelay: '0.54s', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
             >
               <WhatsAppIcon size={20} color="#ffffff" />
               <span>Wholesale Inquiry</span>
@@ -222,14 +226,14 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
 
         {/* Bottom Trust & Statistics Strip (Left 2 stats from Left, Right 2 stats from Right) */}
         <div style={{
-          padding: '28px 32px',
+          padding: '24px 28px',
           background: '#ffffff',
           borderRadius: '24px',
           border: '1px solid #ECE5CE',
           boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)',
           display: 'grid',
           gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: '24px',
+          gap: '20px',
           maxWidth: '1120px',
           margin: '0 auto'
         }} className="stats-grid">
@@ -245,23 +249,23 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
                 style={{ 
                   textAlign: 'center', 
                   borderRight: i < 3 ? '1px solid #ECE5CE' : 'none',
-                  padding: '4px 12px',
+                  padding: '4px 8px',
                   animationDelay: delay
                 }}
               >
                 <div style={{
                   fontFamily: "'Cinzel', serif",
-                  fontSize: '2.1rem',
+                  fontSize: 'clamp(1.6rem, 3.5vw, 2.1rem)',
                   fontWeight: 700,
                   color: '#EF233C',
                   lineHeight: 1.1
                 }}>
                   {stat.value}
                 </div>
-                <div style={{ fontWeight: 700, fontSize: '0.92rem', color: '#1c1917', marginTop: '4px' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.86rem', color: '#1c1917', marginTop: '4px' }}>
                   {stat.label}
                 </div>
-                <div style={{ fontSize: '0.8rem', color: '#5e5750' }}>
+                <div style={{ fontSize: '0.76rem', color: '#5e5750' }}>
                   {stat.sub}
                 </div>
               </div>
@@ -274,23 +278,32 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
         @media (max-width: 992px) {
           .stats-grid {
             grid-template-columns: repeat(2, 1fr) !important;
-            gap: 20px !important;
+            gap: 16px !important;
           }
           .stats-grid > div:nth-child(2) {
             border-right: none !important;
           }
         }
-        @media (max-width: 576px) {
+        @media (max-width: 640px) {
+          .hero-cta-group {
+            flex-direction: column !important;
+            gap: 10px !important;
+          }
+          .hero-cta-group .btn {
+            width: 100% !important;
+            justifyContent: center !important;
+          }
           .stats-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            padding: 16px 12px !important;
+            gap: 12px !important;
           }
           .stats-grid > div {
             border-right: none !important;
-            border-bottom: 1px solid #ECE5CE;
-            padding-bottom: 14px;
+            padding: 6px 4px !important;
           }
-          .stats-grid > div:last-child {
-            border-bottom: none;
+          .stats-grid > div:nth-child(odd) {
+            border-right: 1px solid #ECE5CE !important;
           }
         }
       `}</style>

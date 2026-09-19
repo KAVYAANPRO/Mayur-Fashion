@@ -27,45 +27,30 @@ export default function Footer({ onNavigate }) {
         width: '100%'
       }} />
 
-      <div className="container" style={{ padding: '70px 24px 40px 24px' }}>
+      <div className="container" style={{ padding: '60px 20px 36px 20px', overflow: 'hidden' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: '1.4fr 0.9fr 0.9fr 1.2fr',
-          gap: '40px',
-          marginBottom: '50px'
+          gap: '36px',
+          marginBottom: '40px'
         }} className="footer-grid">
           
-          {/* Column 1: Brand & Slogan */}
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '18px' }}>
+          {/* Column 1: Brand & Slogan (Flies in from Left Wall) */}
+          <div className="fly-in-left delay-1">
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
               <img
-                src="/assets/logo/mayur-official-circle.png"
-                alt="Mayur Fashion Official Logo"
+                src="/assets/logo/mayur-official-brand-logo-white.png"
+                alt="Mayur Fashion - Manohar Dresses"
+                className="footer-logo"
                 style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '50%',
-                  boxShadow: '0 4px 16px rgba(239, 35, 60, 0.35)',
-                  border: '2px solid #ffffff'
+                  height: '52px',
+                  width: 'auto',
+                  objectFit: 'contain'
                 }}
               />
-              <div>
-                <div style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: '1.5rem',
-                  fontWeight: 800,
-                  color: '#ffffff',
-                  letterSpacing: '0.04em'
-                }}>
-                  MAYUR FASHION
-                </div>
-                <div style={{ fontSize: '0.72rem', color: '#F2BCB6', letterSpacing: '0.1em', fontWeight: 600 }}>
-                  MANOHAR DRESSES • ESTD. 1991
-                </div>
-              </div>
             </div>
 
-            <p style={{ fontSize: '0.88rem', color: '#C8D6BF', lineHeight: 1.6, marginBottom: '20px', maxWidth: '360px' }}>
+            <p style={{ fontSize: '0.86rem', color: '#C8D6BF', lineHeight: 1.6, marginBottom: '18px', maxWidth: '360px' }}>
               Premier manufacturer & wholesale supplier of women's ethnic wear in Ahmedabad. Specialized in Kurti 3-Piece Sets, Anarkalis, Shararas, and Co-ord sets (Sizes M to 6XL).
             </p>
 
@@ -111,18 +96,18 @@ export default function Footer({ onNavigate }) {
             </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div>
+          {/* Column 2: Quick Links (Flies in from Left Wall) */}
+          <div className="fly-in-left delay-2">
             <h4 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: '1.15rem',
+              fontSize: '1.1rem',
               color: '#EDEBE6',
-              marginBottom: '18px',
+              marginBottom: '16px',
               fontWeight: 700
             }}>
               Quick Navigation
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.88rem' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.86rem' }}>
               {['Home', 'Collections', 'Digital Lookbook', 'Heritage & Story', 'Why Mayur', 'B2B Wholesale'].map((item, idx) => {
                 const idMap = {
                   'Home': 'hero',
@@ -136,7 +121,7 @@ export default function Footer({ onNavigate }) {
                   <li key={idx}>
                     <button
                       onClick={() => onNavigate && onNavigate(idMap[item])}
-                      style={{ color: '#C8D6BF', textAlign: 'left', padding: '2px 0' }}
+                      style={{ color: '#C8D6BF', textAlign: 'left', padding: '3px 0' }}
                       onMouseEnter={(e) => e.currentTarget.style.color = '#EF233C'}
                       onMouseLeave={(e) => e.currentTarget.style.color = '#C8D6BF'}
                     >
@@ -148,53 +133,53 @@ export default function Footer({ onNavigate }) {
             </ul>
           </div>
 
-          {/* Column 3: Categories & Sizes */}
-          <div>
+          {/* Column 3: Categories & Sizes (Flies in from Right Wall) */}
+          <div className="fly-in-right delay-2">
             <h4 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: '1.15rem',
+              fontSize: '1.1rem',
               color: '#EDEBE6',
-              marginBottom: '18px',
+              marginBottom: '16px',
               fontWeight: 700
             }}>
               Collections
             </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.88rem', color: '#C8D6BF' }}>
+            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.86rem', color: '#C8D6BF' }}>
               <li>Kurti 3-Piece Sets</li>
               <li>Anarkali & Sharara Gowns</li>
               <li>Co-ord & Afghani Sets</li>
               <li>Pure Chanderi & Dola Silk</li>
               <li>Festive Lucknowi Chikankari</li>
-              <li style={{ color: '#F2BCB6', fontWeight: 600 }}>Sizes: M, L, XL, XXL, 3XL, 4XL, 5XL, 6XL</li>
+              <li style={{ color: '#F2BCB6', fontWeight: 600 }}>Sizes: M to 6XL Complete Grading</li>
             </ul>
           </div>
 
-          {/* Column 4: Contact & Showrooms */}
-          <div>
+          {/* Column 4: Contact & Showrooms (Flies in from Right Wall) */}
+          <div className="fly-in-right delay-1">
             <h4 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: '1.15rem',
+              fontSize: '1.1rem',
               color: '#EDEBE6',
-              marginBottom: '18px',
+              marginBottom: '16px',
               fontWeight: 700
             }}>
               Direct Contacts
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.86rem', color: '#C8D6BF' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.84rem', color: '#C8D6BF' }}>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
-                <MapPin size={18} color="#EF233C" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <MapPin size={17} color="#EF233C" style={{ flexShrink: 0, marginTop: '2px' }} />
                 <span>Safal 3 Market & VIP Market, Sarangpur, Ahmedabad, Gujarat 380001</span>
               </div>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                <Phone size={16} color="#EF233C" style={{ flexShrink: 0 }} />
+                <Phone size={15} color="#EF233C" style={{ flexShrink: 0 }} />
                 <span>+91 99788 31115 / +91 98253 43225</span>
               </div>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                <Mail size={16} color="#EF233C" style={{ flexShrink: 0 }} />
+                <Mail size={15} color="#EF233C" style={{ flexShrink: 0 }} />
                 <span>mayurfashion1991@gmail.com</span>
               </div>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                <Globe size={16} color="#EF233C" style={{ flexShrink: 0 }} />
+                <Globe size={15} color="#EF233C" style={{ flexShrink: 0 }} />
                 <span>www.mayurfashion.co.in</span>
               </div>
             </div>
@@ -202,17 +187,20 @@ export default function Footer({ onNavigate }) {
         </div>
 
         {/* Bottom Copyright & Back to Top */}
-        <div style={{
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-          paddingTop: '24px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '16px',
-          fontSize: '0.82rem',
-          color: '#a8a29e'
-        }}>
+        <div 
+          className="fly-in-up delay-3"
+          style={{
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            paddingTop: '20px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '14px',
+            fontSize: '0.8rem',
+            color: '#a8a29e'
+          }}
+        >
           <div>
             © 1991 – {new Date().getFullYear()} <strong>Manohar Dresses / Mayur Fashion</strong>. All Rights Reserved. "We Care What You Wear"
           </div>
@@ -228,28 +216,35 @@ export default function Footer({ onNavigate }) {
               padding: '6px 14px',
               borderRadius: '9999px',
               border: '1px solid rgba(200, 214, 191, 0.3)',
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: 600
             }}
           >
             <span>Back to Top</span>
-            <ArrowUp size={14} />
+            <ArrowUp size={13} />
           </button>
         </div>
       </div>
+
 
       <style>{`
         @media (max-width: 992px) {
           .footer-grid {
             grid-template-columns: 1fr 1fr !important;
+            gap: 28px !important;
           }
         }
-        @media (max-width: 576px) {
+        @media (max-width: 600px) {
           .footer-grid {
             grid-template-columns: 1fr !important;
+            gap: 24px !important;
+          }
+          .footer-logo {
+            height: 42px !important;
           }
         }
       `}</style>
     </footer>
   );
 }
+

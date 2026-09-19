@@ -53,6 +53,7 @@ export default function InquiryDrawer({
       onClick={onClose}
     >
       <div
+        className="inquiry-drawer-panel"
         style={{
           width: '100%',
           maxWidth: '480px',
@@ -68,7 +69,7 @@ export default function InquiryDrawer({
       >
         {/* Header */}
         <div style={{
-          padding: '20px 24px',
+          padding: '18px 20px',
           borderBottom: '1px solid #ECE5CE',
           display: 'flex',
           justifyContent: 'space-between',
@@ -116,10 +117,10 @@ export default function InquiryDrawer({
         <div style={{
           flex: 1,
           overflowY: 'auto',
-          padding: '20px 24px',
+          padding: '16px 18px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '16px'
+          gap: '14px'
         }}>
           {items.length > 0 ? (
             items.map((item) => (
@@ -127,8 +128,8 @@ export default function InquiryDrawer({
                 key={item.id}
                 style={{
                   display: 'flex',
-                  gap: '14px',
-                  padding: '12px',
+                  gap: '12px',
+                  padding: '10px',
                   borderRadius: '14px',
                   border: '1px solid #ECE5CE',
                   background: '#EDEBE6',
@@ -136,8 +137,8 @@ export default function InquiryDrawer({
                 }}
               >
                 <div style={{
-                  width: '70px',
-                  height: '90px',
+                  width: '68px',
+                  height: '88px',
                   borderRadius: '10px',
                   overflow: 'hidden',
                   flexShrink: 0,
@@ -156,7 +157,7 @@ export default function InquiryDrawer({
                       Code: {item.id}
                     </span>
                     <h4 style={{
-                      fontSize: '0.92rem',
+                      fontSize: '0.9rem',
                       color: '#1c1917',
                       fontWeight: 700,
                       lineHeight: 1.3,
@@ -170,7 +171,7 @@ export default function InquiryDrawer({
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '6px' }}>
-                    <span style={{ fontSize: '0.74rem', color: '#3e5336', background: '#C8D6BF', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
+                    <span style={{ fontSize: '0.72rem', color: '#3e5336', background: '#C8D6BF', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
                       Sizes M - 6XL
                     </span>
 
@@ -182,7 +183,7 @@ export default function InquiryDrawer({
                         display: 'flex',
                         alignItems: 'center',
                         gap: '4px',
-                        fontSize: '0.75rem',
+                        fontSize: '0.74rem',
                         fontWeight: 600
                       }}
                     >
@@ -224,34 +225,34 @@ export default function InquiryDrawer({
         {/* Footer Actions */}
         {items.length > 0 && (
           <div style={{
-            padding: '20px 24px',
+            padding: '16px 18px 20px 18px',
             borderTop: '1px solid #ECE5CE',
             background: '#EDEBE6',
             display: 'flex',
             flexDirection: 'column',
-            gap: '12px'
+            gap: '10px'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.86rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem' }}>
               <span style={{ color: '#5e5750' }}>Total Designs Selected:</span>
-              <strong style={{ color: '#EF233C', fontSize: '1rem' }}>{items.length} Designs</strong>
+              <strong style={{ color: '#EF233C', fontSize: '0.98rem' }}>{items.length} Designs</strong>
             </div>
 
             <button
               onClick={handleSendConsolidatedInquiry}
               className="btn btn-whatsapp"
-              style={{ width: '100%', padding: '14px', fontSize: '0.98rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+              style={{ width: '100%', padding: '13px', fontSize: '0.95rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
             >
-              <WhatsAppIcon size={20} color="#ffffff" />
+              <WhatsAppIcon size={19} color="#ffffff" />
               <span>Send All {items.length} Designs to WhatsApp</span>
             </button>
 
             <button
               onClick={onClearAll}
               style={{
-                fontSize: '0.8rem',
+                fontSize: '0.78rem',
                 color: '#5e5750',
                 textAlign: 'center',
-                padding: '4px'
+                padding: '3px'
               }}
             >
               Clear Entire Bag
@@ -265,7 +266,13 @@ export default function InquiryDrawer({
           from { transform: translateX(100%); }
           to { transform: translateX(0); }
         }
+        @media (max-width: 500px) {
+          .inquiry-drawer-panel {
+            max-width: 100% !important;
+          }
+        }
       `}</style>
     </div>
   );
 }
+

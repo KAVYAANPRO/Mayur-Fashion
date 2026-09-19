@@ -34,37 +34,45 @@ export default function LookbookViewer() {
       <div className="container-wide" style={{ position: 'relative', zIndex: 2 }}>
         {/* Header */}
         <div className="section-title-wrap">
-          <div className="section-tag rose" style={{ background: 'rgba(242, 188, 182, 0.15)', color: '#F2BCB6', borderColor: 'rgba(242, 188, 182, 0.3)' }}>
+          <div className="section-tag rose fly-in-left" style={{ background: 'rgba(242, 188, 182, 0.15)', color: '#F2BCB6', borderColor: 'rgba(242, 188, 182, 0.3)' }}>
             <span>Official 2026 Brand Catalogue</span>
           </div>
-          <h2 className="section-title" style={{ color: '#ffffff' }}>
+          <h2 className="section-title fly-in-left delay-1" style={{ color: '#ffffff' }}>
             Digital Lookbook Experience
           </h2>
-          <p className="section-subtitle" style={{ color: '#C8D6BF' }}>
+          <p className="section-subtitle fly-in-right delay-2" style={{ color: '#C8D6BF' }}>
             Browse through the curated 8-page Mayur editorial collection, celebrating traditional textiles, contemporary silhouettes, and 70+ years of heritage.
           </p>
         </div>
 
         {/* Magazine Spread Display */}
-        <div style={{
-          maxWidth: '1100px',
-          margin: '0 auto',
-          background: '#241e20',
-          borderRadius: '24px',
-          border: '1px solid rgba(200, 214, 191, 0.25)',
-          overflow: 'hidden',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.5)'
-        }}>
+        <div 
+          className="fly-in-up delay-2"
+          style={{
+            maxWidth: '1100px',
+            margin: '0 auto',
+            background: '#241e20',
+            borderRadius: '24px',
+            border: '1px solid rgba(200, 214, 191, 0.25)',
+            overflow: 'hidden',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.5)'
+          }}
+        >
           {/* Top Bar of Lookbook */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            padding: '16px 24px',
-            background: 'rgba(24, 21, 22, 0.9)',
-            borderBottom: '1px solid rgba(200, 214, 191, 0.2)'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div 
+            className="lookbook-topbar"
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '14px 20px',
+              background: 'rgba(24, 21, 22, 0.95)',
+              borderBottom: '1px solid rgba(200, 214, 191, 0.2)',
+              gap: '10px',
+              flexWrap: 'wrap'
+            }}
+          >
+            <div className="fly-in-left delay-3" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span style={{
                 background: '#EF233C',
                 color: '#ffffff',
@@ -80,7 +88,7 @@ export default function LookbookViewer() {
               </span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div className="fly-in-right delay-3" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <button
                 onClick={() => setIsZoomed(!isZoomed)}
                 style={{
@@ -88,14 +96,14 @@ export default function LookbookViewer() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  fontSize: '0.82rem',
+                  fontSize: '0.8rem',
                   padding: '6px 12px',
                   borderRadius: '9999px',
                   border: '1px solid rgba(200, 214, 191, 0.3)'
                 }}
               >
-                <Maximize2 size={14} />
-                <span>{isZoomed ? 'Standard View' : 'Zoom Spread'}</span>
+                <Maximize2 size={13} />
+                <span>{isZoomed ? 'Standard' : 'Zoom'}</span>
               </button>
 
               <a
@@ -107,7 +115,7 @@ export default function LookbookViewer() {
                   background: 'linear-gradient(135deg, #EF233C, #b81427)',
                   color: '#ffffff',
                   fontWeight: 700,
-                  fontSize: '0.82rem',
+                  fontSize: '0.8rem',
                   padding: '6px 14px',
                   borderRadius: '9999px',
                   display: 'flex',
@@ -116,14 +124,24 @@ export default function LookbookViewer() {
                   boxShadow: '0 2px 10px rgba(239, 35, 60, 0.3)'
                 }}
               >
-                <Download size={14} />
+                <Download size={13} />
                 <span>PDF Download</span>
               </a>
             </div>
           </div>
 
           {/* Main Page Canvas */}
-          <div style={{ position: 'relative', background: '#0e0c0d', minHeight: '480px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div 
+            className="lookbook-canvas"
+            style={{ 
+              position: 'relative', 
+              background: '#0e0c0d', 
+              minHeight: '300px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center' 
+            }}
+          >
             <img
               src={page.image}
               alt={`Lookbook page ${page.page}: ${page.title}`}
@@ -139,13 +157,14 @@ export default function LookbookViewer() {
             {/* Left Nav Arrow */}
             <button
               onClick={handlePrev}
+              className="lookbook-nav-arrow left fly-in-left delay-4"
               style={{
                 position: 'absolute',
-                left: '20px',
+                left: '16px',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                width: '48px',
-                height: '48px',
+                width: '44px',
+                height: '44px',
                 borderRadius: '50%',
                 background: 'rgba(24, 21, 22, 0.85)',
                 backdropFilter: 'blur(8px)',
@@ -154,23 +173,26 @@ export default function LookbookViewer() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.4)',
+                zIndex: 5
               }}
               aria-label="Previous Lookbook Page"
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={22} />
             </button>
 
             {/* Right Nav Arrow */}
             <button
               onClick={handleNext}
+              className="lookbook-nav-arrow right fly-in-right delay-4"
               style={{
                 position: 'absolute',
-                right: '20px',
+                right: '16px',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                width: '48px',
-                height: '48px',
+                width: '44px',
+                height: '44px',
                 borderRadius: '50%',
                 background: 'rgba(24, 21, 22, 0.85)',
                 backdropFilter: 'blur(8px)',
@@ -179,46 +201,51 @@ export default function LookbookViewer() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.4)',
+                zIndex: 5
               }}
               aria-label="Next Lookbook Page"
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={22} />
             </button>
           </div>
 
           {/* Page Details Footer */}
-          <div style={{
-            padding: '20px 24px',
-            background: '#241e20',
-            borderTop: '1px solid rgba(200, 214, 191, 0.15)',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: '16px'
-          }}>
-            <div>
-              <div style={{ fontSize: '0.8rem', color: '#F2BCB6', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+          <div 
+            className="lookbook-details"
+            style={{
+              padding: '18px 20px',
+              background: '#241e20',
+              borderTop: '1px solid rgba(200, 214, 191, 0.15)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '14px'
+            }}
+          >
+            <div className="fly-in-left delay-3">
+              <div style={{ fontSize: '0.76rem', color: '#F2BCB6', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                 {page.tagline}
               </div>
-              <h3 style={{ fontSize: '1.2rem', color: '#ffffff', fontFamily: "'Playfair Display', serif" }}>
+              <h3 style={{ fontSize: '1.15rem', color: '#ffffff', fontFamily: "'Playfair Display', serif" }}>
                 {page.title}
               </h3>
-              <p style={{ fontSize: '0.88rem', color: '#C8D6BF', maxWidth: '650px', marginTop: '4px' }}>
+              <p style={{ fontSize: '0.85rem', color: '#C8D6BF', maxWidth: '650px', marginTop: '4px', lineHeight: 1.5 }}>
                 {page.description}
               </p>
             </div>
 
-            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+            <div className="fly-in-right delay-3" style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
               {page.tags.map((t, idx) => (
                 <span
                   key={idx}
                   style={{
-                    fontSize: '0.75rem',
+                    fontSize: '0.72rem',
                     background: 'rgba(255, 255, 255, 0.08)',
                     color: '#EDEBE6',
-                    padding: '3px 10px',
+                    padding: '3px 9px',
                     borderRadius: '9999px',
                     border: '1px solid rgba(255, 255, 255, 0.12)'
                   }}
@@ -231,26 +258,31 @@ export default function LookbookViewer() {
         </div>
 
         {/* Lookbook Thumbnail Ribbon */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '12px',
-          marginTop: '30px',
-          overflowX: 'auto',
-          paddingBottom: '10px'
-        }}>
+        <div 
+          className="lookbook-thumb-scroll fly-in-up delay-4"
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '10px',
+            marginTop: '24px',
+            overflowX: 'auto',
+            paddingBottom: '8px',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
           {LOOKBOOK_PAGES.map((p, idx) => (
             <button
               key={p.page}
               onClick={() => setCurrentPage(idx)}
+              className={idx < 4 ? 'fly-in-left' : 'fly-in-right'}
               style={{
-                width: '70px',
-                height: '52px',
+                width: '64px',
+                height: '48px',
                 borderRadius: '8px',
                 overflow: 'hidden',
                 border: currentPage === idx ? '2px solid #EF233C' : '1px solid rgba(200, 214, 191, 0.25)',
                 opacity: currentPage === idx ? 1 : 0.45,
-                transform: currentPage === idx ? 'scale(1.08)' : 'scale(1)',
+                transform: currentPage === idx ? 'scale(1.06)' : 'scale(1)',
                 transition: 'all 0.25s ease',
                 flexShrink: 0
               }}
@@ -259,7 +291,38 @@ export default function LookbookViewer() {
             </button>
           ))}
         </div>
+
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .lookbook-topbar {
+            padding: 10px 14px !important;
+          }
+          .lookbook-canvas {
+            min-height: 220px !important;
+          }
+          .lookbook-nav-arrow {
+            width: 36px !important;
+            height: 36px !important;
+          }
+          .lookbook-nav-arrow.left {
+            left: 8px !important;
+          }
+          .lookbook-nav-arrow.right {
+            right: 8px !important;
+          }
+          .lookbook-details {
+            padding: 14px 14px !important;
+          }
+          .lookbook-thumb-scroll {
+            justify-content: flex-start !important;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
+
