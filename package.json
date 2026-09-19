@@ -4,10 +4,8 @@
   "description": "Mayur Fashion backend API",
   "main": "api/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "start": "node api/index.js",
+    "build": "cd admin-panel && npm install && npm run build",
+    "start": "serve -s admin-panel/dist -l ${PORT:-3000}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,6 +22,7 @@
     "mongoose": "^9.10.1",
     "multer": "^2.4.0",
     "multer-storage-cloudinary": "^4.0.0",
-    "nodemailer": "^10.0.10"
+    "nodemailer": "^10.0.10",
+    "serve": "^14.2.0"
   }
 }
