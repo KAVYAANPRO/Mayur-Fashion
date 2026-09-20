@@ -62,8 +62,7 @@ export const COMPANY_INFO = {
     title: "The Legacy of Manohar Dresses & Mayur",
     paragraphs: [
       "The journey began in 1991, when Mr. Manohar Peswani and family established Manohar Dresses and registered the celebrated designer brand label 'Mayur' in Ahmedabad, the textile heartland of India, driven by an uncompromising vision for fabric excellence, size inclusivity, and authentic craftsmanship.",
-      "Over more than three decades, that foundational passion has expanded into one of India's premier ethnic wear manufacturing houses, trusted by over 15,000 retail boutiques and exporting to 30+ nations worldwide.",
-      "Our expansive collections span Kurti 3-Piece Sets, Designer Anarkalis, Sharara Ensembles, Indo-Western Co-ords, and Afghani Pant Sets in sizes M to 6XL, meticulously engineered with pure silks, fine Chanderi, modal, georgette, and breathable cottons."
+      "Over more than three decades, that foundational passion has expanded into one of India's premier ethnic wear manufacturing houses, trusted by over 15,000 retail boutiques and exporting to 30+ nations worldwide."
     ]
   },
 
