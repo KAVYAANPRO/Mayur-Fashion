@@ -8,6 +8,9 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        navigateFallbackDenylist: [/^\/admin/],
+      },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mayur-icon.png'],
       manifest: {
         name: 'Mayur Fashion',
