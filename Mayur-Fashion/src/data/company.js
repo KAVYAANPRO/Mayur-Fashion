@@ -16,23 +16,52 @@ export const COMPANY_INFO = {
 
   contacts: [
     {
-      name: "Mayur Peswani",
-      role: "Director / Sales & Marketing",
-      phones: ["+91 99788 31115", "+91 79908 30323"],
-      whatsapp: "919978831115",
-      highlight: true
+      title: "For Ready to Wear garments",
+      highlight: false,
+      people: [
+        {
+          name: "Mayur Peswani",
+          role: "Sales and Marketing",
+          phone: "+91 99788 31115",
+          whatsapp: "919978831115"
+        },
+        {
+          name: "Bharat Peswani",
+          role: "Production and Bulk Wholesale",
+          phone: "+91 99091 54100",
+          whatsapp: "919909154100"
+        }
+      ]
     },
     {
-      name: "Bharat Peswani",
-      role: "Operations & Wholesale",
-      phones: ["+91 99091 54100"],
-      whatsapp: "919909154100"
+      title: "Founder & Chairman",
+      highlight: false,
+      people: [
+        {
+          name: "Manohar Peswani",
+          role: "Founder & Chairman",
+          phone: "+91 98253 43225",
+          whatsapp: "919825343225"
+        }
+      ]
     },
     {
-      name: "Manohar Peswani",
-      role: "Founder & Chairman",
-      phones: ["+91 98253 43225"],
-      whatsapp: "919825343225"
+      title: "For Dress Material",
+      highlight: false,
+      people: [
+        {
+          name: "Amit Peswani",
+          role: "Production and bulk wholesale",
+          phone: "+91 9727043225",
+          whatsapp: "919727043225"
+        },
+        {
+          name: "Girish Punjabi",
+          role: "Sales and marketing",
+          phone: "+91 9879367580",
+          whatsapp: "919879367580"
+        }
+      ]
     }
   ],
 

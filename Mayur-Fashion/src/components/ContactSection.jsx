@@ -26,7 +26,7 @@ export default function ContactSection() {
       `*Subject:* ${formState.subject}\n` +
       `*Message:* ${formState.message}`;
 
-    window.open(`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
   return (
@@ -100,54 +100,56 @@ export default function ContactSection() {
 
                 <h3 style={{
                   fontFamily: "'Playfair Display', serif",
-                  fontSize: '1.25rem',
+                  fontSize: '1.15rem',
                   color: '#1c1917',
-                  marginBottom: '4px'
+                  marginBottom: '16px',
+                  lineHeight: 1.3
                 }}>
-                  {contact.name}
+                  {contact.title}
                 </h3>
 
-                <div style={{
-                  fontSize: '0.8rem',
-                  color: '#EF233C',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
-                  marginBottom: '16px'
-                }}>
-                  {contact.role}
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '20px' }}>
-                  {contact.phones.map((phone, pIdx) => (
-                    <a
-                      key={pIdx}
-                      href={`tel:${phone.replace(/\s+/g, '')}`}
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        fontSize: '0.9rem',
-                        color: '#1c1917',
-                        fontWeight: 600
-                      }}
-                    >
-                      <Phone size={15} color="#EF233C" />
-                      <span>{phone}</span>
-                    </a>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '20px' }}>
+                  {contact.people.map((person, pIdx) => (
+                    <div key={pIdx}>
+                      <div style={{ fontWeight: 700, color: '#1c1917', fontSize: '1rem', marginBottom: '2px' }}>
+                        {person.name}
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: '#EF233C', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '6px' }}>
+                        {person.role}
+                      </div>
+                      <a
+                        href={`tel:${person.phone.replace(/\s+/g, '')}`}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          fontSize: '0.9rem',
+                          color: '#5e5750',
+                          fontWeight: 500
+                        }}
+                      >
+                        <Phone size={14} color="#EF233C" />
+                        <span>{person.phone}</span>
+                      </a>
+                    </div>
                   ))}
                 </div>
 
-                <a
-                  href={`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(`Hello ${contact.name}, I am contacting you from the Mayur Fashion website.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-whatsapp"
-                  style={{ width: '100%', padding: '9px 14px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px' }}
-                >
-                  <WhatsAppIcon size={16} color="#ffffff" />
-                  <span>Chat with {contact.name.split(' ')[0]}</span>
-                </a>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {contact.people.map((person, pIdx) => (
+                    <a
+                      key={pIdx}
+                      href={`https://wa.me/${person.whatsapp}?text=${encodeURIComponent(`Hello ${person.name}, I am contacting you from the Mayur Fashion website.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-whatsapp"
+                      style={{ width: '100%', padding: '9px 14px', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '7px' }}
+                    >
+                      <WhatsAppIcon size={16} color="#ffffff" />
+                      <span>Chat with {person.name.split(' ')[0]}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
             );
           })}

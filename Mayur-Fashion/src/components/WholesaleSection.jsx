@@ -80,10 +80,10 @@ export default function WholesaleSection() {
               <Package size={24} />
             </div>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: '#1c1917', marginBottom: '8px' }}>
-              Full Catalog Set Supply
+              Complete Collections, Ready to Sell
             </h3>
             <p style={{ fontSize: '0.9rem', color: '#5e5750', lineHeight: 1.6 }}>
-              Sold in pristine catalog sets with assorted sizes M to 6XL. Each garment is packed in branded luxury sleeves ready for your store racks.
+              We provide complete sets with a wide range of sizes and colour options, bringing the latest and most in-demand designs to our retail partners at the right time. With perfect fits, consistent quality, and competitive pricing, our collections help retailers stay up to date, meet customer demand faster, and unlock greater business potential.
             </p>
           </div>
 
@@ -102,10 +102,10 @@ export default function WholesaleSection() {
               <Globe size={24} />
             </div>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: '#1c1917', marginBottom: '8px' }}>
-              Air & Sea Export To 30+ Nations
+              Fast Trend-to-Market Manufacturing
             </h3>
             <p style={{ fontSize: '0.86rem', color: '#5e5750', lineHeight: 1.55 }}>
-              Seamless documentation and express courier dispatch across USA, UK, UAE, Canada, Australia, South Africa, and Southeast Asia.
+              We closely follow changing fashion trends and quickly turn emerging and in-demand designs into ready-to-sell collections, helping our retail partners keep their stores fresh, relevant, and aligned with customer demand.
             </p>
           </div>
 
@@ -124,10 +124,10 @@ export default function WholesaleSection() {
               <Truck size={24} />
             </div>
             <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: '#1c1917', marginBottom: '8px' }}>
-              Reliable Daily Dispatches
+              Stay Updated, Wherever You Are
             </h3>
             <p style={{ fontSize: '0.86rem', color: '#5e5750', lineHeight: 1.55 }}>
-              Centrally located in Sarangpur textile hub, Ahmedabad, ensuring 24-48 hour dispatch for ready-to-ship catalog stock.
+              Keep your store fresh with our latest collections and trending designs, updated regularly for our retail partners. Visit us to explore new arrivals, or shop remotely through scheduled video calls and WhatsApp. Follow our WhatsApp and Instagram channels for regular trend and collection updates—so you never miss what’s next.
             </p>
           </div>
         </div>

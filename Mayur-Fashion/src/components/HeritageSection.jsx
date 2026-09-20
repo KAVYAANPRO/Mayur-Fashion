@@ -10,13 +10,13 @@ export default function HeritageSection() {
     },
     {
       year: "2000",
-      title: "Wholesale & Ready-to-Wear Expansion",
-      desc: "Pioneered specialized 3-Piece Kurti Ensembles, Anarkalis, and complete size grading from M to 6XL for boutiques across Western & Northern India."
+      title: "Evolving With the Times",
+      desc: "From our beginnings in sarees to embracing the growing demand for dress materials and ready-to-wear kurti sets, our journey has always evolved with the changing fashion landscape. We continuously adapt our products, designs, and services to keep our retail partners ahead of the market—because staying relevant means staying ready for what’s next."
     },
     {
-      year: "2008",
-      title: "Sarangpur Textile Market Hub",
-      desc: "Established state-of-the-art showrooms in Safal 3 Market and VIP Commercial Complex in Sarangpur, becoming a cornerstone for Indian ethnic wholesalers."
+      year: "2016",
+      title: "Growing With Our Customers",
+      desc: "With growing demand from our retail partners, we expanded into a larger premises at Safal 3, Ahmedabad’s established textile market. The move was driven by one goal: to serve you better—with greater product variety, faster and more reliable dispatches, improved operations, and the latest designs at competitive prices."
     },
     {
       year: "2026",
@@ -49,7 +49,7 @@ export default function HeritageSection() {
           alignItems: 'center',
           marginBottom: '50px'
         }} className="heritage-grid">
-          
+
           {/* Left Column: Visual Collage (Flies in from Left Wall) */}
           <div className="fly-in-left delay-2" style={{ position: 'relative', marginBottom: '20px' }}>
             <div style={{
@@ -68,7 +68,7 @@ export default function HeritageSection() {
             </div>
 
             {/* Overlapping Badge */}
-            <div 
+            <div
               className="heritage-badge"
               style={{
                 position: 'absolute',
@@ -85,7 +85,7 @@ export default function HeritageSection() {
                 gap: '12px'
               }}
             >
-              <div 
+              <div
                 className="heritage-badge-year"
                 style={{
                   fontFamily: "'Cinzel', serif",
