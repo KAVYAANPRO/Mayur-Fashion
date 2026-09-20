@@ -61,7 +61,7 @@ export default function CookieConsent() {
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {!preferencesOpen ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', md: { flexDirection: 'row', alignItems: 'center' } }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}>
             <div style={{ flex: 1 }}>
               <h3 style={{ fontSize: '1.25rem', marginBottom: '8px', fontWeight: 600 }}>We value your privacy</h3>
               <p style={{ fontSize: '0.9rem', color: '#666' }}>
