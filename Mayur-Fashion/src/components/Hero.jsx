@@ -9,6 +9,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
   const [videoUrl, setVideoUrl] = useState('');
   const [videoType, setVideoType] = useState('');
   const [videoReady, setVideoReady] = useState(false);
+  const [videoDismissed, setVideoDismissed] = useState(false);
 
   const highlights = [
     "Wide Range of premium fabrics",
@@ -36,14 +37,15 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
   }, []);
 
   /* ── Toggle sound (only works for direct <video> tags, not iframes easily) ── */
-  const toggleMute = () => {
+  const toggleMute = (e) => {
+    e.stopPropagation(); // Prevent click from dismissing the video
     if (videoRef.current) {
       videoRef.current.muted = !muted;
       setMuted(!muted);
     }
   };
 
-  const hasVideo = !!videoUrl;
+  const hasVideo = !!videoUrl && !videoDismissed;
 
   // Colors switch based on whether there is a background video or not
   const textColorPrimary = hasVideo ? '#ffffff' : '#1c1917';
@@ -67,6 +69,9 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
   return (
     <section
       id="hero"
+      onClick={() => {
+        if (hasVideo) setVideoDismissed(true);
+      }}
       style={{
         position: 'relative',
         overflow: 'hidden',
@@ -76,7 +81,8 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
         justifyContent: 'center',
         backgroundColor: hasVideo ? '#000' : '#EDEBE6',
         padding: hasVideo ? '0' : '75px 0 65px 0',
-        borderBottom: hasVideo ? 'none' : '1px solid #ECE5CE'
+        borderBottom: hasVideo ? 'none' : '1px solid #ECE5CE',
+        cursor: hasVideo ? 'pointer' : 'default', // indicates clickable to dismiss
       }}
     >
       {/* ── Background Ambient Color Radial Accents (ONLY if NO video) ── */}
