@@ -3,6 +3,7 @@ import CategoryManager from './components/CategoryManager';
 import ProductManager from './components/ProductManager';
 import Login from './components/Login';
 import AdminManagement from './components/AdminManagement';
+import VideoSettings from './components/VideoSettings';
 
 function App() {
   const [auth, setAuth] = useState(null);
@@ -69,6 +70,12 @@ function App() {
             >
               🏷️ Categories
             </button>
+            <button
+              className={activeTab === 'video' ? 'btn-primary' : 'btn-outline'}
+              onClick={() => setActiveTab('video')}
+            >
+              🎬 Company Video
+            </button>
             {auth.user.role === 'master' && (
               <button 
                 className={activeTab === 'admins' ? 'btn-primary' : 'btn-outline'}
@@ -91,6 +98,7 @@ function App() {
       <main>
         {activeTab === 'categories' && <CategoryManager categories={categories} refreshCategories={fetchCategories} auth={auth} />}
         {activeTab === 'products' && <ProductManager categories={categories} auth={auth} />}
+        {activeTab === 'video' && <VideoSettings auth={auth} />}
         {activeTab === 'admins' && auth.user.role === 'master' && <AdminManagement auth={auth} />}
       </main>
     </div>
