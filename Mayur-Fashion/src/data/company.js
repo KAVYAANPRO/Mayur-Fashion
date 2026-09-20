@@ -81,8 +81,8 @@ export const COMPANY_INFO = {
     },
     {
       id: "inclusivity",
-      title: "Complete Size Inclusivity",
-      desc: "Flattering silhouettes tailored for real bodies—offering complete catalog grading from M (38) all the way to 6XL (52).",
+      title: "Stay Ahead of Trends. Grow Your Margins.",
+      desc: "We quickly turn viral and trending designs into quality-crafted Indian wear, offering retailers the right products at competitive prices—so you can bring fresh styles to your customers and create greater opportunities for profit.",
       icon: "Sparkles"
     },
     {
