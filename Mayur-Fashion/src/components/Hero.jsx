@@ -132,13 +132,13 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               className="hero-morph-left" 
               style={{ display: 'inline', animationDelay: '0.28s' }}
             >
-              From timeless classics to modern trends, explore our diverse collection and elevate your wardrobe today.
+              The Fast-Moving Indian Wear Partner for Retailers Across India.
             </span>{' '}
             <span 
               className="hero-morph-right" 
               style={{ display: 'inline', animationDelay: '0.34s' }}
             >
-              Meticulously handcrafted in Ahmedabad with pure silks, authentic zardozi embroidery, and complete sizing from <strong style={{ color: '#1c1917' }}>M to 6XL</strong>.
+              We turn emerging trends into quality-crafted Indian wear, combining exceptional design, premium fabrics, perfect fits, competitive pricing, and reliable service.
             </span>
           </p>
 

@@ -47,7 +47,7 @@ export const COMPANY_INFO = {
       name: "Mayur Fashion Showroom",
       address: "A-35, Ground Floor, Safal 3 Market, Sarangpur, Ahmedabad, Gujarat 380001",
       city: "Ahmedabad, Gujarat",
-      mapUrl: "https://maps.google.com/?q=Safal+3+Market+Sarangpur+Ahmedabad"
+      mapUrl: "https://maps.app.goo.gl/H43w2d8ZAkVErfXL8"
     },
     {
       type: "Head Office (H.O.)",

@@ -1,90 +1,16 @@
-import React, { forwardRef, useCallback, useImperativeHandle, useRef } from "react";
-import { motion, useAnimation } from "framer-motion";
+import React from 'react';
 
-const PATH_VARIANTS = {
-  normal: { opacity: 1 },
-  animate: (i) => ({
-    opacity: [0, 1],
-    transition: { delay: i * 0.1, duration: 0.3 },
-  }),
-};
-
-const WhatsAppIcon = forwardRef(
-  ({ onMouseEnter, onMouseLeave, className, size = 18, color = "currentColor", style = {}, ...props }, ref) => {
-    const controls = useAnimation();
-    const isControlledRef = useRef(false);
-
-    useImperativeHandle(ref, () => {
-      isControlledRef.current = true;
-      return {
-        startAnimation: () => controls.start("animate"),
-        stopAnimation: () => controls.start("normal"),
-      };
-    });
-
-    const handleMouseEnter = useCallback(
-      (e) => {
-        if (isControlledRef.current) {
-          onMouseEnter?.(e);
-        } else {
-          controls.start("animate");
-        }
-      },
-      [controls, onMouseEnter]
-    );
-
-    const handleMouseLeave = useCallback(
-      (e) => {
-        if (isControlledRef.current) {
-          onMouseLeave?.(e);
-        } else {
-          controls.start("normal");
-        }
-      },
-      [controls, onMouseLeave]
-    );
-
-    return (
-      <svg
-        fill="none"
-        height={size}
-        stroke={color}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-        width={size}
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0, ...style }}
-        {...props}
-      >
-        {[
-          "M14 3h1",
-          "M14 17h1",
-          "M10 17H7l-4 4v-7",
-          "M9 3h1",
-          "M19 3a2 2 0 0 1 2 2",
-          "M3 9v1",
-          "M21 9v1",
-          "M21 14v1a2 2 0 0 1-2 2",
-          "M5 3a2 2 0 0 0-2 2",
-        ].map((d, index) => (
-          <motion.path
-            animate={controls}
-            custom={index + 1}
-            d={d}
-            key={d}
-            variants={PATH_VARIANTS}
-          />
-        ))}
-      </svg>
-    );
-  }
-);
-
-WhatsAppIcon.displayName = "WhatsAppIcon";
-
-export default WhatsAppIcon;
+export default function WhatsAppIcon({ size = 18, color = "currentColor", style = {} }) {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      width={size} 
+      height={size} 
+      fill={color}
+      style={{ display: 'inline-block', verticalAlign: 'middle', flexShrink: 0, ...style }}
+      aria-hidden="true"
+    >
+      <path d="M12.004 2C6.482 2 2 6.48 2 12c0 1.768.462 3.49 1.34 5.012L2 22l5.132-1.346A9.957 9.957 0 0 0 12.004 22c5.522 0 10.004-4.48 10.004-10S17.526 2 12.004 2zm0 18.334a8.29 8.29 0 0 1-4.23-1.155l-.304-.18-3.143.824.839-3.064-.198-.315a8.318 8.318 0 0 1-1.272-4.444c0-4.602 3.743-8.345 8.308-8.345 4.565 0 8.308 3.743 8.308 8.345 0 4.602-3.743 8.334-8.308 8.334zm4.555-6.242c-.25-.125-1.478-.729-1.707-.812-.23-.083-.396-.125-.563.125-.166.25-.646.812-.792.979-.146.167-.291.188-.541.063-.25-.125-1.056-.39-2.012-1.242-.744-.664-1.247-1.485-1.393-1.735-.146-.25-.015-.385.11-.51.113-.112.25-.292.375-.438.125-.146.167-.25.25-.417.083-.167.042-.313-.021-.438-.063-.125-.563-1.355-.771-1.855-.203-.487-.41-.42-.563-.428-.146-.007-.313-.008-.479-.008s-.438.063-.667.313c-.23.25-.875.855-.875 2.084 0 1.229.896 2.417 1.021 2.584.125.167 1.763 2.692 4.271 3.776.597.258 1.063.412 1.427.528.6.191 1.146.164 1.577.1.481-.072 1.478-.604 1.687-1.188.208-.584.208-1.084.146-1.188-.063-.105-.23-.167-.479-.292z"/>
+    </svg>
+  );
+}
