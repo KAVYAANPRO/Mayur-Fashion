@@ -88,6 +88,7 @@ export default function Header({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: '40px',
             padding: isScrolled ? '10px 0' : '14px 0',
             transition: 'all 0.3s ease'
           }}>
@@ -96,7 +97,7 @@ export default function Header({
             <a 
               href="#hero" 
               onClick={(e) => { e.preventDefault(); handleNavClick('hero'); }}
-              style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flex: 1 }}
+              style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
               aria-label="Mayur Fashion - Manohar Dresses"
             >
               <img 
@@ -136,7 +137,7 @@ export default function Header({
             </nav>
 
             {/* Action Buttons */}
-            <div className="action-buttons-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '8px', flex: 1 }}>
+            <div className="action-buttons-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '8px' }}>
               {/* Search Toggle */}
               <button
                 onClick={() => setShowSearch(!showSearch)}
