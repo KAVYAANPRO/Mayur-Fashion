@@ -5,7 +5,6 @@ import { COMPANY_INFO } from '../data/company';
 
 export default function Hero({ onExploreClick, onLookbookClick }) {
   const videoRef   = useRef(null);
-  const [muted, setMuted]       = useState(true);
   const [videoUrl, setVideoUrl] = useState('');
   const [videoType, setVideoType] = useState('');
   const [videoReady, setVideoReady] = useState(false);
@@ -35,15 +34,6 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
       }
     })();
   }, []);
-
-  /* ── Toggle sound (only works for direct <video> tags, not iframes easily) ── */
-  const toggleMute = (e) => {
-    e.stopPropagation(); // Prevent click from dismissing the video
-    if (videoRef.current) {
-      videoRef.current.muted = !muted;
-      setMuted(!muted);
-    }
-  };
 
   const hasVideo = !!videoUrl && !videoDismissed;
 
