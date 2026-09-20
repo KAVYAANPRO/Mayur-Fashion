@@ -7,6 +7,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
   const videoRef   = useRef(null);
   const [muted, setMuted]       = useState(true);
   const [videoUrl, setVideoUrl] = useState('');
+  const [videoType, setVideoType] = useState('');
   const [videoReady, setVideoReady] = useState(false);
 
   const highlights = [
@@ -24,14 +25,17 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
         const res  = await fetch(`${apiUrl}/api/settings`);
         if (!res.ok) return;
         const data = await res.json();
-        if (data.companyVideoUrl) setVideoUrl(data.companyVideoUrl);
+        if (data.companyVideoUrl) {
+          setVideoUrl(data.companyVideoUrl);
+          setVideoType(data.companyVideoType || 'direct');
+        }
       } catch {
-        /* silently fall back to gradient background */
+        /* silently ignore */
       }
     })();
   }, []);
 
-  /* ── Toggle sound ── */
+  /* ── Toggle sound (only works for direct <video> tags, not iframes easily) ── */
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !muted;
@@ -39,82 +43,139 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
     }
   };
 
+  const hasVideo = !!videoUrl;
+
+  // Colors switch based on whether there is a background video or not
+  const textColorPrimary = hasVideo ? '#ffffff' : '#1c1917';
+  const textColorSecondary = hasVideo ? 'rgba(255,255,255,0.82)' : '#5e5750';
+  const badgeBg = hasVideo ? 'rgba(255,255,255,0.10)' : '#ECE5CE';
+  const badgeBorder = hasVideo ? 'rgba(255,255,255,0.20)' : '#C8D6BF';
+  const badgeText = hasVideo ? '#F2BCB6' : '#EF233C';
+  const highlightBg = hasVideo ? 'rgba(255,255,255,0.10)' : '#ffffff';
+  const highlightBorder = hasVideo ? 'rgba(255,255,255,0.20)' : '#ECE5CE';
+  const highlightText = hasVideo ? '#ffffff' : '#1c1917';
+  const statsBg = hasVideo ? 'rgba(255,255,255,0.08)' : '#ffffff';
+  const statsBorder = hasVideo ? 'rgba(255,255,255,0.15)' : '#ECE5CE';
+  const statsLabel = hasVideo ? '#ffffff' : '#1c1917';
+  const statsSub = hasVideo ? 'rgba(255,255,255,0.6)' : '#5e5750';
+  const textShadow = hasVideo ? '0 2px 20px rgba(0,0,0,0.4)' : 'none';
+  const textShadowSub = hasVideo ? '0 1px 6px rgba(0,0,0,0.3)' : 'none';
+  const lookbookBtnBg = hasVideo ? 'rgba(255,255,255,0.12)' : 'transparent';
+  const lookbookBtnText = hasVideo ? '#ffffff' : '#1c1917';
+  const lookbookBtnBorder = hasVideo ? '1px solid rgba(255,255,255,0.3)' : '1px solid #C8D6BF';
+
   return (
     <section
       id="hero"
       style={{
         position: 'relative',
         overflow: 'hidden',
-        minHeight: '100vh',
+        minHeight: hasVideo ? '100vh' : 'auto',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        /* Fallback gradient when no video */
-        background: 'linear-gradient(135deg, #1c1917 0%, #2d1f22 50%, #1a1214 100%)',
+        backgroundColor: hasVideo ? '#000' : '#EDEBE6',
+        padding: hasVideo ? '0' : '75px 0 65px 0',
+        borderBottom: hasVideo ? 'none' : '1px solid #ECE5CE'
       }}
     >
+      {/* ── Background Ambient Color Radial Accents (ONLY if NO video) ── */}
+      {!hasVideo && (
+        <>
+          <div style={{
+            position: 'absolute', top: '-180px', left: '50%', transform: 'translateX(-50%)',
+            width: '850px', height: '550px', borderRadius: '50%',
+            background: 'radial-gradient(ellipse at center, rgba(242, 188, 182, 0.35) 0%, rgba(200, 214, 191, 0.2) 45%, rgba(237, 235, 230, 0) 70%)',
+            pointerEvents: 'none'
+          }} />
+          <div style={{
+            position: 'absolute', bottom: '-120px', right: '-80px',
+            width: '500px', height: '500px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(200, 214, 191, 0.3) 0%, rgba(237, 235, 230, 0) 70%)',
+            pointerEvents: 'none'
+          }} />
+          <div style={{
+            position: 'absolute', bottom: '-100px', left: '-100px',
+            width: '450px', height: '450px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(239, 35, 60, 0.08) 0%, rgba(237, 235, 230, 0) 70%)',
+            pointerEvents: 'none'
+          }} />
+        </>
+      )}
+
       {/* ── Full-screen background video ─────────────────────── */}
-      {videoUrl && (
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          autoPlay
-          muted
-          loop
-          playsInline
-          onCanPlay={() => setVideoReady(true)}
+      {hasVideo && (
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, overflow: 'hidden', pointerEvents: 'none' }}>
+          {videoType === 'youtube' ? (
+            <iframe
+              src={`${videoUrl}?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=${videoUrl.split('embed/')[1] || ''}`}
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              onLoad={() => setVideoReady(true)}
+              style={{
+                width: '100vw',
+                height: '56.25vw', /* 16:9 aspect ratio */
+                minHeight: '100vh',
+                minWidth: '177.77vh', /* 16:9 aspect ratio */
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                opacity: videoReady ? 1 : 0,
+                transition: 'opacity 1s ease',
+              }}
+            />
+          ) : videoType === 'vimeo' ? (
+            <iframe
+              src={`${videoUrl}?background=1&autoplay=1&loop=1&byline=0&title=0`}
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              onLoad={() => setVideoReady(true)}
+              style={{
+                width: '100vw',
+                height: '56.25vw',
+                minHeight: '100vh',
+                minWidth: '177.77vh',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                opacity: videoReady ? 1 : 0,
+                transition: 'opacity 1s ease',
+              }}
+            />
+          ) : (
+            <video
+              ref={videoRef}
+              src={videoUrl}
+              autoPlay
+              muted
+              loop
+              playsInline
+              onCanPlay={() => setVideoReady(true)}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                opacity: videoReady ? 1 : 0,
+                transition: 'opacity 1s ease',
+              }}
+            />
+          )}
+        </div>
+      )}
+
+      {/* ── Dark gradient overlay (only if video) ─────── */}
+      {hasVideo && (
+        <div
           style={{
             position: 'absolute',
             inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 0,
-            opacity: videoReady ? 1 : 0,
-            transition: 'opacity 1s ease',
+            zIndex: 1,
+            background: 'linear-gradient(to bottom, rgba(15,10,10,0.60) 0%, rgba(15,10,10,0.50) 60%, rgba(15,10,10,0.75) 100%)',
+            pointerEvents: 'none',
           }}
         />
-      )}
-
-      {/* ── Dark gradient overlay so text stays readable ─────── */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          zIndex: 1,
-          background: videoUrl
-            ? 'linear-gradient(to bottom, rgba(15,10,10,0.60) 0%, rgba(15,10,10,0.50) 60%, rgba(15,10,10,0.75) 100%)'
-            : 'linear-gradient(135deg, rgba(239,35,60,0.12) 0%, transparent 60%)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* ── Mute / Unmute toggle (only when video is playing) ─── */}
-      {videoUrl && videoReady && (
-        <button
-          onClick={toggleMute}
-          title={muted ? 'Unmute video' : 'Mute video'}
-          style={{
-            position: 'absolute',
-            bottom: '160px',
-            right: '28px',
-            zIndex: 10,
-            background: 'rgba(255,255,255,0.12)',
-            border: '1px solid rgba(255,255,255,0.25)',
-            backdropFilter: 'blur(8px)',
-            color: '#ffffff',
-            width: '42px',
-            height: '42px',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            transition: 'background 0.2s',
-          }}
-        >
-          {muted ? <VolumeX size={18} /> : <Volume2 size={18} />}
-        </button>
       )}
 
       {/* ── Main content ─────────────────────────────────────── */}
@@ -123,7 +184,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
         style={{
           position: 'relative',
           zIndex: 2,
-          padding: '100px 20px 48px 20px',
+          padding: hasVideo ? '100px 20px 48px 20px' : '0 20px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -147,23 +208,24 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               display: 'inline-flex',
               alignItems: 'center',
               padding: '7px 22px',
-              background: 'rgba(255,255,255,0.10)',
-              color: '#F2BCB6',
-              border: '1px solid rgba(255,255,255,0.20)',
+              background: badgeBg,
+              color: badgeText,
+              border: `1px solid ${badgeBorder}`,
               borderRadius: '9999px',
               fontSize: '0.82rem',
               fontWeight: 700,
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
               marginBottom: '24px',
-              backdropFilter: 'blur(6px)',
+              backdropFilter: hasVideo ? 'blur(6px)' : 'none',
+              boxShadow: hasVideo ? 'none' : '0 2px 10px rgba(200, 214, 191, 0.4)',
               animationDelay: '0.06s',
             }}
           >
             Manohar Dresses • Estd. 1991 • Brand Mayur™
           </div>
 
-          {/* Main headline — white + red accent */}
+          {/* Main headline */}
           <h1
             style={{
               fontFamily: "'Playfair Display', serif",
@@ -178,8 +240,8 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               alignItems: 'center',
               columnGap: '0.35em',
               rowGap: '0.1em',
-              color: '#ffffff',
-              textShadow: '0 2px 20px rgba(0,0,0,0.4)',
+              color: textColorPrimary,
+              textShadow: textShadow,
             }}
           >
             <span className="hero-morph-left" style={{ display: 'inline-block', animationDelay: '0.14s' }}>
@@ -187,7 +249,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
             </span>
             <span
               className="hero-morph-right"
-              style={{ display: 'inline-block', animationDelay: '0.22s', color: '#EF233C', textShadow: '0 0 40px rgba(239,35,60,0.5)' }}
+              style={{ display: 'inline-block', animationDelay: '0.22s', color: '#EF233C', textShadow: hasVideo ? '0 0 40px rgba(239,35,60,0.5)' : 'none' }}
             >
               What You Wear
             </span>
@@ -196,13 +258,13 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
           {/* Subtitle */}
           <p
             style={{
-              fontSize: 'clamp(1.05rem, 1.8vw, 1.2rem)',
+              fontSize: 'clamp(1.05rem, 1.8vw, 1.25rem)',
               lineHeight: 1.7,
-              color: 'rgba(255,255,255,0.82)',
-              maxWidth: '720px',
+              color: textColorSecondary,
+              maxWidth: '820px',
               marginBottom: '32px',
               fontWeight: 400,
-              textShadow: '0 1px 6px rgba(0,0,0,0.3)',
+              textShadow: textShadowSub,
             }}
           >
             <span className="hero-morph-left" style={{ display: 'inline', animationDelay: '0.28s' }}>
@@ -237,13 +299,14 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
                     display: 'inline-flex',
                     alignItems: 'center',
                     padding: '8px 20px',
-                    background: 'rgba(255,255,255,0.10)',
-                    border: '1px solid rgba(255,255,255,0.20)',
-                    backdropFilter: 'blur(6px)',
+                    background: highlightBg,
+                    border: `1px solid ${highlightBorder}`,
+                    backdropFilter: hasVideo ? 'blur(6px)' : 'none',
+                    boxShadow: hasVideo ? 'none' : '0 2px 8px rgba(0, 0, 0, 0.03)',
                     borderRadius: '9999px',
                     fontSize: '0.85rem',
                     fontWeight: 600,
-                    color: '#ffffff',
+                    color: highlightText,
                     animationDelay: delay,
                     transition: 'all 0.3s ease',
                     cursor: 'default',
@@ -263,7 +326,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               flexWrap: 'wrap',
               justifyContent: 'center',
               gap: '14px',
-              marginBottom: '56px',
+              marginBottom: '48px',
               width: '100%',
             }}
           >
@@ -283,10 +346,10 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
                 fontSize: '1rem',
                 padding: '14px 26px',
                 animationDelay: '0.58s',
-                background: 'rgba(255,255,255,0.12)',
-                color: '#ffffff',
-                border: '1px solid rgba(255,255,255,0.3)',
-                backdropFilter: 'blur(6px)',
+                background: lookbookBtnBg,
+                color: lookbookBtnText,
+                border: lookbookBtnBorder,
+                backdropFilter: hasVideo ? 'blur(6px)' : 'none',
               }}
             >
               <span>Digital Lookbook</span>
@@ -314,16 +377,16 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
           </div>
         </div>
 
-        {/* Stats strip — glassmorphism card at bottom */}
+        {/* Stats strip */}
         <div
           style={{
             padding: '24px 28px',
-            background: 'rgba(255,255,255,0.08)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
+            background: statsBg,
+            backdropFilter: hasVideo ? 'blur(16px)' : 'none',
+            WebkitBackdropFilter: hasVideo ? 'blur(16px)' : 'none',
             borderRadius: '24px',
-            border: '1px solid rgba(255,255,255,0.15)',
-            boxShadow: '0 8px 40px rgba(0,0,0,0.3)',
+            border: `1px solid ${statsBorder}`,
+            boxShadow: hasVideo ? '0 8px 40px rgba(0,0,0,0.3)' : '0 8px 30px rgba(0, 0, 0, 0.04)',
             display: 'grid',
             gridTemplateColumns: 'repeat(4, 1fr)',
             gap: '20px',
@@ -343,7 +406,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
                 className={animClass}
                 style={{
                   textAlign: 'center',
-                  borderRight: i < 3 ? '1px solid rgba(255,255,255,0.12)' : 'none',
+                  borderRight: i < 3 ? `1px solid ${statsBorder}` : 'none',
                   padding: '4px 8px',
                   animationDelay: delay,
                 }}
@@ -354,14 +417,14 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
                   fontWeight: 700,
                   color: '#EF233C',
                   lineHeight: 1.1,
-                  textShadow: '0 0 20px rgba(239,35,60,0.4)',
+                  textShadow: hasVideo ? '0 0 20px rgba(239,35,60,0.4)' : 'none',
                 }}>
                   {stat.value}
                 </div>
-                <div style={{ fontWeight: 700, fontSize: '0.86rem', color: '#ffffff', marginTop: '4px' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.86rem', color: statsLabel, marginTop: '4px' }}>
                   {stat.label}
                 </div>
-                <div style={{ fontSize: '0.76rem', color: 'rgba(255,255,255,0.6)' }}>
+                <div style={{ fontSize: '0.76rem', color: statsSub }}>
                   {stat.sub}
                 </div>
               </div>
@@ -380,7 +443,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
           .hero-cta-group .btn { width: 100% !important; justify-content: center !important; }
           .stats-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 16px 12px !important; gap: 12px !important; }
           .stats-grid > div { border-right: none !important; padding: 6px 4px !important; }
-          .stats-grid > div:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.12) !important; }
+          .stats-grid > div:nth-child(odd) { border-right: 1px solid ${statsBorder} !important; }
         }
       `}</style>
     </section>
