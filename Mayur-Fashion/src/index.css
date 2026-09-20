@@ -601,3 +601,10 @@ body {
   touch-action: manipulation;
 }
 
+/* Hero highlight badges hover effect */
+.highlight-badge:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 6px 16px rgba(28, 25, 23, 0.12), 0 0 12px rgba(239, 35, 60, 0.25) !important;
+  border-color: var(--primary) !important;
+}
+

@@ -5,10 +5,10 @@ import { COMPANY_INFO } from '../data/company';
 
 export default function Hero({ onExploreClick, onLookbookClick }) {
   const highlights = [
-    "100% Pure Silks & Chanderi",
-    "Artisanal Zardozi & Hand Embroidery",
-    "Complete Size Grading (M to 6XL)",
-    "Global Wholesale Export to 30+ Nations"
+    "Wide Range of premium fabrics",
+    "Exquisite Craftsmanship on every fabric",
+    "Styles for every woman and every occasion",
+    "A favorite fashion brand Across india"
   ];
 
   return (
@@ -161,7 +161,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
               return (
                 <div
                   key={idx}
-                  className={animClass}
+                  className={`${animClass} highlight-badge`}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -173,7 +173,9 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
                     fontWeight: 600,
                     color: '#1c1917',
                     boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)',
-                    animationDelay: delay
+                    animationDelay: delay,
+                    transition: 'all 0.3s ease',
+                    cursor: 'default'
                   }}
                 >
                   <span>{item}</span>
