@@ -85,12 +85,21 @@ app.use('/api/chat', chatbotRoutes);
 // Serve uploads folder statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Upload route
+// Single image upload (legacy support)
 app.post('/api/upload', authMiddleware, upload.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
   res.json({ imageUrl: req.file.path });
+});
+
+// Multi-image upload — accepts up to 20 images at once (field name: "images")
+app.post('/api/upload-multiple', authMiddleware, upload.array('images', 20), (req, res) => {
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ message: 'No files uploaded' });
+  }
+  const imageUrls = req.files.map(f => f.path);
+  res.json({ imageUrls });
 });
 
 // Error handling middleware
