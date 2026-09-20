@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
 import WhatsAppIcon from './components/WhatsAppIcon';
 import Header from './components/Header';
@@ -18,6 +19,15 @@ const WholesaleSection = React.lazy(() => import('./components/WholesaleSection'
 const ContactSection = React.lazy(() => import('./components/ContactSection'));
 const Footer = React.lazy(() => import('./components/Footer'));
 const ChatWidget = React.lazy(() => import('./components/ChatWidget'));
+
+// Policy pages
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
+const CookiePolicy = React.lazy(() => import('./pages/CookiePolicy'));
+const RefundPolicy = React.lazy(() => import('./pages/RefundPolicy'));
+const DataDeletion = React.lazy(() => import('./pages/DataDeletion'));
+
+const CookieConsent = React.lazy(() => import('./components/CookieConsent'));
 
 export default function App() {
   useScrollReveal();
@@ -170,43 +180,56 @@ export default function App() {
       />
 
       <main style={{ flexGrow: 1 }}>
-        {/* 1. Hero Showcase (Clean typography editorial design) */}
-        <Hero
-          onExploreClick={() => scrollToSection('collections')}
-          onLookbookClick={() => scrollToSection('lookbook')}
-        />
+        <Suspense fallback={<LoadingScreen />}>
+          <Routes>
+            <Route path="/" element={
+              <>
+                {/* 1. Hero Showcase (Clean typography editorial design) */}
+                <Hero
+                  onExploreClick={() => scrollToSection('collections')}
+                  onLookbookClick={() => scrollToSection('lookbook')}
+                />
 
-        {/* 2. Product Catalog with Categories & Filtering */}
-        <ProductCatalog
-          searchQuery={searchQuery}
-          onQuickView={(p) => setModalProduct(p)}
-          onToggleInquiry={handleToggleInquiry}
-          inquiryList={inquiryList}
-        />
+                {/* 2. Product Catalog with Categories & Filtering */}
+                <ProductCatalog
+                  searchQuery={searchQuery}
+                  onQuickView={(p) => setModalProduct(p)}
+                  onToggleInquiry={handleToggleInquiry}
+                  inquiryList={inquiryList}
+                />
 
-        {/* 3. Digital Lookbook Interactive Viewer */}
-        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
-          <LookbookViewer />
-        </Suspense>
+                {/* 3. Digital Lookbook Interactive Viewer */}
+                <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+                  <LookbookViewer />
+                </Suspense>
 
-        {/* 4. Heritage & Brand Story (1991 Foundation) */}
-        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
-          <HeritageSection onExploreClick={() => scrollToSection('collections')} />
-        </Suspense>
+                {/* 4. Heritage & Brand Story (1991 Foundation) */}
+                <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+                  <HeritageSection onExploreClick={() => scrollToSection('collections')} />
+                </Suspense>
 
-        {/* 5. Why Mayur & Size Inclusivity (M to 6XL) */}
-        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
-          <ValuesSection onWholesaleClick={() => scrollToSection('wholesale')} />
-        </Suspense>
+                {/* 5. Why Mayur & Size Inclusivity (M to 6XL) */}
+                <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+                  <ValuesSection onWholesaleClick={() => scrollToSection('wholesale')} />
+                </Suspense>
 
-        {/* 6. Wholesale & B2B Inquiry Portal */}
-        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
-          <WholesaleSection />
-        </Suspense>
+                {/* 6. Wholesale & B2B Inquiry Portal */}
+                <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+                  <WholesaleSection />
+                </Suspense>
 
-        {/* 7. Showroom, Contacts & Map */}
-        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
-          <ContactSection />
+                {/* 7. Showroom, Contacts & Map */}
+                <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+                  <ContactSection />
+                </Suspense>
+              </>
+            } />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
+            <Route path="/refund-policy" element={<RefundPolicy />} />
+            <Route path="/data-deletion" element={<DataDeletion />} />
+          </Routes>
         </Suspense>
       </main>
 
@@ -235,6 +258,9 @@ export default function App() {
       />
 
       {/* Floating Action Quick Links (Bottom Right) */}
+      <Suspense fallback={null}>
+        <CookieConsent />
+      </Suspense>
       <div style={{
         position: 'fixed',
         bottom: '24px',

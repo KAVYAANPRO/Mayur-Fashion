@@ -329,6 +329,15 @@ export default function WholesaleSection() {
               />
             </div>
 
+            <div className="fly-in-up delay-4" style={{ marginBottom: '20px', textAlign: 'left' }}>
+              <label style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', cursor: 'pointer', maxWidth: '800px', margin: '0 auto' }}>
+                <input type="checkbox" required style={{ marginTop: '4px' }} />
+                <span style={{ fontSize: '0.8rem', color: '#5e5750', lineHeight: 1.4 }}>
+                  I agree to the <a href="/privacy-policy" style={{ color: '#EF233C', textDecoration: 'underline' }} target="_blank">Privacy Policy</a> and consent to having my information processed for this wholesale inquiry.
+                </span>
+              </label>
+            </div>
+
             <div className="fly-in-up delay-4" style={{ textAlign: 'center' }}>
               <button
                 type="submit"

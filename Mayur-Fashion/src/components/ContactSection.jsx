@@ -354,6 +354,15 @@ export default function ContactSection() {
                 />
               </div>
 
+              <div style={{ marginBottom: '16px' }}>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', cursor: 'pointer' }}>
+                  <input type="checkbox" required style={{ marginTop: '4px' }} />
+                  <span style={{ fontSize: '0.8rem', color: '#5e5750', lineHeight: 1.4 }}>
+                    I agree to the <a href="/privacy-policy" style={{ color: '#EF233C', textDecoration: 'underline' }} target="_blank">Privacy Policy</a> and consent to having my information processed for this inquiry.
+                  </span>
+                </label>
+              </div>
+
               <button
                 type="submit"
                 className="btn btn-primary"
