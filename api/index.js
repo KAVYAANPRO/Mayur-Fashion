@@ -8,6 +8,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const inquiryRoutes = require('./routes/inquiryRoutes');
 const chatbotRoutes = require('./routes/chatbotRoutes');
+const settingsRoutes = require('./routes/settingsRoutes');
 const { router: authRoutes, initMasterAdmin, authMiddleware } = require('./routes/authRoutes');
 const multer = require('multer');
 const path = require('path');
@@ -81,6 +82,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/inquiries', inquiryRoutes);
 app.use('/api/chat', chatbotRoutes);
+app.use('/api/settings', settingsRoutes);
 
 // Serve uploads folder statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -100,6 +102,24 @@ app.post('/api/upload-multiple', authMiddleware, upload.array('images', 20), (re
   }
   const imageUrls = req.files.map(f => f.path);
   res.json({ imageUrls });
+});
+
+// Video upload to Cloudinary (single video, stored in mayur-fashion/videos folder)
+const videoStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'mayur-fashion/videos',
+    resource_type: 'video',
+    allowedFormats: ['mp4', 'mov', 'avi', 'webm', 'mkv'],
+  },
+});
+const uploadVideo = multer({ storage: videoStorage });
+
+app.post('/api/upload-video', authMiddleware, uploadVideo.single('video'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'No video file uploaded' });
+  }
+  res.json({ videoUrl: req.file.path });
 });
 
 // Error handling middleware
