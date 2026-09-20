@@ -20,7 +20,7 @@ export default function ProductModal({ product, onClose, onToggleInquiry, isInIn
 
   const handleWhatsAppEnquiry = () => {
     const text = `Hello Mayur Fashion! I am looking to inquire about the wholesale catalog set for:\n\n*Product:* ${product.title}\n*Code:* ${product.id}\n*Fabric:* ${product.fabric || 'Premium Fabric'}\n*Preferred Size:* ${selectedSize}\n*Color:* ${product.color || 'As shown'}\n\nPlease share catalog pricing, MOQ, and delivery timeline.`;
-    window.open(`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (

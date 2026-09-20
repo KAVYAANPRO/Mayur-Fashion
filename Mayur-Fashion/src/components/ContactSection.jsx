@@ -379,7 +379,7 @@ export default function ContactSection() {
       <style>{`
         @media (max-width: 992px) {
           .directors-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr 1fr !important;
             gap: 16px !important;
           }
           .contact-main-grid {
@@ -387,7 +387,14 @@ export default function ContactSection() {
             gap: 30px !important;
           }
         }
-        @media (max-width: 600px) {
+        @media (max-width: 640px) {
+          .directors-grid {
+            grid-template-columns: 1fr !important;
+            gap: 14px !important;
+          }
+          .directors-grid > div {
+            padding: 20px 16px !important;
+          }
           .contact-form-card {
             padding: 22px 16px !important;
             border-radius: 18px !important;

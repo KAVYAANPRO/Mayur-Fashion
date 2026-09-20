@@ -34,7 +34,7 @@ export default function InquiryDrawer({
 
     message += `Please provide wholesale set pricing, ready stock availability, and MOQ for these designs. Thank you!`;
 
-    const waUrl = `https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
   };
 

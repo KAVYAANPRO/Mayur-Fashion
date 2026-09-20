@@ -227,6 +227,15 @@ export default function HeritageSection() {
             grid-template-columns: 1fr !important;
             gap: 14px !important;
           }
+          .milestones-grid > div {
+            padding: 18px 16px !important;
+          }
+          .milestones-grid > div h4 {
+            font-size: 0.95rem !important;
+          }
+          .milestones-grid > div p {
+            font-size: 0.82rem !important;
+          }
         }
       `}</style>
     </section>

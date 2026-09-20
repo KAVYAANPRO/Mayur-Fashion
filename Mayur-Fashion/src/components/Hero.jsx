@@ -352,7 +352,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
             </button>
 
             <a
-              href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(
+              href={`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent(
                 'Hello Mayur Fashion! I would like to request your wholesale price list and catalog sets.'
               )}`}
               target="_blank"
@@ -434,7 +434,7 @@ export default function Hero({ onExploreClick, onLookbookClick }) {
           .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
           .stats-grid > div:nth-child(2) { border-right: none !important; }
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .hero-cta-group { flex-direction: column !important; gap: 10px !important; }
           .hero-cta-group .btn { width: 100% !important; justify-content: center !important; }
           .stats-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 16px 12px !important; gap: 12px !important; }

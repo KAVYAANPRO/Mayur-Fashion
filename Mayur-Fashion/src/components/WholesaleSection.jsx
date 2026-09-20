@@ -37,7 +37,7 @@ export default function WholesaleSection() {
       `*Estimated Volume:* ${formData.estimatedOrderSize}\n` +
       `*Notes:* ${formData.customNotes || 'Looking forward to receiving latest wholesale catalog.'}`;
 
-    const waUrl = `https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(msg)}`;
+    const waUrl = `https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
   };
 
@@ -358,6 +358,15 @@ export default function WholesaleSection() {
           .wholesale-cards-grid {
             grid-template-columns: 1fr !important;
             gap: 16px !important;
+          }
+          .wholesale-cards-grid > div {
+            padding: 20px 16px !important;
+          }
+          .wholesale-cards-grid > div h3 {
+            font-size: 1.05rem !important;
+          }
+          .wholesale-cards-grid > div p {
+            font-size: 0.84rem !important;
           }
           .form-grid {
             grid-template-columns: 1fr !important;

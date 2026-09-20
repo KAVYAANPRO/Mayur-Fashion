@@ -57,7 +57,7 @@ export default function Header({
             <div className="ticker-secondary" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
               <span>Exports to 30+ Countries</span>
               <a 
-                href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion team, I am interested in viewing your wholesale catalog.")}`}
+                href={`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion team, I am interested in viewing your wholesale catalog.")}`}
                 target="_blank" 
                 rel="noopener noreferrer"
                 style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#25D366', fontWeight: 'bold' }}
@@ -199,7 +199,7 @@ export default function Header({
 
               {/* WhatsApp Wholesale CTA (Desktop) */}
               <a
-                href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am looking for your latest catalog and wholesale pricing.")}`}
+                href={`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am looking for your latest catalog and wholesale pricing.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-whatsapp hide-mobile"
@@ -331,7 +331,7 @@ export default function Header({
                 gap: '10px'
               }}>
                 <a
-                  href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you directly from your website.")}`}
+                  href={`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you directly from your website.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-whatsapp"

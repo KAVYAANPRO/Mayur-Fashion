@@ -261,7 +261,7 @@ export default function App() {
       <Suspense fallback={null}>
         <CookieConsent />
       </Suspense>
-      <div style={{
+      <div className="floating-actions" style={{
         position: 'fixed',
         bottom: '24px',
         right: '24px',
@@ -316,7 +316,7 @@ export default function App() {
         </Suspense>
 
         <a
-          href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you directly from your website.")}`}
+          href={`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you directly from your website.")}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -337,6 +337,26 @@ export default function App() {
           <WhatsAppIcon size={30} color="#ffffff" />
         </a>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .floating-actions {
+            bottom: 16px !important;
+            right: 14px !important;
+            gap: 10px !important;
+          }
+          .floating-actions > button,
+          .floating-actions > a {
+            width: 48px !important;
+            height: 48px !important;
+          }
+          .floating-actions > button svg,
+          .floating-actions > a svg {
+            width: 20px !important;
+            height: 20px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

@@ -75,7 +75,7 @@ export default function Footer({ onNavigate }) {
                 <InstagramIcon size={18} />
               </a>
               <a
-                href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}`}
+                href={`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

@@ -20,7 +20,7 @@ export default function ProductCard({
   const handleWhatsAppEnquiry = (e) => {
     e.stopPropagation();
     const text = `Hello Mayur Fashion! I am interested in inquiring about the design: *${product.title}* (Code: ${product.id}). Fabric: ${product.fabric}. Please provide wholesale price and catalog set availability.`;
-    window.open(`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (

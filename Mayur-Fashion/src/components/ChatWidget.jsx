@@ -356,9 +356,10 @@ export default function ChatWidget() {
           from { opacity: 0; transform: translateY(12px) scale(0.97); }
           to   { opacity: 1; transform: translateY(0)    scale(1);    }
         }
-        @media (max-width: 500px) {
-          .floating-chat-btn  { bottom:18px!important; right:16px!important; width:48px!important; height:48px!important; }
-          .chat-window-panel  { right:12px!important; left:12px!important; bottom:74px!important; width:auto!important; max-width:100%!important; }
+        @media (max-width: 640px) {
+          .floating-chat-btn  { width:48px!important; height:48px!important; }
+          .floating-chat-btn svg { width:18px!important; height:18px!important; }
+          .chat-window-panel  { right:12px!important; left:12px!important; bottom:74px!important; width:auto!important; max-width:100%!important; height:65vh!important; }
         }
       `}</style>
     </>
