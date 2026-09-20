@@ -54,7 +54,7 @@ export const COMPANY_INFO = {
       name: "Manohar Dresses Corporate Office",
       address: "A 501, 5th Floor, Iscon Commercial Complex (VIP Market), Omex Mill Compound, Nr. New Cloth Market, Sarangpur, Ahmedabad, Gujarat 380001",
       city: "Ahmedabad, Gujarat",
-      mapUrl: "https://maps.google.com/?q=Iscon+Commercial+Complex+Sarangpur+Ahmedabad"
+      mapUrl: "https://maps.app.goo.gl/g8NaiGuVayWc3wmY9"
     }
   ],
 
