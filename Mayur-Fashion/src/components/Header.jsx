@@ -55,7 +55,6 @@ export default function Header({
               <span><strong>Ahmedabad's Premier Ethnic Wear Manufacturer</strong> (Est. 1991) • Sizes <strong>M to 6XL</strong></span>
             </div>
             <div className="ticker-secondary" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-              <span>Exports to 30+ Countries</span>
               <a 
                 href={`https://wa.me/${COMPANY_INFO.contacts[0].people[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion team, I am interested in viewing your wholesale catalog.")}`}
                 target="_blank" 
@@ -97,7 +96,7 @@ export default function Header({
             <a 
               href="#hero" 
               onClick={(e) => { e.preventDefault(); handleNavClick('hero'); }}
-              style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
+              style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flex: 1 }}
               aria-label="Mayur Fashion - Manohar Dresses"
             >
               <img 
@@ -137,7 +136,7 @@ export default function Header({
             </nav>
 
             {/* Action Buttons */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="action-buttons-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '8px', flex: 1 }}>
               {/* Search Toggle */}
               <button
                 onClick={() => setShowSearch(!showSearch)}

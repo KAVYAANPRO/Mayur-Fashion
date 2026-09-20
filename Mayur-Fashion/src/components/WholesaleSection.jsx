@@ -50,10 +50,10 @@ export default function WholesaleSection() {
             <span>Direct Manufacturer Pricing</span>
           </div>
           <h2 className="section-title fly-in-left delay-1">
-            B2B Wholesale & Global Export Portal
+            B2B Wholesale & Global Portal
           </h2>
-          <p className="section-subtitle fly-in-right delay-2">
-            Partner directly with Manohar Dresses. Guaranteed catalog exclusivity, export-compliant packaging, and seamless dispatch to 30+ countries.
+          <p className="section-subtitle fade-up" style={{ animationDelay: '0.1s' }}>
+            Partner directly with Manohar Dresses. Guaranteed catalog exclusivity and seamless dispatch.
           </p>
         </div>
 

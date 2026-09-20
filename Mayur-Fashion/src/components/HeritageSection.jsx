@@ -20,8 +20,8 @@ export default function HeritageSection() {
     },
     {
       year: "2026",
-      title: "Global Reach & Size Inclusivity",
-      desc: "Now serving over 15,000+ retail partners and exporting to 30+ nations worldwide, leading the ethnic fashion industry."
+      title: "Today",
+      desc: "Now serving over 15,000+ retail partners, leading the ethnic fashion industry."
     }
   ];
 
