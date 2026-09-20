@@ -80,6 +80,24 @@ router.delete('/video', authMiddleware, async (req, res) => {
   try {
     const settings = await SiteSettings.findOne({ key: 'global' });
     if (settings) {
+      if (settings.companyVideoType === 'cloudinary' && settings.companyVideoUrl) {
+        try {
+          const cloudinary = require('cloudinary').v2;
+          const url = settings.companyVideoUrl;
+          const parts = url.split('/upload/');
+          if (parts.length > 1) {
+            let path = parts[1];
+            if (path.match(/^v\d+\//)) {
+              path = path.replace(/^v\d+\//, '');
+            }
+            path = path.replace(/\.[^/.]+$/, '');
+            await cloudinary.uploader.destroy(path, { resource_type: 'video' });
+          }
+        } catch (err) {
+          console.error('Failed to delete video from Cloudinary:', err);
+        }
+      }
+
       settings.companyVideoUrl  = '';
       settings.companyVideoType = '';
       await settings.save();
