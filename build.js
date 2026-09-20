@@ -28,16 +28,8 @@ const serveJson = {
       "destination": "/admin/index.html"
     },
     {
-      "source": "/admin/assets/**",
-      "destination": "/admin/assets/$1"
-    },
-    {
       "source": "/admin/**",
       "destination": "/admin/index.html"
-    },
-    {
-      "source": "/assets/**",
-      "destination": "/assets/$1"
     },
     {
       "source": "**",

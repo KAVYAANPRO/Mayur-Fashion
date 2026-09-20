@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- Brand Decorative Flourish -->
+  <path d="M42 16 C38 8, 30 6, 26 12 C20 22, 36 34, 48 38 C56 41, 62 38, 64 30 C66 22, 58 14, 48 18 C40 21, 35 28, 38 34" stroke="#c01853" stroke-width="3" stroke-linecap="round" fill="none"/>
+  
+  <!-- Mayur Wordmark Stylized Calligraphy -->
+  <text x="75" y="44" font-family="'Playfair Display', 'Cinzel', serif" font-size="34" font-weight="700" fill="#be123c" letter-spacing="1">MAYUR</text>
+  <text x="215" y="28" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="600" fill="#991b1b">™</text>
+  
+  <!-- Slogan & Heritage -->
+  <line x1="75" y1="53" x2="280" y2="53" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="2 2" />
+  <text x="76" y="66" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="600" fill="#881337" letter-spacing="1.5">SINCE 1991  •  WE CARE WHAT YOU WEAR</text>
+</svg>

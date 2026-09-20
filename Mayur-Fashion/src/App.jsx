@@ -13,6 +13,7 @@ import ContactSection from './components/ContactSection';
 import InquiryDrawer from './components/InquiryDrawer';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
+import LoadingScreen from './components/LoadingScreen';
 import { COMPANY_INFO } from './data/company';
 import useScrollReveal from './hooks/useScrollReveal';
 
@@ -80,6 +81,9 @@ export default function App() {
 
   return (
     <div className="app-container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#EDEBE6' }}>
+      {/* Site Loading Screen */}
+      <LoadingScreen />
+
       {/* Toast Notification */}
       {toastMessage && (
         <div style={{

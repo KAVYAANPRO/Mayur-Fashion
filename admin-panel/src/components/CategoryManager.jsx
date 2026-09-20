@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 function CategoryManager({ categories, refreshCategories, auth }) {
   const [newCategoryName, setNewCategoryName] = useState('');
   const [newCategoryDesc, setNewCategoryDesc] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleAddCategory = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`, {
         method: 'POST',
@@ -20,10 +22,13 @@ function CategoryManager({ categories, refreshCategories, auth }) {
         setNewCategoryDesc('');
         refreshCategories();
       } else {
-        console.error('Failed to add category');
+        alert('Failed to add category');
       }
     } catch (err) {
       console.error(err);
+      alert('Error creating category');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -39,7 +44,7 @@ function CategoryManager({ categories, refreshCategories, auth }) {
       if (res.ok) {
         refreshCategories();
       } else {
-        console.error('Failed to delete category');
+        alert('Failed to delete category');
       }
     } catch (err) {
       console.error(err);
@@ -48,44 +53,54 @@ function CategoryManager({ categories, refreshCategories, auth }) {
 
   return (
     <div className="card animate-fade-in-up">
-      <h2>Categories</h2>
+      <h2 style={{ color: 'var(--primary)', marginBottom: '1.25rem' }}>Category Management</h2>
       
-      <form onSubmit={handleAddCategory} className="form-group flex-row animate-fade-in-up delay-1" style={{ alignItems: 'flex-end', marginBottom: '2rem' }}>
-        <div style={{ flex: 1 }}>
-          <label>Category Name</label>
+      <form onSubmit={handleAddCategory} className="category-form-responsive animate-fade-in-up delay-1">
+        <div style={{ flex: '1 1 200px' }}>
+          <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px', textTransform: 'uppercase' }}>
+            Category Name *
+          </label>
           <input 
             type="text" 
+            placeholder="e.g. 3-Piece Kurti Sets"
             value={newCategoryName} 
             onChange={(e) => setNewCategoryName(e.target.value)} 
             required 
-            style={{ width: '100%' }}
           />
         </div>
-        <div style={{ flex: 2 }}>
-          <label>Description</label>
+        <div style={{ flex: '2 1 280px' }}>
+          <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px', textTransform: 'uppercase' }}>
+            Description
+          </label>
           <input 
             type="text" 
+            placeholder="e.g. Designer Kurti with matching Pant & Dupatta"
             value={newCategoryDesc} 
             onChange={(e) => setNewCategoryDesc(e.target.value)} 
-            style={{ width: '100%' }}
           />
         </div>
-        <button type="submit" className="btn-primary">Add Category</button>
+        <button type="submit" className="btn-primary" disabled={isSubmitting}>
+          {isSubmitting ? 'Adding...' : '➕ Add Category'}
+        </button>
       </form>
 
       <div className="grid">
         {categories.map((cat, index) => (
-          <div key={cat._id} className={`card animate-fade-in-up delay-${Math.min(index % 4 + 1, 4)}`} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div 
+            key={cat._id} 
+            className={`card animate-fade-in-up delay-${Math.min((index % 4) + 1, 4)}`} 
+            style={{ justifyContent: 'space-between', minHeight: '130px' }}
+          >
             <div>
-              <h3 className="card-title" style={{ color: 'var(--text-color)' }}>{cat.name}</h3>
-              <p className="card-subtitle">{cat.description}</p>
+              <h3 className="card-title" style={{ color: '#ffffff', fontSize: '1.15rem', marginBottom: '4px' }}>{cat.name}</h3>
+              <p className="card-subtitle" style={{ margin: 0 }}>{cat.description || 'No description provided'}</p>
             </div>
             <button 
               className="btn-danger"
-              style={{ marginTop: '1rem', width: 'fit-content' }}
+              style={{ marginTop: '1rem', alignSelf: 'flex-start', fontSize: '0.82rem', padding: '0.5rem 1rem' }}
               onClick={() => handleDeleteCategory(cat._id)}
             >
-              Delete
+              🗑️ Delete
             </button>
           </div>
         ))}

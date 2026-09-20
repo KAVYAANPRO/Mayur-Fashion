@@ -12,8 +12,10 @@ build/
 Photos/
 scratch/
 *.zip
+*.tar.gz
 *.pt
 yolov8n.pt
+payload.json
 
 # Environment files
 .env

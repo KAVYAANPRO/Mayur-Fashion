@@ -40,39 +40,51 @@ function App() {
 
   return (
     <div className="app-container">
-      <header className="flex-row animate-fade-in-up" style={{ justifyContent: 'space-between' }}>
-        <div>
-          <h1 style={{ display: 'inline-block', marginRight: '1rem', color: 'var(--primary)' }}>Mayur Fashion Admin</h1>
-          <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Logged in as <strong style={{ color: 'var(--text-color)' }}>{auth.user.name}</strong> ({auth.user.role})</span>
-        </div>
-        <div className="flex-row">
-          <button 
-            className={activeTab === 'products' ? 'btn-primary' : 'btn-outline'}
-            onClick={() => setActiveTab('products')}
-          >
-            Products
-          </button>
-          <button 
-            className={activeTab === 'categories' ? 'btn-primary' : 'btn-outline'}
-            onClick={() => setActiveTab('categories')}
-          >
-            Categories
-          </button>
-          {auth.user.role === 'master' && (
+      <header className="animate-fade-in-up">
+        <div className="admin-header-row">
+          <div className="admin-brand">
+            <img 
+              src="/assets/logo/mayur-official-brand-logo-white.png" 
+              alt="Mayur Fashion" 
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+            <div>
+              <h1 style={{ color: 'var(--primary)', margin: 0, lineHeight: 1.2 }}>Mayur Admin Portal</h1>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                User: <strong style={{ color: 'var(--text-color)' }}>{auth.user.name}</strong> ({auth.user.role})
+              </span>
+            </div>
+          </div>
+
+          <div className="admin-nav-tabs">
             <button 
-              className={activeTab === 'admins' ? 'btn-primary' : 'btn-outline'}
-              onClick={() => setActiveTab('admins')}
+              className={activeTab === 'products' ? 'btn-primary' : 'btn-outline'}
+              onClick={() => setActiveTab('products')}
             >
-              Admins
+              📦 Products
             </button>
-          )}
-          <button 
-            className="btn-danger"
-            style={{ marginLeft: '1rem' }}
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
+            <button 
+              className={activeTab === 'categories' ? 'btn-primary' : 'btn-outline'}
+              onClick={() => setActiveTab('categories')}
+            >
+              🏷️ Categories
+            </button>
+            {auth.user.role === 'master' && (
+              <button 
+                className={activeTab === 'admins' ? 'btn-primary' : 'btn-outline'}
+                onClick={() => setActiveTab('admins')}
+              >
+                👥 Admins
+              </button>
+            )}
+            <button 
+              className="btn-danger"
+              onClick={handleLogout}
+              title="Logout from admin session"
+            >
+              🚪 Logout
+            </button>
+          </div>
         </div>
       </header>
 
