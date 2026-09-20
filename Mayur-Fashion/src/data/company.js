@@ -42,6 +42,12 @@ export const COMPANY_INFO = {
           role: "Founder & Chairman",
           phone: "+91 98253 43225",
           whatsapp: "919825343225"
+        },
+        {
+          name: "Mayur Fashion Official",
+          role: "Support staff",
+          phone: "+91 9510597462",
+          whatsapp: "919510597462"
         }
       ]
     },
