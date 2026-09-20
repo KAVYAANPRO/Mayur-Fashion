@@ -1,99 +1,141 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MessageSquare, X, Send } from 'lucide-react';
 
-// Parses a bot reply string into React elements:
-// - **bold** → <strong>
-// - URLs → clickable <a> links (word-break so they don't overflow)
-// - Numbered lines (1. 2.) and bullet lines (- ) → formatted list items
+// ─── Robust message renderer ──────────────────────────────────────────────────
+// Handles AI output that may have:
+//   - **bold** markers
+//   - Inline numbered items like "1. text 2. text" without real newlines
+//   - Raw URLs anywhere in the text
+// ─────────────────────────────────────────────────────────────────────────────
+
 function renderMessage(text) {
   if (!text) return null;
 
-  // Split into lines for list handling
-  const lines = text.split('\n');
+  // Step 1: normalise line-endings
+  let processed = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
 
-  return lines.map((line, lineIdx) => {
-    const trimmed = line.trim();
-    if (!trimmed) {
-      // Empty line → small vertical spacer
-      return <div key={lineIdx} style={{ height: '5px' }} />;
-    }
+  // Step 2: insert a real newline BEFORE inline numbered items
+  // e.g. "...380001 2. **Head..." → "...380001\n2. **Head..."
+  processed = processed.replace(/([^\n])\s+([\d]+\.\s)/g, '$1\n$2');
 
-    // Detect numbered list item: "1. " or "2. " etc.
-    const numberedMatch = trimmed.match(/^(\d+)\.\s+(.+)/);
-    // Detect bullet list item: "- " or "• "
-    const bulletMatch = trimmed.match(/^[-•]\s+(.+)/);
+  // Step 3: insert a real newline BEFORE bare URLs that follow other text
+  // e.g. "...380001 https://..." → "...380001\nhttps://..."
+  processed = processed.replace(/([^\n\s])\s+(https?:\/\/)/g, '$1\n$2');
 
-    if (numberedMatch) {
-      return (
-        <div key={lineIdx} style={{ display: 'flex', gap: '6px', marginTop: lineIdx === 0 ? 0 : '4px' }}>
-          <span style={{ color: '#EF233C', fontWeight: 700, flexShrink: 0, minWidth: '16px' }}>
-            {numberedMatch[1]}.
-          </span>
-          <span>{inlineRender(numberedMatch[2])}</span>
-        </div>
-      );
-    }
+  // Step 4: split into lines and render each
+  const lines = processed.split('\n');
 
-    if (bulletMatch) {
-      return (
-        <div key={lineIdx} style={{ display: 'flex', gap: '6px', marginTop: lineIdx === 0 ? 0 : '3px' }}>
-          <span style={{ color: '#EF233C', fontWeight: 700, flexShrink: 0 }}>•</span>
-          <span>{inlineRender(bulletMatch[1])}</span>
-        </div>
-      );
-    }
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+      {lines.map((line, lineIdx) => {
+        const trimmed = line.trim();
+        if (!trimmed) return <div key={lineIdx} style={{ height: '4px' }} />;
 
-    // Regular line
-    return (
-      <div key={lineIdx} style={{ marginTop: lineIdx === 0 ? 0 : '4px' }}>
-        {inlineRender(trimmed)}
-      </div>
-    );
-  });
+        // Bare URL line
+        if (/^https?:\/\//.test(trimmed)) {
+          const display = trimmed.length > 36 ? trimmed.slice(0, 34) + '…' : trimmed;
+          return (
+            <div key={lineIdx}>
+              <a
+                href={trimmed}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: '#EF233C',
+                  textDecoration: 'underline',
+                  fontWeight: 600,
+                  fontSize: '0.78rem',
+                  wordBreak: 'break-all',
+                  display: 'inline-block'
+                }}
+              >
+                🗺 {display}
+              </a>
+            </div>
+          );
+        }
+
+        // Numbered item: "1. ..."
+        const numMatch = trimmed.match(/^(\d+)\.\s+(.+)/);
+        if (numMatch) {
+          return (
+            <div key={lineIdx} style={{ display: 'flex', gap: '6px', alignItems: 'flex-start' }}>
+              <span style={{
+                color: '#EF233C', fontWeight: 700,
+                flexShrink: 0, minWidth: '18px', paddingTop: '1px'
+              }}>
+                {numMatch[1]}.
+              </span>
+              <span style={{ flex: 1, wordBreak: 'break-word' }}>
+                {inlineRender(numMatch[2])}
+              </span>
+            </div>
+          );
+        }
+
+        // Bullet item: "- ..." or "• ..."
+        const bulletMatch = trimmed.match(/^[-•]\s+(.+)/);
+        if (bulletMatch) {
+          return (
+            <div key={lineIdx} style={{ display: 'flex', gap: '6px', alignItems: 'flex-start' }}>
+              <span style={{ color: '#EF233C', fontWeight: 700, flexShrink: 0, paddingTop: '1px' }}>•</span>
+              <span style={{ flex: 1, wordBreak: 'break-word' }}>
+                {inlineRender(bulletMatch[1])}
+              </span>
+            </div>
+          );
+        }
+
+        // Regular line
+        return (
+          <div key={lineIdx} style={{ wordBreak: 'break-word' }}>
+            {inlineRender(trimmed)}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
-// Parses inline tokens: **bold** and bare URLs
+// Parses inline **bold** and bare https:// URLs within a single line
 function inlineRender(text) {
-  // Tokenise: split on **…** and URLs
   const tokenRegex = /(\*\*[^*]+\*\*|https?:\/\/[^\s]+)/g;
   const parts = [];
   let lastIndex = 0;
   let match;
+  let key = 0;
 
   while ((match = tokenRegex.exec(text)) !== null) {
-    // Plain text before this token
     if (match.index > lastIndex) {
-      parts.push(text.slice(lastIndex, match.index));
+      parts.push(<span key={key++}>{text.slice(lastIndex, match.index)}</span>);
     }
 
     const token = match[0];
 
     if (token.startsWith('**')) {
-      // Bold text
-      const content = token.slice(2, -2);
       parts.push(
-        <strong key={match.index} style={{ fontWeight: 700, color: 'inherit' }}>
-          {content}
+        <strong key={key++} style={{ fontWeight: 700 }}>
+          {token.slice(2, -2)}
         </strong>
       );
     } else {
-      // Clickable URL — truncate display to keep bubble tidy
-      const displayUrl = token.length > 38 ? token.slice(0, 36) + '…' : token;
+      const display = token.length > 36 ? token.slice(0, 34) + '…' : token;
       parts.push(
         <a
-          key={match.index}
+          key={key++}
           href={token}
           target="_blank"
           rel="noopener noreferrer"
           style={{
             color: '#EF233C',
             textDecoration: 'underline',
-            wordBreak: 'break-all',
             fontWeight: 600,
-            fontSize: '0.82rem'
+            fontSize: '0.78rem',
+            wordBreak: 'break-all',
+            display: 'inline-block'
           }}
         >
-          {displayUrl}
+          {display}
         </a>
       );
     }
@@ -101,13 +143,13 @@ function inlineRender(text) {
     lastIndex = match.index + token.length;
   }
 
-  // Remaining plain text
   if (lastIndex < text.length) {
-    parts.push(text.slice(lastIndex));
+    parts.push(<span key={key++}>{text.slice(lastIndex)}</span>);
   }
 
-  return parts.length === 1 && typeof parts[0] === 'string' ? parts[0] : parts;
+  return parts.length === 0 ? text : parts;
 }
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -137,7 +179,6 @@ export default function ChatWidget() {
 
     const apiUrl = import.meta.env.VITE_API_URL || '';
 
-    // Map previous messages for the backend history format (skip empty ones)
     const history = messages.filter(m => m.text).map(m => ({
       role: m.isBot ? "model" : "user",
       parts: [{ text: m.text }]
@@ -159,15 +200,19 @@ export default function ChatWidget() {
         } else if (data.action === 'open_contact_form') {
           setIsOpen(false);
           const contactElem = document.getElementById('contact');
-          if (contactElem) {
-            contactElem.scrollIntoView({ behavior: 'smooth' });
-          }
+          if (contactElem) contactElem.scrollIntoView({ behavior: 'smooth' });
         }
       } else {
-        setMessages(prev => [...prev, { text: "Thank you for reaching out! You can also chat directly with our team on WhatsApp for instant assistance.", isBot: true }]);
+        setMessages(prev => [...prev, {
+          text: "Thank you for reaching out! Please connect with our team on WhatsApp for instant assistance.",
+          isBot: true
+        }]);
       }
     } catch (err) {
-      setMessages(prev => [...prev, { text: "For instant catalog sets and wholesale price inquiries, please click the WhatsApp button.", isBot: true }]);
+      setMessages(prev => [...prev, {
+        text: "For wholesale inquiries, please click the WhatsApp button below.",
+        isBot: true
+      }]);
     } finally {
       setIsLoading(false);
     }
@@ -187,7 +232,7 @@ export default function ChatWidget() {
             borderRadius: '50%',
             background: 'linear-gradient(135deg, #1c1917, #2c2729)',
             color: '#ffffff',
-            boxShadow: '0 8px 25px rgba(0, 0, 0, 0.3)',
+            boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
             border: '2px solid #EF233C',
             display: 'flex',
             alignItems: 'center',
@@ -222,7 +267,7 @@ export default function ChatWidget() {
             zIndex: 2000,
             border: '1px solid #ECE5CE',
             overflow: 'hidden',
-            animation: 'fadeIn 0.25s ease'
+            animation: 'chatFadeIn 0.25s ease'
           }}
         >
           {/* Header */}
@@ -233,7 +278,8 @@ export default function ChatWidget() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            borderBottom: '2px solid #EF233C'
+            borderBottom: '2px solid #EF233C',
+            flexShrink: 0
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#25d366' }} />
@@ -252,6 +298,7 @@ export default function ChatWidget() {
           <div style={{
             flex: 1,
             overflowY: 'auto',
+            overflowX: 'hidden',
             padding: '14px',
             display: 'flex',
             flexDirection: 'column',
@@ -263,31 +310,36 @@ export default function ChatWidget() {
                 key={idx}
                 style={{
                   alignSelf: msg.isBot ? 'flex-start' : 'flex-end',
-                  background: msg.isBot ? '#ffffff' : 'linear-gradient(135deg, #EF233C, #b81427)',
+                  background: msg.isBot
+                    ? '#ffffff'
+                    : 'linear-gradient(135deg, #EF233C, #b81427)',
                   color: msg.isBot ? '#1c1917' : '#ffffff',
                   padding: '10px 14px',
                   borderRadius: msg.isBot ? '4px 14px 14px 14px' : '14px 4px 14px 14px',
+                  // KEY FIX: hard max-width + word break at container level
                   maxWidth: '88%',
+                  width: 'fit-content',
+                  minWidth: 0,
+                  overflowWrap: 'anywhere',
+                  wordBreak: 'break-word',
                   border: msg.isBot ? '1px solid #ECE5CE' : 'none',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
                   fontSize: '0.86rem',
-                  lineHeight: '1.55',
-                  wordBreak: 'break-word',
-                  overflowWrap: 'anywhere'
+                  lineHeight: '1.6'
                 }}
               >
                 {msg.isBot ? renderMessage(msg.text) : msg.text}
               </div>
             ))}
 
-            {/* Animated typing indicator */}
+            {/* Animated typing dots */}
             {isLoading && (
               <div style={{
                 alignSelf: 'flex-start',
                 background: '#ffffff',
                 border: '1px solid #ECE5CE',
                 borderRadius: '4px 14px 14px 14px',
-                padding: '10px 16px',
+                padding: '11px 16px',
                 display: 'flex',
                 gap: '5px',
                 alignItems: 'center'
@@ -311,13 +363,17 @@ export default function ChatWidget() {
           </div>
 
           {/* Input Area */}
-          <form onSubmit={handleSend} style={{
-            padding: '12px 14px',
-            background: '#ffffff',
-            borderTop: '1px solid #ECE5CE',
-            display: 'flex',
-            gap: '8px'
-          }}>
+          <form
+            onSubmit={handleSend}
+            style={{
+              padding: '12px 14px',
+              background: '#ffffff',
+              borderTop: '1px solid #ECE5CE',
+              display: 'flex',
+              gap: '8px',
+              flexShrink: 0
+            }}
+          >
             <input
               type="text"
               value={input}
@@ -330,7 +386,8 @@ export default function ChatWidget() {
                 border: '1px solid #C8D6BF',
                 outline: 'none',
                 fontSize: '0.88rem',
-                background: '#EDEBE6'
+                background: '#EDEBE6',
+                minWidth: 0
               }}
             />
             <button
@@ -360,12 +417,12 @@ export default function ChatWidget() {
 
       <style>{`
         @keyframes typingDot {
-          0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+          0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
           30% { transform: translateY(-5px); opacity: 1; }
         }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px) scale(0.98); }
-          to   { opacity: 1; transform: translateY(0)   scale(1); }
+        @keyframes chatFadeIn {
+          from { opacity: 0; transform: translateY(12px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0)    scale(1);    }
         }
         @media (max-width: 500px) {
           .floating-chat-btn {
