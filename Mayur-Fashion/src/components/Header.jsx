@@ -118,16 +118,7 @@ export default function Header({
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.id)}
-                  style={{
-                    fontSize: '0.92rem',
-                    fontWeight: 600,
-                    color: activeSection === link.id ? '#EF233C' : '#1c1917',
-                    position: 'relative',
-                    padding: '8px 2px',
-                    transition: 'color 0.2s ease'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = '#EF233C'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = activeSection === link.id ? '#EF233C' : '#1c1917'}
+                  className={`nav-link-btn ${activeSection === link.id ? 'active' : ''}`}
                 >
                   {link.label}
                   {activeSection === link.id && (

@@ -48,30 +48,47 @@ export default function App() {
 
   // Real-time navbar sync with scroll position
   useEffect(() => {
-    const handleScroll = () => {
-      const sectionIds = ['hero', 'collections', 'lookbook', 'heritage', 'values', 'wholesale', 'contact'];
-      let currentActive = activeSection;
+    const sectionIds = ['hero', 'collections', 'lookbook', 'heritage', 'values', 'wholesale', 'contact'];
 
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // 1. Near the top of the page -> Always highlight Hero / Home
+      if (scrollY < 120) {
+        setActiveSection('hero');
+        return;
+      }
+
+      // 2. Near the bottom of the page -> Always highlight Contact / Footer
+      if (scrollY + windowHeight >= documentHeight - 60) {
+        setActiveSection('contact');
+        return;
+      }
+
+      // 3. Focal line: 160px from top of viewport (just below the sticky header)
+      const focalLine = 160;
       for (const id of sectionIds) {
         const element = document.getElementById(id);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Check if section is taking up the middle of the screen
-          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-            currentActive = id;
-            break;
+          if (rect.top <= focalLine && rect.bottom > focalLine) {
+            setActiveSection(id);
+            return;
           }
         }
       }
-
-      setActiveSection(prev => (prev !== currentActive ? currentActive : prev));
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Initialize
+    window.addEventListener('resize', handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
   }, []);
 
 
