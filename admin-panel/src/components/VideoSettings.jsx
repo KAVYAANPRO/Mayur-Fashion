@@ -49,8 +49,6 @@ export default function VideoSettings({ auth }) {
 
   /* form fields */
   const [videoUrl, setVideoUrl]         = useState('');
-  const [videoTitle, setVideoTitle]     = useState('Our Story');
-  const [videoCaption, setVideoCaption] = useState('See how we craft every piece with love.');
 
   const fileInputRef = useRef(null);
 
@@ -62,8 +60,6 @@ export default function VideoSettings({ auth }) {
         const data = await res.json();
         setSettings(data);
         setVideoUrl(data.companyVideoUrl || '');
-        setVideoTitle(data.companyVideoTitle || 'Our Story');
-        setVideoCaption(data.companyVideoCaption || 'See how we craft every piece with love.');
       } catch (err) {
         console.error('Failed to fetch settings', err);
       } finally {
@@ -112,8 +108,6 @@ export default function VideoSettings({ auth }) {
         headers: { 'Content-Type': 'application/json', 'x-auth-token': auth.token },
         body: JSON.stringify({
           companyVideoUrl:     videoUrl,
-          companyVideoTitle:   videoTitle,
-          companyVideoCaption: videoCaption,
         }),
       });
       if (!res.ok) throw new Error('Save failed');
@@ -221,31 +215,12 @@ export default function VideoSettings({ auth }) {
           )}
         </div>
 
-        {/* ── Video Metadata ─────────────────────────────────── */}
-        <div className="card" style={{ padding: '1.5rem' }}>
-          <h3 style={{ marginBottom: '1rem', fontSize: '1.05rem' }}>📝 Display Settings</h3>
-          <div className="form-group">
-            <label>Section Title (shown above the video)</label>
-            <input type="text" value={videoTitle} onChange={(e) => setVideoTitle(e.target.value)}
-              placeholder="e.g. Our Story" />
-          </div>
-          <div className="form-group" style={{ marginBottom: 0 }}>
-            <label>Caption (shown below the title)</label>
-            <input type="text" value={videoCaption} onChange={(e) => setVideoCaption(e.target.value)}
-              placeholder="e.g. See how we craft every piece with love." />
-          </div>
-        </div>
-
         {/* ── Live Preview ──────────────────────────────────── */}
         {videoUrl && (
           <div className="card" style={{ padding: '1.5rem' }}>
             <h3 style={{ marginBottom: '1rem', fontSize: '1.05rem' }}>👁️ Live Preview</h3>
             <VideoPreview url={videoUrl} type={currentType} />
-            <div style={{ marginTop: '12px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-color)', marginBottom: '4px' }}>{videoTitle}</div>
-                <div style={{ fontSize: '0.88rem', color: 'var(--text-muted)' }}>{videoCaption}</div>
-              </div>
+            <div style={{ marginTop: '12px', display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
               <button type="button" className="btn-danger"
                 onClick={handleRemove}
                 style={{ alignSelf: 'flex-start', fontSize: '0.82rem', padding: '8px 16px', minHeight: '36px', whiteSpace: 'nowrap' }}>
