@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { ShoppingBag } from 'lucide-react';
 import WhatsAppIcon from './components/WhatsAppIcon';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductCatalog from './components/ProductCatalog';
 import ProductModal from './components/ProductModal';
-import LookbookViewer from './components/LookbookViewer';
-import HeritageSection from './components/HeritageSection';
-import ValuesSection from './components/ValuesSection';
-import WholesaleSection from './components/WholesaleSection';
-import ContactSection from './components/ContactSection';
 import InquiryDrawer from './components/InquiryDrawer';
-import Footer from './components/Footer';
-import ChatWidget from './components/ChatWidget';
 import LoadingScreen from './components/LoadingScreen';
 import { COMPANY_INFO } from './data/company';
 import useScrollReveal from './hooks/useScrollReveal';
+
+// Lazy load non-critical components below the fold
+const LookbookViewer = React.lazy(() => import('./components/LookbookViewer'));
+const HeritageSection = React.lazy(() => import('./components/HeritageSection'));
+const ValuesSection = React.lazy(() => import('./components/ValuesSection'));
+const WholesaleSection = React.lazy(() => import('./components/WholesaleSection'));
+const ContactSection = React.lazy(() => import('./components/ContactSection'));
+const Footer = React.lazy(() => import('./components/Footer'));
+const ChatWidget = React.lazy(() => import('./components/ChatWidget'));
 
 export default function App() {
   useScrollReveal();
@@ -43,6 +45,35 @@ export default function App() {
       console.error(e);
     }
   }, [inquiryList]);
+
+  // Real-time navbar sync with scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionIds = ['hero', 'collections', 'lookbook', 'heritage', 'values', 'wholesale', 'contact'];
+      let currentActive = activeSection;
+
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Check if section is taking up the middle of the screen
+          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+            currentActive = id;
+            break;
+          }
+        }
+      }
+
+      setActiveSection(prev => (prev !== currentActive ? currentActive : prev));
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Initialize
+    handleScroll();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   const showToast = (msg) => {
     setToastMessage(msg);
@@ -137,23 +168,35 @@ export default function App() {
         />
 
         {/* 3. Digital Lookbook Interactive Viewer */}
-        <LookbookViewer />
+        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+          <LookbookViewer />
+        </Suspense>
 
         {/* 4. Heritage & Brand Story (1991 Foundation) */}
-        <HeritageSection onExploreClick={() => scrollToSection('collections')} />
+        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+          <HeritageSection onExploreClick={() => scrollToSection('collections')} />
+        </Suspense>
 
         {/* 5. Why Mayur & Size Inclusivity (M to 6XL) */}
-        <ValuesSection onWholesaleClick={() => scrollToSection('wholesale')} />
+        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+          <ValuesSection onWholesaleClick={() => scrollToSection('wholesale')} />
+        </Suspense>
 
         {/* 6. Wholesale & B2B Inquiry Portal */}
-        <WholesaleSection />
+        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+          <WholesaleSection />
+        </Suspense>
 
         {/* 7. Showroom, Contacts & Map */}
-        <ContactSection />
+        <Suspense fallback={<div style={{height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Loading...</div>}>
+          <ContactSection />
+        </Suspense>
       </main>
 
       {/* Footer */}
-      <Footer onNavigate={scrollToSection} />
+      <Suspense fallback={<div style={{height: '200px'}}></div>}>
+        <Footer onNavigate={scrollToSection} />
+      </Suspense>
 
       {/* Quick View Product Modal */}
       {modalProduct && (
@@ -225,7 +268,9 @@ export default function App() {
           </button>
         )}
 
-        <ChatWidget />
+        <Suspense fallback={<div>...</div>}>
+          <ChatWidget />
+        </Suspense>
 
         <a
           href={`https://wa.me/${COMPANY_INFO.contacts[0].whatsapp}?text=${encodeURIComponent("Hello Mayur Fashion! I am contacting you directly from your website.")}`}
