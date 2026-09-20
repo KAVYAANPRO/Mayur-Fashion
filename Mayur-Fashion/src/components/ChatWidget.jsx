@@ -75,9 +75,7 @@ export default function ChatWidget() {
           onClick={() => setIsOpen(true)}
           className="floating-chat-btn"
           style={{
-            position: 'fixed',
-            bottom: '24px',
-            right: '24px',
+            position: 'relative',
             width: '54px',
             height: '54px',
             borderRadius: '50%',
