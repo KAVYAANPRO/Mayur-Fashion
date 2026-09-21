@@ -10,7 +10,7 @@ export const COMPANY_INFO = {
   stats: [
     { label: "Manufacturing Heritage", value: "35+ Yrs", sub: "Since 1991" },
     { label: "Retail & Wholesale Network", value: "15,000+", sub: "Trusted Partners" },
-    { label: "Global Export Reach", value: "30+ Countries", sub: "Worldwide Delivery" },
+    { label: "Quality-First Materials", value: "Premium Fabrics", sub: "Carefully Selected" },
     { label: "Inclusive Size Range", value: "M to 6XL", sub: "Perfect Fits" },
   ],
 
